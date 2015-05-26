@@ -1,0 +1,7 @@
+RSS Aggregator.
+Il progetto assegnato per l'esame di Programmazione Web riguarda una web application che permette agli utenti di avere un unico punto di accesso alle notizie mediante feed RSS.
+La web application in questione deve permettere di:
+	- gestire utenti
+	- ogni utente ha diverse categorie (o cartelle) in cui vengono raggruppati i feed
+	- ogni categoria contiene feed RSS con le notizie ad esso associate.
+Inoltre deve permettere la creazione di una statistica personalizzata per ogni utente la quale prevede la creazione di una "word cloud" dei termini più ricorrenti negli articoli letti, una statistica settimanale di "news lette" (da definire cosa si intende).
