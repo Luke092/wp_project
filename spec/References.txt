@@ -1,2 +1,6 @@
 RSS structure:
 	http://cyber.law.harvard.edu/rss/rss.html
+WordCloud:
+	https://www.jasondavies.com/wordcloud/#%2F%2Fwww.jasondavies.com%2Fwordcloud%2Fabout%2F
+	http://www.goat1000.com/tagcanvas.php
+	Notes: ho trovato queste librerie
