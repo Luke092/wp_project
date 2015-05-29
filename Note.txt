@@ -1,0 +1,4 @@
+AGGREGATORE DI NEWS - FEED RSS
+Funzionalità aggiuntive --> sezione "statistiche" in cui:
+1) visualizzare le cosiddette "word clouds" --> cercare una libreria online che permette di farle
+2) visualizzare grafici statistici sulle categorie più seguite (andamento settimanale) --> provare con la libreria highcharts
