@@ -2,3 +2,6 @@ AGGREGATORE DI NEWS - FEED RSS
 Funzionalità aggiuntive --> sezione "statistiche" in cui:
 1) visualizzare le cosiddette "word clouds" --> cercare una libreria online che permette di farle
 2) visualizzare grafici statistici sulle categorie più seguite (andamento settimanale) --> provare con la libreria highcharts
+
+Alternativa: libreria data-driven documents (d3js.org) nella veste C3 (http://c3js.org/)
+che permette di fare anche i word cloud (github.com/jasondavies/d3-cloud)
