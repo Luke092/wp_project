@@ -1,0 +1,9 @@
+Parti progetto:
+	- from di login e autenticazione
+	- home page, visualizzazione feed per categoria o singolo feed
+	- pagina di gestione feed e loro aggiunta e categorizzazione
+	- pagina personale utente con info, cambio password e statistiche
+	- classi di gestione articoli letti e loro salvataggio
+	- design del db e delle strutture dati per la gestione degli articoli letti
+
+NOTA: ogni parte comprende sia una parte client (JS e HTML) che una parte lato server (PHP)
