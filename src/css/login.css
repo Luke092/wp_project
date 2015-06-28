@@ -20,32 +20,36 @@
 /* You can customize to your needs  */
 .login-popup {
     display: none;
-    background: #333;
+    /*background: #333;*/
+    background: #c54101;
     padding: 10px;
     border: 2px solid #ddd;
     float: left;
-    font-size: 1.2em;
+    font: 13px Arial, Helvetica, sans-serif;
+    /*font-size: 1.2em;*/
     position: fixed;
     top: 50%;
     left: 50%;
     z-index: 99999;
     box-shadow: 0px 0px 20px #999;
     /* CSS3 */
-        -moz-box-shadow: 0px 0px 20px #999;
+    -moz-box-shadow: 0px 0px 20px #999;
     /* Firefox */
-        -webkit-box-shadow: 0px 0px 20px #999;
+    -webkit-box-shadow: 0px 0px 20px #999;
     /* Safari, Chrome */
-	border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px;
     /* Firefox */
-        -webkit-border-radius: 3px;
+    -webkit-border-radius: 3px;
     /* Safari, Chrome */;
 }
 
 img.btn_close {
     /* Position the close button */
-	float: right;
+    float: right;
     margin: -28px -28px 0 0;
+    width: 32px;
+    height: 32px;
 }
 
 fieldset {
@@ -63,12 +67,12 @@ form.signin .textbox span {
 
 form.signin p, form.signin span {
     color: #999;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 18px;
 }
 
 form.signin .textbox input {
-    background: #666666;
+    background: #8f3c3c;
     border-bottom: 1px solid #333;
     border-left: 1px solid #000;
     border-right: 1px solid #333;
