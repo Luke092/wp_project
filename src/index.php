@@ -58,8 +58,13 @@
                                 <input id="password" name="password" value="" type="password" placeholder="Password">
                             </label>
                             <label class="password">
+<<<<<<< HEAD
                                 <span>Ripeti password</span>
                                 <input id="re-password" name="password" value="" type="password" placeholder="Ripeti password">
+=======
+                                <span>Insert Password Again</span>
+                                <input id="re-password" name="password" value="" type="password" placeholder="Repeat Password">
+>>>>>>> origin/master
                             </label>
                             <button class="submit button" type="button">Registrati</button>
                         </fieldset>
