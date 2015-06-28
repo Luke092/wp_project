@@ -59,7 +59,7 @@
                             </label>
                             <label class="password">
                                 <span>Insert Password Again</span>
-                                <input id="re-password" name="password" value="" type="password" placeholder="Repeate Password">
+                                <input id="re-password" name="password" value="" type="password" placeholder="Repeat Password">
                             </label>
                             <button class="submit button" type="button">Register</button>
                         </fieldset>
