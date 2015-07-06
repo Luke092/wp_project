@@ -22,7 +22,7 @@ public static $DB_PASSWORD = "";
 		if($fields!=null)
 		{
 			$sql .= "(";
-			$fields = implode(",",$fields);
+			$sql .= implode(",",$fields);
 			$sql .= ") ";
 		}		
 		$sql .= "VALUES (:field0";
