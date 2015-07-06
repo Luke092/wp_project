@@ -1,40 +1,24 @@
-$(document).ready(function() {
-    $('#login').click(function() {
-        showPopUp($(this).attr('value'));
-    });
-    $('#register').click(function() {
-        showPopUp($(this).attr('value'));
-    });
-    // When clicking on the button close or the mask layer the popup closed
-    $('a.close, #mask').bind('click', function() { 
-      $('#mask , .login-popup').fadeOut(300 , function() {
-            $('#mask').remove();  
-        }); 
-        return false;
-    });
+var xhr = null;
+$(document).ready(function(){
+    $("#login-box :button").click(sendLoginData);
 });
 
-function showPopUp(box){
-    //Fade in the Popup
-    $(box).fadeIn(300);
+function sendLoginData(){
+    xhr = myGetXmlHttpRequest();
+    var url = "./login.php";
+    var method = "POST";
+    var email = document.getElementById("login-email").value;
+    var password = document.getElementById("login-password").value;
+    var param = new Array(
+            "email", email.trim(),
+            "password", password.trim());
+    sendData(xhr, url, method, param, loginValidate);
+}
 
-    //Set the center alignment padding + border see css style
-    var popMargTop = ($(box).height() + 24) / 2; 
-    var popMargLeft = ($(box).width() + 24) / 2; 
-
-    $(box).css({ 
-        'margin-top' : -popMargTop,
-        'margin-left' : -popMargLeft
-    });
-
-    // Add the mask to body
-    $('body').append('<div id="mask"></div>');
-    $('#mask').fadeIn(300);
-    $('#mask').click(function(){
-        $('#mask , .login-popup').fadeOut(300 , function() {
-            $('#mask').remove();
-        }); 
-    });
-
-    return false;
+function loginValidate(){
+    if(xhr.responseText){
+        $("#login-error").html(xhr.responseText);
+    } else{
+        location.href = "./home.php";
+    }
 }

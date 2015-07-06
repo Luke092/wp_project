@@ -45,19 +45,15 @@ CREATE TABLE IF NOT EXISTS UCF(
 
 CREATE TABLE IF NOT EXISTS Stats(
     email varchar(255),
+    c_id int,
     f_readed int NOT NULL,
     file_path varchar(255) NOT NULL,
-    PRIMARY KEY (email),
+    PRIMARY KEY (email, c_id),
     FOREIGN KEY (email) REFERENCES Users (email) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (c_id) REFERENCES Categories (id) 
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-# clear tables data for tables witch already exists
-DELETE FROM Users;
-DELETE FROM Categories;
-DELETE FROM Feeds;
-DELETE FROM UCF;
-DELETE FROM Stats;
 
 # add data example into tables
 INSERT INTO Categories (c_name) VALUES ("News");

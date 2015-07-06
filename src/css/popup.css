@@ -18,7 +18,7 @@
 }
 
 /* You can customize to your needs  */
-.login-popup {
+.access-popup {
     display: none;
     /*background: #333;*/
     background: #c54101;
@@ -41,15 +41,15 @@
     -moz-border-radius: 3px;
     /* Firefox */
     -webkit-border-radius: 3px;
-    /* Safari, Chrome */;
+    /* Safari, Chrome */
 }
 
 img.btn_close {
     /* Position the close button */
     float: right;
-    margin: -28px -28px 0 0;
     width: 32px;
     height: 32px;
+    margin: -163px -28px 0 0;
 }
 
 fieldset {
@@ -111,10 +111,28 @@ form.signin input::-webkit-input-placeholder {
     display: inline-block;
     padding: 6px 6px 4px;
     margin-top: 10px;
-    font: 12px;
+    font-size: 12px;
     width: 214px;
 }
 
 .button:hover {
     background: #ddd;
+}
+
+.error{
+    color: rgba(188, 255, 70, 0.71);
+    height: 90px;
+    text-align: left;
+}
+
+.popup-header{
+    font-weight: bold;
+    word-wrap: break-word;
+    width: 300px;
+}
+
+.popup-title{
+    font-size: 14px;
+    color: darkturquoise;
+    text-align: center;
 }

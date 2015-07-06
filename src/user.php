@@ -17,7 +17,7 @@ class user {
 			return self::$ALREADY_SIGNEDUP;
 		// if not, insert new user into the table
 		else  
-			return dbUtil::insert(self::$TABLE,null,array($email,$password));
+			return dbUtil::insert(self::$TABLE,null,array($email, $password));
 	}
 	
 	// returns $NOT_SIGNEDUP if user didn't exist.
@@ -55,7 +55,7 @@ class user {
 			return $row;
 		}
 		else
-			return $NOT_SIGNEDUP;
+			return self::$NOT_SIGNEDUP;
 	}		
 	
 	// checks if the email is already present inside the db
