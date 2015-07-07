@@ -26,7 +26,7 @@ class user {
         }
     }
 
-    public static function getCategoryByUser($email) {
+    private static function getCategoryByUser($email) {
         $db = dbUtil::connect();
         $sql = "SELECT DISTINCT c_id FROM `ucf` WHERE email = ?;";
         $stmt = $db->prepare($sql);
@@ -35,13 +35,18 @@ class user {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function buildCatArray($email) {
+    private static function buildCatArray($email) {
         $rows = self::getCategoryByUser($email);
         $i = 0;
         foreach ($rows as $row) {
             self::$categories[$i++] = new category($row['c_id'], $email);
 //            self::$categories[$i - 1]->printCategory();
         }
+    }
+    
+    public static function getCatArray($email){
+        self::buildCatArray($email);
+        return self::$categories;
     }
 
     // returns $NOT_SIGNEDUP if user didn't exist.
@@ -62,7 +67,7 @@ class user {
             return false;
     }
 
-    public static function getData($email) {
+    private static function getData($email) {
         if (self::alreadySignedUp($email)) {
             $sql = "SELECT * FROM Users WHERE email=?";
             $db = dbUtil::connect();
