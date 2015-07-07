@@ -14,6 +14,8 @@ $ERROR_MESSAGES = array(
         4 => "La password deve essere lunga almeno " . MIN_LENGTH_PASSWORD . " caratteri",
         5 => "Le due password inserite non coincidono",
         6 => "Password errata",
+        8 => "Errore nel dialogo con il database",
+        9 => "Utente non registrato",
         
         // directory errors
         7 => "Errore nell'apertura della directory ",

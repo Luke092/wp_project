@@ -32,7 +32,9 @@
         if(empty($errors)){
             $password = hash(HASHING_ALGORITHM, $password);
             // check if password is correct
-            if($password != user::getPassword($email))
+            if(user::getPassword($email) == null)
+                $errors[] = $ERROR_MESSAGES[9];
+            else if($password !== user::getPassword($email))
                 $errors[] = $ERROR_MESSAGES[6];
             else{
                 session::set_info("login", true);

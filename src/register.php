@@ -33,13 +33,19 @@
         
         // if no errors occured, then register user
         if(empty($errors)){
-            if(user::alreadySignedUp($email))
-                $errors[] = $ERROR_MESSAGES[2];
-            else
-                $password = hash(HASHING_ALGORITHM, $password);
-                user::insert($email, $password);
-                session::set_info("login", true);
-                session::set_info("email", $email);
+            $password = hash(HASHING_ALGORITHM, $password);
+            switch(user::insert($email, $password)){
+                case user::$ALREADY_PRESENT:
+                    $errors[] = $ERROR_MESSAGES[2];
+                    break;
+                case user::$ERROR_INSERT:
+                    $errors[] = $ERROR_MESSAGES[8];
+                    break;
+                case user::$CORRECT_INSERT:
+                    session::set_info("login", true);
+                    session::set_info("email", $email);
+                    break;
+            }
         }
         show_form_errors($errors);
     }

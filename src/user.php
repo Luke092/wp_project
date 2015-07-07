@@ -2,10 +2,12 @@
 
 class user {
 
+    public static $ALREADY_PRESENT = 0;
+    public static $ERROR_INSERT = 1;
+    public static $CORRECT_INSERT = 2;
+    public static $NOT_SIGNEDUP = 3;
+    
     private static $TABLE = "Users";
-    private static $ALREADY_PRESENT = 0;
-    private static $ERROR_INSERT = 1;
-    private static $CORRECT_INSERT = 2;
     private static $categories = array();
 
     // returns $ALREADY_SIGNEDUP if the user is already signed up.
@@ -61,10 +63,10 @@ class user {
 
     public static function getPassword($email) {
         $data = self::getData($email);
-        if ($data != false)
+        if ($data !== self::$NOT_SIGNEDUP)
             return $data['password'];
         else
-            return false;
+            return NULL;
     }
 
     private static function getData($email) {
@@ -84,7 +86,7 @@ class user {
     }
 
     // checks if the email is already present inside the db
-    public static function alreadySignedUp($email) {
+    private static function alreadySignedUp($email) {
         // check if email is present in user table
         $db = dbUtil::connect();
         $sql = "SELECT * FROM Users WHERE email='" . $email . "'";

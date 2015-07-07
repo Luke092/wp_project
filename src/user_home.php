@@ -19,7 +19,11 @@
                     <table>
                         <tr>
                             <td>
-                            <div id="search-icon"></div>
+                                <div id="search-icon"></div>
+                            </td>
+                            <td>
+                                <input type="text" name="search-token" placeholder="">
+                            </td>
                         </tr>
                     </table>
                 </div>
