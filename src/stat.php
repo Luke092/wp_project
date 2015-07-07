@@ -9,6 +9,11 @@ class stat implements JsonSerializable {
         $this->user_id = $email;
     }
     
+    public function set_articles($articles){
+        $this->articles = $articles;
+    }
+
+
     public function feed_count($c_id){
         $count = 0;
         foreach ($this->articles as $article) {
@@ -61,7 +66,16 @@ class stat implements JsonSerializable {
     }
     
     public static function import_JSON($json){
-        return json_decode($json);
+        $obj_array = json_decode($json, true);
+        $stat = new stat($obj_array['email']);
+        $article_array = array();
+        foreach ($obj_array['feeds'] as $a){
+            $article = new article($a["id"],$a["cat_it"],$a["text"]);
+            $article_array[] = $article;
+        }
+        $stat->set_articles($article_array);
+        
+        return $stat;
     }
     
 }

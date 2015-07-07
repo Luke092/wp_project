@@ -30,7 +30,13 @@ class article implements JsonSerializable {
         ];
     }
     
+    public static function export_JSON($art){
+        return json_encode($art, JSON_UNESCAPED_SLASHES);
+    }
+    
     public static function import_JSON($json){
-        return json_decode($json);
+        $obj_array = json_decode($json, true);
+        $article = new article($obj_array["id"], $obj_array["cat_it"], $obj_array["text"]);
+        return $article;
     }
 }
