@@ -40,7 +40,7 @@ class user {
         $i = 0;
         foreach ($rows as $row) {
             self::$categories[$i++] = new category($row['c_id'], $email);
-            self::$categories[$i - 1]->printCategory();
+//            self::$categories[$i - 1]->printCategory();
         }
     }
 

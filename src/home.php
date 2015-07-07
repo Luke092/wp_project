@@ -1,3 +1,12 @@
+<?php
+    function __autoload($class_name){
+        require_once $class_name . '.php';
+    }
+
+    session::start();
+    if(!session::user_is_logged())
+        header("Location: ./index.php");
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -8,11 +17,13 @@
         
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="js/ajax.js"></script>
+        <script type="text/javascript" src="lib/jquery.zrssfeed.js"></script>
         
         <script type="text/javascript">
             $(document).ready(function(){
                 var xhr = myGetXmlHttpRequest();
-                pageRequest(xhr, "/user_home.php", "POST");
+                pageRequest(xhr, "./user_home.php", "POST");
+//                $('#page').rssfeed('http://www.tomshardware.com/feeds/rss2/news.xml');
             });
         </script>
         
