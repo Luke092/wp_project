@@ -49,7 +49,7 @@ img.btn_close {
     width: 32px;
     height: 32px;
     top: -17px;
-    left: 305px;
+    left: 280px;
     position: absolute;
 }
 
@@ -122,14 +122,15 @@ form.signin input::-webkit-input-placeholder {
 
 .error{
     color: rgba(188, 255, 70, 0.71);
-    height: 90px;
-    text-align: left;
+    /*height: 90px;*/
+/*    width: 300px;*/
+    text-align: justify;
 }
 
 .popup-header{
     font-weight: bold;
     word-wrap: break-word;
-    width: 300px;
+    width: 275px;
 }
 
 .popup-title{
