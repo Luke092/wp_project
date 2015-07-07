@@ -17,6 +17,7 @@ function sendLoginData(){
 
 function loginValidate(){
     if(xhr.responseText){
+        $("#login-error").show();
         $("#login-error").html(xhr.responseText);
     } else{
         location.href = "./home.php";

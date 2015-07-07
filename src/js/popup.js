@@ -25,7 +25,7 @@ function showPopUp(box){
     $('#mask').fadeIn(300);
     $('a.close, #mask').click(function(){
         $('#mask, .access-popup').fadeOut(300 , function(){
-            $('#mask').remove();            
+            $('#mask').remove();          
         });
         cleanPopUp(box);
     });
@@ -34,5 +34,6 @@ function showPopUp(box){
 }
 
 function cleanPopUp(box){
+    $(box + " > .error").hide();
     $(box + " > .error").html("");
 }

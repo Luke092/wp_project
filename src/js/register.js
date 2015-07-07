@@ -19,6 +19,7 @@ function sendRegisterData(){
 
 function registerValidate(){
     if(xhr.responseText){
+        $("#register-error").show();
         $("#register-error").html(xhr.responseText);
     } else{
         location.href = "./home.php";

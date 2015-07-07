@@ -46,10 +46,11 @@
 
 img.btn_close {
     /* Position the close button */
-    float: right;
     width: 32px;
     height: 32px;
-    margin: -163px -28px 0 0;
+    top: -17px;
+    left: 305px;
+    position: absolute;
 }
 
 fieldset {
