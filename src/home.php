@@ -23,7 +23,6 @@
             $(document).ready(function(){
                 var xhr = myGetXmlHttpRequest();
                 pageRequest(xhr, "./user_home.php", "POST");
-//                $('#page').rssfeed('http://www.tomshardware.com/feeds/rss2/news.xml');
             });
         </script>
         

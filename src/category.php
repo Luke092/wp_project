@@ -5,7 +5,7 @@ class category {
     private static $ALREADY_PRESENT = 0;
     private static $ERROR_INSERT = 1;
     private static $CORRECT_INSERT = 2;
-    private static $TABLE = "categories";
+    private static $TABLE = "Categories";
     private $id;
     private $c_name;
     private $feeds;

@@ -135,7 +135,8 @@ function pageRequest(xhr, url, method, param){
         // import target page css
         $(document.head).append($(xhr.responseText).filter("link[rel=\"stylesheet\"]"));
         // load remote page in the correct place
-        document.getElementById("page").innerHTML = $(xhr.responseText).filter("div").html();
+//        document.getElementById("page").innerHTML = $(xhr.responseText).filter("div").html();
+        $("#page").html(xhr.responseText);
     };
     sendData(xhr, url, method, param, callback);
 }

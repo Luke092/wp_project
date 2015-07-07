@@ -3,10 +3,10 @@
 class dbUtil {
 
     public static $HOSTNAME = "localhost";
-    public static $DBNAME = "rssaggregator";
+    public static $DBNAME = "RssAggregator";
     public static $CHARSET = "utf8";
-    public static $DB_USERNAME = "root";
-    public static $DB_PASSWORD = "";
+    public static $DB_USERNAME = "rss";
+    public static $DB_PASSWORD = "wp_rss15";
 
     public static function connect() {
         return new PDO("mysql:host=" . self::$HOSTNAME . ";dbname=" . self::$DBNAME . ";charset=" . self::$CHARSET, self::$DB_USERNAME, self::$DB_PASSWORD);

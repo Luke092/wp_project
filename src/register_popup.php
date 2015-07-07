@@ -2,7 +2,7 @@
 <div id="register-box" class="access-popup">
     <div class="popup-title popup-header">Completa i seguenti campi per procedere con la registrazione</div><br>
     <div id="register-error" class="error popup-header"></div>
-    <a href="#" class="close"><img src="img/close_pop.png" class="btn_close" title="Chiudi" alt="Close" /></a>
+    <a href="#" class="close"><img src="img/utils/close_pop.png" class="btn_close" title="Chiudi" alt="Close" /></a>
     <form method="post" class="signin" action="">
         <fieldset class="textbox">
             <label class="username">

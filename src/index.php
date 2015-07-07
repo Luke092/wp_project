@@ -1,3 +1,12 @@
+<?php
+    function __autoload($class_name){
+        require_once $class_name . '.php';
+    }
+
+    session::start();
+    if(session::user_is_logged())
+        header("Location: ./home.php");
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -19,18 +28,9 @@
         
     </head>
     <body>
-        <?php
-            function __autoload($class_name){
-                require_once $class_name . '.php';
-            }
-            
-            session::start();
-            if(session::user_is_logged())
-                header("Location: ./home.php");
-        ?>
         <div id="wrapper">
             <div id="header" align="center">
-                <img src="img/index_header.jpg"/>
+                <img src="img/utils/index_header.jpg"/>
             </div>
             <div id="content" align="center">
                 <button id="login" value="#login-box">Accedi</button>&nbsp;&nbsp;
