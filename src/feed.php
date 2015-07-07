@@ -5,7 +5,7 @@ class feed {
     private static $ALREADY_PRESENT = 0;
     private static $ERROR_INSERT = 1;
     private static $CORRECT_INSERT = 2;
-    private static $TABLE = "feeds";
+    private static $TABLE = "Feeds";
     private static $T_HEADER = ["id", "f_name", "url", "default_cat"];
     private $id, $f_name, $url, $default_cat;
 

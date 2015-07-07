@@ -12,7 +12,7 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 var xhr = myGetXmlHttpRequest();
-                pageRequest(xhr, "/user_home.php", "POST");
+                pageRequest(xhr, "./user_home.php", "POST");
             });
         </script>
         

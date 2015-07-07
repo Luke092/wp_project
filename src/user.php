@@ -2,7 +2,7 @@
 
 class user {
 
-    private static $TABLE = "users";
+    private static $TABLE = "Users";
     private static $ALREADY_PRESENT = 0;
     private static $ERROR_INSERT = 1;
     private static $CORRECT_INSERT = 2;
@@ -64,7 +64,7 @@ class user {
 
     public static function getData($email) {
         if (self::alreadySignedUp($email)) {
-            $sql = "SELECT * FROM users WHERE email=?";
+            $sql = "SELECT * FROM Users WHERE email=?";
             $db = dbUtil::connect();
             $stmt = $db->prepare($sql);
             $stmt->execute(array($email));
@@ -82,7 +82,7 @@ class user {
     public static function alreadySignedUp($email) {
         // check if email is present in user table
         $db = dbUtil::connect();
-        $sql = "SELECT * FROM users WHERE email='" . $email . "'";
+        $sql = "SELECT * FROM Users WHERE email='" . $email . "'";
         $stmt = $db->query($sql);
 
         $signedUp = false;

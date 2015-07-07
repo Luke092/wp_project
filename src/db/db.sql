@@ -45,13 +45,9 @@ CREATE TABLE IF NOT EXISTS UCF(
 
 CREATE TABLE IF NOT EXISTS Stats(
     email varchar(255),
-    c_id int,
-    f_readed int NOT NULL,
     file_path varchar(255) NOT NULL,
-    PRIMARY KEY (email, c_id),
+    PRIMARY KEY (email),
     FOREIGN KEY (email) REFERENCES Users (email) 
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (c_id) REFERENCES Categories (id) 
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -67,3 +63,6 @@ INSERT INTO Feeds (f_name,url,default_cat) VALUES ("NYT International", "http://
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("Gizmodo", "http://feeds.gawker.com/gizmodo/full", "2");
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("The Verge", "http://www.theverge.com/rss/index.xml", "2");
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("News Tom's Hardware", "http://www.tomshardware.com/feeds/rss2/news.xml", "2");
+
+# create new user for the db
+GRANT ALL ON `RssAggregator`.* TO 'rss'@'localhost' IDENTIFIED BY 'wp_rss15';
