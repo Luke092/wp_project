@@ -73,13 +73,41 @@ class category {
         return (($this->is_default == 1)? true : false);
     }
     
-    public function add_feed($f_name, $url, $default_cat){
-        if(!feed::alreadyPresent($f_name, $url)){
-            feed::insert($f_name, $url, $default_cat);
+    public function add_Feed($f_name, $url, $default_cat){
+        $res = feed::insert($f_name, $url, $default_cat);
+        if($res == feed::$ERROR_INSERT){
+            return false;
         }
-        
+        $feed = new feed(feed::fetch_by_name_url($f_name, $url)['id']);
+        feed::insert_UCF_data($this->email, $this->id, $feed->getId());
         $this->feeds = array();
         $this->buildFeedArray($this->email);
+    }
+    
+    public function remove_Feed($feed){
+        $f_id = $feed->getId();
+        $res = feed::delete_UCF_data($this->email, $this->id, $f_id);
+        
+        if($res){
+            $this->buildFeedArray($this->email);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function getFeedByNameURL($name, $url){
+        foreach ($this->feeds as $feed){
+            if($feed->getName() == $name && $feed->getURL() == $url){
+                return $feed;
+            }
+        }
+        return false;
+    }
+    
+    public function get_array(){
+        return $this->feeds;
     }
     
     public static function insert($c_name) {
@@ -107,7 +135,7 @@ class category {
         return dbUtil::update(self::$TABLE, array("c_name"), [$newName], array("id"), [$id]);
     }
 
-    public static function alreadyPresent($c_name) {
+    private static function alreadyPresent($c_name) {
         $db = dbUtil::connect();
         $sql = "SELECT * FROM " . self::$TABLE . " WHERE c_name = '" . $c_name . "';";
         $stmt = $db->query($sql);

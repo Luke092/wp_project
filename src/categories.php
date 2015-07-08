@@ -88,18 +88,14 @@ class categories{
     
     public function remove_Category($cat){
         $c_id = $cat->getId();
-        if(!$cat->is_default){
-            $res = category::delete($c_id);
-        }
-        else{
-            $res = category::delete_UCF_data($c_id, $this->email);
-        }
+        $res = category::delete_UCF_data($c_id, $this->email);
         
         if($res){
             $this->update_data();
+            return true;
         }
         else{
-            // db delete error
+            return false;
         }
     }
     
