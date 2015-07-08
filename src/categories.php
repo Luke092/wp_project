@@ -73,19 +73,16 @@ class categories{
 
 
     public function add_Category($c_name){
-        switch (category::insert($c_name)){
-            case category::$ALREADY_PRESENT:
-                $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
-                $this->categories[] = $cat;
-                break;
-            case category::$ERROR_INSERT:
-                break;
-            case category::$CORRECT_INSERT:
-                $this->update_data();
-                $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
-                $this->categories[] = $cat;
-                break;
+        $res = category::insert($c_name);
+        if($res == category::$ERROR_INSERT){
+            return false;
         }
+        elseif ($res == category::$CORRECT_INSERT || $res ==category::$ALREADY_PRESENT) {
+            $this->update_data();
+        }
+        $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
+        $this->categories[] = $cat;
+        return true;
     }
     
     
@@ -117,6 +114,10 @@ class categories{
     
     public function count(){
         return count($this->categories);
+    }
+    
+    public function get_array(){
+        return $this->categories;
     }
     
     // Debug only function!
