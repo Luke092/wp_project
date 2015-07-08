@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS Users(
 CREATE TABLE IF NOT EXISTS Categories(
     id int AUTO_INCREMENT, # define an autoincremental index
     c_name varchar(30) UNIQUE NOT NULL,
+    is_default int NOT NULL,
     PRIMARY KEY (id)
 );
 
