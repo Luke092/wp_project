@@ -2,14 +2,18 @@
 
 class category {
 
-    private static $ALREADY_PRESENT = 0;
-    private static $ERROR_INSERT = 1;
-    private static $CORRECT_INSERT = 2;
+    public static $ALREADY_PRESENT = 0;
+    public static $ERROR_INSERT = 1;
+    public static $CORRECT_INSERT = 2;
+    
     private static $TABLE = "Categories";
+    
     private $id;
     private $c_name;
     private $is_default;
     private $feeds;
+    
+    private $email;
 
     public function __construct($id, $email = null) {
         $this->id = $id;
@@ -17,6 +21,7 @@ class category {
         $this->c_name = $attributes["c_name"];
         $this->is_default = $attributes["is_default"];
         $this->buildFeedArray($email);
+        $this->email = $email;
     }
     
     private function getCatAttributes() {
@@ -57,17 +62,26 @@ class category {
     }
     
     public function getId(){
-        $this->id;
+        return $this->id;
     }
     
     public function getName(){
-        $this->c_name;
+        return $this->c_name;
     }
     
     public function is_default_cat(){
         return (($this->is_default == 1)? true : false);
     }
-
+    
+    public function add_feed($f_name, $url, $default_cat){
+        if(!feed::alreadyPresent($f_name, $url)){
+            feed::insert($f_name, $url, $default_cat);
+        }
+        
+        $this->feeds = array();
+        $this->buildFeedArray($this->email);
+    }
+    
     public static function insert($c_name) {
 //        if (!self::alreadyPresent($c_name)) {
         if (!dbUtil::alreadyPresent(self::$TABLE,["c_name"],[$c_name])) {
@@ -106,6 +120,14 @@ class category {
         dbUtil::close($db);
 
         return $present;
+    }
+    
+    public static function fetch_by_name($c_name){
+        $db = dbUtil::connect();
+        $sql = "SELECT * FROM " . self::$TABLE . " WHERE name=?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($c_name));
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
 }

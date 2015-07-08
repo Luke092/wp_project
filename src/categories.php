@@ -122,11 +122,11 @@ class categories{
     // Debug only function!
     public function print_all_categories(){
         foreach ($this->categories as $cat){
-//            echo "ID: " . $cat->getId() . "<br>";
-//            echo "Name: " . $cat->getName() . "<br>";
-//            echo "is_default: ";
-//            var_dump($cat->is_default_cat());
-//            echo "<br>";
+            echo "ID: " . $cat->getId() . "<br>";
+            echo "Name: " . $cat->getName() . "<br>";
+            echo "is_default: ";
+            var_dump($cat->is_default_cat());
+            echo "<br>";
             var_dump($cat);
             echo "<br>";
         }
