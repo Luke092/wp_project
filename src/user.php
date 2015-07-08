@@ -8,7 +8,7 @@ class user {
     public static $NOT_SIGNEDUP = 3;
     
     private static $TABLE = "Users";
-    private static $categories = array();
+    private static $categories;
 
     // returns $ALREADY_SIGNEDUP if the user is already signed up.
     // true if user has been added.
@@ -27,27 +27,9 @@ class user {
             }
         }
     }
-
-    private static function getCategoryByUser($email) {
-        $db = dbUtil::connect();
-        $sql = "SELECT DISTINCT c_id FROM `ucf` WHERE email = ?;";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array($email));
-        dbUtil::close($db);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    private static function buildCatArray($email) {
-        $rows = self::getCategoryByUser($email);
-        $i = 0;
-        foreach ($rows as $row) {
-            self::$categories[$i++] = new category($row['c_id'], $email);
-//            self::$categories[$i - 1]->printCategory();
-        }
-    }
     
     public static function getCatArray($email){
-        self::buildCatArray($email);
+        self::$categories = categories::getCategories(categories::$USER_CAT, $email);
         return self::$categories;
     }
 

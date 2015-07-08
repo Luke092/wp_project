@@ -17,12 +17,6 @@ class feed {
         $this->default_cat = $attributes["default_cat"];
     }
 
-//    public function printFeed() {
-//        echo $this->id;
-//        echo $this->f_name;
-//        echo $this->url;
-//        echo $this->default_cat;
-//    }
     // returns the attributes of the feed from the database
     public function getFeedAttributes() {
         $db = dbUtil::connect();
