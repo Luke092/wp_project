@@ -122,9 +122,7 @@ form.signin input::-webkit-input-placeholder {
 
 .error{
     color: rgba(188, 255, 70, 0.71);
-    /*height: 90px;*/
-/*    width: 300px;*/
-    text-align: justify;
+    text-align: left;
 }
 
 .popup-header{

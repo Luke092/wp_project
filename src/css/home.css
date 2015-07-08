@@ -1,4 +1,4 @@
-#content{
+.content{
     display: -webkit-box;        /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;           /* OLD - Firefox 19- (buggy but mostly works) */ 
     display: -ms-flexbox;        /* TWEENER - IE 10 */
@@ -56,6 +56,44 @@
     border-radius: 15px; 
     -moz-border-radius: 15px; 
     -webkit-border-radius: 15px;
-    color: #bcbcbc;
+    color: darkslategray;
+    border-color: red;
     outline: none;
+}
+
+.minicover{
+height: 100px;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center center;
+border-bottom: 1px solid #EFEFEF;
+}
+
+.label{
+height: 30px;
+text-align: center;
+font-size: 12px;
+line-height: 30px;
+overflow: hidden;
+text-transform: capitalize;
+color: #494949;
+font-weight: bold;
+}
+
+table{
+    position: relative;
+    margin: auto;
+    width: 60%;
+}
+
+.block{
+    float: left;
+    border-radius: 3px;
+    width: 116px;
+    border: 1px solid #D8D8D8;
+    overflow: hidden;
+    cursor: pointer;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    transition: border-color 0.2s linear;
 }

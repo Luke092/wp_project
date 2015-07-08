@@ -36,3 +36,29 @@ function is_image($file){
         return true;
     return false;
 }
+
+function table($body){
+    return '<table>'.$body.'</table>';
+}
+
+function tr($row){
+    return '<tr>'.$row.'</tr>';
+}
+
+function td($cell){
+    return '<td>'.$cell.'</td>';
+}
+
+//function img($src, $alt){
+//    return '<img src="'.$src.'" alt="'.$alt.'"></img>';
+//}
+
+function div($content, $class){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    return '<div'.$class_assign.'>'.$content.'</div>';
+}
+
+function empty_div($background_image_url, $class){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    return '<div'.$class_assign.' style="background-image:url('.$background_image_url.')".></div>';
+}

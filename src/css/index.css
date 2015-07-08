@@ -1,8 +1,10 @@
 body{
-    background-image: url(../img/utils/index_background.jpg);
+    background-image: url(http://localhost/RSSAggregator/img/utils/index_background.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-attachment: fixed; 
+    background-attachment: fixed;
+    alignment-adjust: auto;
+    overflow-x: hidden;
 }
 
 button{
@@ -24,4 +26,10 @@ button{
     background-image: -ms-linear-gradient(top, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* IE10+ */
     background-image: linear-gradient(to bottom, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdbca', endColorstr='#8c1b0b',GradientType=0 ); /* IE6-9 */
+}
+
+.footer{
+    position: absolute;
+    width: 100%;
+    overflow-x: no-display;
 }

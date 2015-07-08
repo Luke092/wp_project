@@ -28,17 +28,17 @@
         
     </head>
     <body>
-        <div id="wrapper">
-            <div id="header" align="center">
+        <div class="wrapper">
+            <div class="header" align="center">
                 <img src="img/utils/index_header.jpg"/>
             </div>
-            <div id="content" align="center">
+            <div class="content" align="center">
                 <button id="login" value="#login-box">Accedi</button>&nbsp;&nbsp;
                 <button id="register" value="#register-box">Registrati</button>
                 <?php
                     require("./login_popup.php");
                     require("./register_popup.php");
-                ?>   
+                ?>  
             </div>
             <?php
                 require("./footer.php");

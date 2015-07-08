@@ -34,11 +34,11 @@
 	<![endif]-->
     </head>
     <body> <!-- da modificare-->
-        <div id="wrapper">
-            <div id="header">
+        <div class="wrapper">
+            <div class="header">
                 <!-- Top menu for account name, link to profile and manage button -->
             </div>
-            <div id="content">
+            <div class="content">
                 <div id="sidebar">
                     <p>paragraph</p>
                 </div>
@@ -46,9 +46,10 @@
                     
                 </div>
             </div>
-            <?php
-                require("./footer.php");
-            ?>
+            <div class="push"></div>
         </div>
+        <?php
+            require("./footer.php");
+        ?>
     </body>
 </html>

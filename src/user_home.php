@@ -9,8 +9,8 @@
         header("Location: ./index.php");
     else{
         $email = session::get_info("email");
-        $categories = user::getCatArray($email);
-        if(count($categories) == 0)
+        $categories = user::getCategories($email);
+        if($categories->count() == 0)
             header("Location: ./add_content.php");
         else{
 ?>
