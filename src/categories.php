@@ -115,6 +115,10 @@ class categories{
         return false;
     }
     
+    public function count(){
+        return count($this->categories);
+    }
+    
     // Debug only function!
     public function print_all_categories(){
         foreach ($this->categories as $cat){
