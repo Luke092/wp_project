@@ -2,7 +2,7 @@
 
 const MIN_LENGTH_PASSWORD = 6;
 const HASHING_ALGORITHM = "sha256";
-const DEF_CAT_DIR = "http://localhost/RSSAggregator/img/default_cat/";
+const DEF_CAT_DIR = "./img/default_cat/";
 const DEF_CAT_PER_ROW = 4;
 
 $ERROR_MESSAGES = array(
