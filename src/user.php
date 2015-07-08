@@ -28,7 +28,7 @@ class user {
         }
     }
     
-    public static function getCatArray($email){
+    public static function getCategories($email){
         self::$categories = categories::getCategories(categories::$USER_CAT, $email);
         return self::$categories;
     }
