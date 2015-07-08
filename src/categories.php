@@ -7,6 +7,7 @@ class categories{
     
     private $categories = array();
     private $mode;
+    
     private $email;
     
     private function __construct($mode, $email) {
@@ -15,7 +16,7 @@ class categories{
     }
     
     public static function getCategories($mode, $email = null){
-        $cats = new categories($mode);
+        $cats = new categories($mode, $email);
         switch ($mode){
             case categories::$USER_CAT:
                 if($email != null){
@@ -72,20 +73,37 @@ class categories{
 
 
     public function add_Category($c_name){
-        category::insert($c_name);
-        $this->update_data();
+        switch (category::insert($c_name)){
+            case category::$ALREADY_PRESENT:
+                $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
+                $this->categories[] = $cat;
+                break;
+            case category::$ERROR_INSERT:
+                break;
+            case category::$CORRECT_INSERT:
+                $this->update_data();
+                $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
+                $this->categories[] = $cat;
+                break;
+        }
     }
     
     
     public function remove_Category($cat){
         $c_id = $cat->getId();
         if(!$cat->is_default){
-            category::delete($c_id);
+            $res = category::delete($c_id);
         }
         else{
-            category::delete_UCF_data($c_id, $this->email);
+            $res = category::delete_UCF_data($c_id, $this->email);
         }
-        $this->update_data();
+        
+        if($res){
+            $this->update_data();
+        }
+        else{
+            // db delete error
+        }
     }
     
     public function getCatByName($name){
@@ -95,6 +113,19 @@ class categories{
             }
         }
         return false;
+    }
+    
+    // Debug only function!
+    public function print_all_categories(){
+        foreach ($this->categories as $cat){
+//            echo "ID: " . $cat->getId() . "<br>";
+//            echo "Name: " . $cat->getName() . "<br>";
+//            echo "is_default: ";
+//            var_dump($cat->is_default_cat());
+//            echo "<br>";
+            var_dump($cat);
+            echo "<br>";
+        }
     }
     
 }
