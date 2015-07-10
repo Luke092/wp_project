@@ -46,7 +46,7 @@
             foreach ($categories as $category) {
                 $feeds = $category->get_array();
                 if (count($feeds) > 0) {
-                    $html = "<div id=\"category_contents\" class=\"itemContentsHolder\">";
+                    $html = "<div id=\"category_".$category->getName()."_contents\" class=\"itemContentsHolder\">";
                     $html .= "<h2>";
                     $html .= "<div class=\"label\">" . $category->getName() . "</div>";
                     $html .= "<div class=\"modCanc\"><img class=\"editCat\" src=\"./img/utils/icon-edit.png\"></img><img class=\"removeCat\" src=\"./img/utils/icon-bury.png\"></img></div>";
