@@ -75,7 +75,8 @@ class categories{
 
     public function add_Category($c_name){
         $res = category::insert($c_name);
-        if($this->getCatByName($name) == false){
+        $present_cat = $this->getCatByName($name);
+        if($present_cat == false){
             if($res == category::$ERROR_INSERT){
                 return false;
             }
@@ -84,9 +85,11 @@ class categories{
             }
             $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
             $this->categories[] = $cat;
-            return true;
+            return $cat;
         }
-        return false;
+        else{
+            return $present_cat;
+        }
     }
     
     

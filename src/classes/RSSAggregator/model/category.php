@@ -158,9 +158,10 @@ class category {
     
     public static function fetch_by_name($c_name){
         $db = dbUtil::connect();
-        $sql = "SELECT * FROM " . self::$TABLE . " WHERE name=?";
+        $sql = "SELECT * FROM " . self::$TABLE . " WHERE c_name=?";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($c_name));
+        dbUtil::close($db);
         return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
