@@ -1,6 +1,12 @@
 <?php
-    function __autoload($class_name){
-        require_once $class_name . '.php';
+    
+    use RSSAggregator\model\session;
+    
+    function __autoload($class) {
+
+	// convert namespace to full file path
+	$class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+	require_once($class);
     }
 
     session::start();

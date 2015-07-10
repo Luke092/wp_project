@@ -1,5 +1,6 @@
 <?php
-
+namespace RSSAggregator\model;
+use PDO;
 class categories{
 
     public static $USER_CAT = 0;

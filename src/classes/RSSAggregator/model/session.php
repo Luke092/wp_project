@@ -1,4 +1,6 @@
 <?php
+namespace RSSAggregator\model;
+use PDO;
 class session{
     public static function start(){
         session_start();

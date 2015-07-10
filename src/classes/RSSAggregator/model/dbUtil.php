@@ -1,5 +1,6 @@
 <?php
-
+namespace RSSAggregator\model;
+use PDO;
 class dbUtil {
 
     public static $HOSTNAME = "localhost";

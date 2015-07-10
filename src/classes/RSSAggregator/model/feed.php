@@ -1,5 +1,6 @@
 <?php
-
+namespace RSSAggregator\model;
+use PDO;
 class feed {
 
     public static $ALREADY_PRESENT = 0;

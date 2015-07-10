@@ -1,5 +1,6 @@
 <?php
-
+namespace RSSAggregator\model;
+use PDO;
 class category {
 
     public static $ALREADY_PRESENT = 0;

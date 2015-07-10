@@ -1,10 +1,22 @@
 <?php
+    use RSSAggregator\model\categories;
+    use RSSAggregator\model\category;
+    use RSSAggregator\model\feed;
+    
     require_once("./config.php");
     require_once("./utils.php");
-    require_once('./php/autoloader.php');
-    function __autoload($class_name){
-        require_once $class_name . '.php';
-        
+    
+    function __autoload($class) {
+
+	// convert namespace to full file path
+	if (strpos($class, 'SimplePie') !== 0)
+        {
+                $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+        }
+        else{
+            $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+        }
+	require_once($class);
     }
 ?>
 <div id="search-bar">

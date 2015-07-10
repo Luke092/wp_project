@@ -1,4 +1,6 @@
 <?php
+namespace RSSAggregator\model;
+use PDO;
 class stat implements JsonSerializable {
     
     private $user_id;
