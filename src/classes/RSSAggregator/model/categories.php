@@ -75,15 +75,18 @@ class categories{
 
     public function add_Category($c_name){
         $res = category::insert($c_name);
-        if($res == category::$ERROR_INSERT){
-            return false;
+        if($this->getCatByName($name) == false){
+            if($res == category::$ERROR_INSERT){
+                return false;
+            }
+            elseif ($res == category::$CORRECT_INSERT || $res ==category::$ALREADY_PRESENT) {
+                $this->update_data();
+            }
+            $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
+            $this->categories[] = $cat;
+            return true;
         }
-        elseif ($res == category::$CORRECT_INSERT || $res ==category::$ALREADY_PRESENT) {
-            $this->update_data();
-        }
-        $cat = new category(category::fetch_by_name($c_name)['id'], $this->email);
-        $this->categories[] = $cat;
-        return true;
+        return false;
     }
     
     
@@ -107,6 +110,17 @@ class categories{
             }
         }
         return false;
+    }
+    
+    public function getFeedsByTitleURL($title, $url){
+        $res = array();
+        foreach ($this->categories as $cat){
+            $feed = $cat->getFeedByNameURL($title, $url);
+            if ($feed != false){
+                $res[] = $feed;
+            }
+        }
+        return $res;
     }
     
     public function count(){

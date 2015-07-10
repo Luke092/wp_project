@@ -80,7 +80,12 @@ class category {
             return false;
         }
         $feed = new feed(feed::fetch_by_name_url($f_name, $url)['id']);
-        feed::insert_UCF_data($this->email, $this->id, $feed->getId());
+        if($this->getFeedByNameURL($feed->getName(), $feed->getURL()) != false){
+            feed::insert_UCF_data($this->email, $this->id, $feed->getId());
+        }
+        else{
+            return false;
+        }
         $this->feeds = array();
         $this->buildFeedArray($this->email);
     }
