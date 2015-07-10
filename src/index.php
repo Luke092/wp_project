@@ -21,6 +21,7 @@
         <link rel = "stylesheet" type = "text/css" href = "./css/generic.css">
         <link rel = "stylesheet" type = "text/css" href = "./css/index.css">
         <link rel = "stylesheet" type = "text/css" href = "./css/popup.css">
+        <link rel="icon" href="./img/utils/feed_icon.png" type="image/png"/>
         <!--[if lt IE 7]>
                 <style type="text/css">
                         #wrapper { height:100%; }

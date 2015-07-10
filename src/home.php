@@ -20,6 +20,7 @@
         <meta charset="ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="./css/generic.css">
         <link rel="stylesheet" type="text/css" href="./css/home.css">
+        <link rel="icon" href="./img/utils/feed_icon.png" type="image/png"/>
         
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="js/ajax.js"></script>
