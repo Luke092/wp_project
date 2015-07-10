@@ -1,5 +1,5 @@
 <?php
-    use RSSAggregator\model;
+    use RSSAggregator\model\session;
     require_once("./utils.php");
     require_once("./config.php");
     
