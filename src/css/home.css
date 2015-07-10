@@ -99,3 +99,8 @@ table{
     margin: 15px;
     transition: border-color 0.2s linear;
 }
+
+.img-art{
+    width: 150px;
+    height: 100px;
+}

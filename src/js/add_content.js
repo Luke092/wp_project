@@ -5,4 +5,5 @@ $(".minicover, .label").click(function(){
     var method = "POST";
     var param = ["catName", cat_name];
     pageRequest(xhr, url, method, param);
+    waitResponse();
 });
