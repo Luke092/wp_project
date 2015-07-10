@@ -49,16 +49,17 @@ function td($cell){
     return '<td>'.$cell.'</td>';
 }
 
-//function img($src, $alt){
-//    return '<img src="'.$src.'" alt="'.$alt.'"></img>';
-//}
+function img($src, $alt){
+    return '<img src="'.$src.'" alt="'.$alt.'"></img>';
+}
 
-function div($content, $class){
+function div($content, $id, $class){
+    $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<div'.$class_assign.'>'.$content.'</div>';
+    return '<div'.$id_assign.$class_assign.'>'.$content.'</div>';
 }
 
 function empty_div($background_image_url, $class){
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<div'.$class_assign.' style="background-image:url('.$background_image_url.')".></div>';
+    return '<div'.$class_assign.' style="background-image:url('.$background_image_url.')"></div>';
 }

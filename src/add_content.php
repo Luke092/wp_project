@@ -1,8 +1,10 @@
 <?php
     require_once("./config.php");
     require_once("./utils.php");
+    require_once('./php/autoloader.php');
     function __autoload($class_name){
         require_once $class_name . '.php';
+        
     }
 ?>
 <div id="search-bar">
@@ -13,20 +15,34 @@
     </form>
 </div>
 <?php
-    $default_categories = categories::getCategories(categories::$DEFAULT_CAT)->get_array();
-    $categories_names = array();
-    $i = 0;
-    foreach($default_categories as $category){
-        $categories_names[$i++] = $category->getName();
+    $default_categories = categories::getCategories(categories::$DEFAULT_CAT);
+    $default_categories_array = $default_categories->get_array();
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["catName"])){
+        $cat_name = $_POST["catName"];
+        $category = $default_categories->getCatByName($cat_name);
+        $feeds = $category->get_array();
+        foreach($feeds as $feed){
+            $rss = new SimplePie();
+            $rss->set_feed_url($feed->getURL());
+            $rss->init();
+            echo $rss->get_title().'<br>';
+        }
     }
-    $category = empty_div(DEF_CAT_DIR.$categories_names[0].'.jpg', "minicover").div($categories_names[0] , "label");
-    $body = "<tr>" . td(div($category, "block"));
-    for($i = 1; $i < count($default_categories); $i++){
-        if($i % DEF_CAT_PER_ROW == 0)
-            $body .= "</tr><tr>";
-        $category = empty_div(DEF_CAT_DIR.$categories_names[$i].'.jpg', "minicover").div($categories_names[$i] , "label");
-        $body .= td(div($category, "block"));
+    else{
+        $categories_names = array();
+        $i = 0;
+        echo div("Categorie", null, "table-header");
+        $body = "<tr>";
+        foreach($default_categories_array as $category){
+            $feeds = $category->get_array();
+            $category_name = $category->getName();
+            $category = empty_div(DEF_CAT_DIR.$category_name.'.jpg', "minicover").div($category_name, null, "label");
+            $body .= td(div($category, $category_name, "block"));
+            if(++$i % DEF_CAT_PER_ROW == 0)
+                $body .= "</tr><tr>";
+        }
+        $body .= "</tr>";
+        echo table($body);
     }
-    $body .= "</tr>";
-    echo table($body);
 ?>
+<script type="text/javascript" src="./js/add_content.js"></script>

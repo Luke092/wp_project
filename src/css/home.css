@@ -41,15 +41,10 @@
     padding: 40px 25px;
 }
 
-#search-bar form{
-    width: 500px;
-    margin: 0 auto;
-}
-
 .search{
     padding: 7px 10px 7px 30px;
-    margin: 3px;
-    width: 45%;
+    width: 55%;
+    margin-left: 20%;
     background: url(../img/utils/search_icon.png) no-repeat;
     -webkit-background-size: contain;
     background-size: contain;
@@ -59,6 +54,7 @@
     color: darkslategray;
     border-color: red;
     outline: none;
+    font-size: 18px;
 }
 
 .minicover{
@@ -86,6 +82,13 @@ table{
     width: 60%;
 }
 
+.table-header{
+    margin-left: 130px;
+    font-weight: bold;
+    color: darkslategray;
+    font-size: 25px;
+}
+
 .block{
     float: left;
     border-radius: 3px;
@@ -93,7 +96,6 @@ table{
     border: 1px solid #D8D8D8;
     overflow: hidden;
     cursor: pointer;
-    margin-right: 30px;
-    margin-bottom: 30px;
+    margin: 15px;
     transition: border-color 0.2s linear;
 }
