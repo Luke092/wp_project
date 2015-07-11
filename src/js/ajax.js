@@ -104,7 +104,7 @@ function sendData(xhr, url, method, param, callback){
                     if(statusText[xhr.status] === "OK")
                         callback();
                     else
-                        alert("Spiacente, si e' verificato il seguente errore: " + xhr);//statusText[xhr.status]);
+                        alert("Spiacente, si e' verificato il seguente errore: " + statusText[xhr.status]);
                     $("#waiting").remove();
                 }
             };
@@ -127,7 +127,7 @@ function sendData(xhr, url, method, param, callback){
                     if(statusText[xhr.status] === "OK")
                         callback();
                     else
-                        alert("Spiacente, si e' verificato il seguente errore: " + xhr);//statusText[xhr.status]);
+                        alert("Spiacente, si e' verificato il seguente errore: " + statusText[xhr.status]);
                     $("#waiting").remove();
                 }
             };
@@ -151,18 +151,17 @@ function pageRequest(xhr, url, method, param){
 
 function waitResponse(){
     var loadingImage = document.createElement("img");
-    loadingImage.src = "./img/utils/loading_page.gif";
+    loadingImage.src = "./img/utils/loading.gif";
     loadingImage.id = "waiting";
-    loadingImage.style.position = "absolute";
+    $(document.body).append($(loadingImage));
     var pos = $("#page").position();
     var h = $("#page").height();
     var w = $("#page").width();
-    var top_margin = pos.top - h/2;
+    var top_margin = pos.top - h/2 - $("#waiting").height();
     var left_margin = pos.left + w/2;
     loadingImage.style.marginTop = top_margin+"px";
     loadingImage.style.marginLeft = left_margin+"px";
     $("#page *").fadeTo(600, 0);
     $(".block").css("cursor", "initial");
-    $(".minicover, .label").unbind("click");
-    $(document.body).append($(loadingImage));
+    $(".minicover, .label").unbind("click"); 
 }

@@ -29,7 +29,6 @@ function visualize_default_feeds($default_categories, $cat_name){
         $rss->init();
         $feed_icon = empty_div(get_feed_icon_url($rss), "feed-icon");
         $feed_name = div($feed->getName(), null, "feed-name", $feed->getName());
-//        $feed_name = '<div class="feed-name" title="'.$feed->getName().'">'.$feed->getName().'</div>';
         $feed_desc = div(get_feed_description($rss), null, "feed-description");
         $feed_add = div(img(null, get_add_feed_icon($default_categories, $feed), "add"), null, "add-feed");
         $feed_header = div($feed_icon.$feed_name.$feed_desc, null, "feed-header");

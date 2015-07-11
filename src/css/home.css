@@ -157,6 +157,7 @@ table{
 .add-feed > img{
     margin-left: 43%;
     height: 30px;
+    cursor: pointer;
 }
 
 .feed-box{
