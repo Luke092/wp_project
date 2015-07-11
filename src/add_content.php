@@ -36,6 +36,10 @@
             $cat_name = $_POST["catName"];
             visualize_default_feeds($default_categories, $cat_name);
         }
+        else if(isset($_POST["feedId"])){
+            $feed_id = $_POST["feedId"];
+            show_category_choice($feed_id);
+        }
         else if(isset($_POST["back-to-cat"])){
             visualize_default_categories($default_categories_array);
         }

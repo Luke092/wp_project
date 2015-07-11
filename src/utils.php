@@ -28,12 +28,13 @@ function td($cell){
     return '<td>'.$cell.'</td>';
 }
 
-function img($class, $src, $alt){
+function img($class, $src, $alt, $title = null){
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<img'.$class_assign.' src="'.$src.'" alt="'.$alt.'"></img>';
+    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
+    return '<img'.$class_assign.' src="'.$src.'" alt="'.$alt.'"'.$title_assign.'></img>';
 }
 
-function div($content, $id, $class, $title=null){
+function div($content, $id, $class, $title = null){
     $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
     $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
@@ -52,9 +53,9 @@ function span($content, $id, $class, $title=null){
     return '<span'.$id_assign.$class_assign.$title_assign.'>'.$content.'</span>';
 }
 
-function br($n = 1){
-    $content = '';
-    for($i = 1; $i <= $n; $i++)
-        $content .= '<br />';
-    return $content;
-}
+//function br($n = 1){
+//    $content = '';
+//    for($i = 1; $i <= $n; $i++)
+//        $content .= '<br />';
+//    return $content;
+//}

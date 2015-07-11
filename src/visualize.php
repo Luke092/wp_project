@@ -1,5 +1,23 @@
 <?php
+// use RSSAggregator\model\categories;
+//use RSSAggregator\model\category;
+use RSSAggregator\model\feed;
+
 require_once("./config.php");
+require_once("./utils.php");
+
+//function __autoload($class) {
+//
+//    // convert namespace to full file path
+//    if (strpos($class, 'SimplePie') !== 0)
+//    {
+//            $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+//    }
+//    else{
+//        $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+//    }
+//    require_once($class);
+//}
 
 function visualize_default_categories($default_categories_array){
     $categories_names = array();
@@ -24,25 +42,31 @@ function visualize_default_feeds($default_categories, $cat_name){
     echo div(span("Categorie > ", "back-to-cat", null).$cat_name, null, "table-header");
     $body = "<tr>";
     foreach($feeds as $feed){
-        $rss = new SimplePie();
-        $rss->set_feed_url($feed->getURL());
-        $rss->init();
-        $feed_icon = empty_div(get_feed_icon_url($rss), "feed-icon");
-        $feed_name = div($feed->getName(), null, "feed-name", $feed->getName());
-        $feed_desc = div(get_feed_description($rss), null, "feed-description");
-        $feed_add = div(img(null, get_add_feed_icon($default_categories, $feed), "add"), null, "add-feed");
-        $feed_header = div($feed_icon.$feed_name.$feed_desc, null, "feed-header");
-        $article_image = empty_div(get_first_article_image_url($rss), "article-image");
-        $article_title = div(div(get_first_article_title($rss), null, "article-title"), null, "vignette");
-        $feed_article = div($article_image.$article_title, null, "article-box");
-        $feed_footer = div($feed_article, null, "feed-footer");
-        $feed_box = div($feed_header.$feed_add.$feed_footer, null, "feed-box");
+        $feed_box = visualize_single_feed_box($feed, $default_categories, "feed-box");
         $body .= td($feed_box);
         if(++$i % FEEDS_PER_ROW == 0)
             $body .= "</tr><tr>";
     }
     $body .= "</tr>";
     echo table($body);
+}
+
+function visualize_single_feed_box($feed, $default_categories, $class){
+    $rss = new SimplePie();
+    $rss->set_feed_url($feed->getURL());
+    $rss->init();
+    $feed_icon = empty_div(get_feed_icon_url($rss), "feed-icon");
+    $feed_name = div($feed->getName(), null, "feed-name", $feed->getName());
+    $feed_desc = div(get_feed_description($rss), null, "feed-description");
+    $feed_add = "";
+    if($default_categories !== false)
+        $feed_add .= div(img(null, get_add_feed_icon($default_categories, $feed), "add-feed", "Aggiungi feed"), null, "add-feed");
+    $feed_header = div($feed_icon.$feed_name.$feed_desc, null, "feed-header");
+    $article_image = empty_div(get_first_article_image_url($rss), "article-image");
+    $article_title = div(div(get_first_article_title($rss), null, "article-title"), null, "vignette");
+    $feed_article = div($article_image.$article_title, null, "article-box");
+    $feed_footer = div($feed_article, null, "feed-footer");
+    return div($feed_header.$feed_add.$feed_footer, $feed->getId(), $class);
 }
 
 function date_transform($date_format){
@@ -108,4 +132,10 @@ function get_first_article_title($rss){
     else
         $res = $title;
     return $res;
+}
+
+function show_category_choice($feed_id){
+    $feed = new feed($feed_id);
+    $feed_box = visualize_single_feed_box($feed, false, "feed-box-cat-choice");
+    echo $feed_box;
 }

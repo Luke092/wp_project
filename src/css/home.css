@@ -212,7 +212,7 @@ table{
     font-size: 12px;
 }
 
-.feed-box .article-box{
+.article-box{
     width: 238px;
     height: 186px;
     cursor: pointer;
@@ -223,6 +223,23 @@ table{
     border-color: #EEE #DDD #BBB;
 }
 
-.feed-box .article-box:hover{
+.article-box:hover{
     border-color: #999;
+}
+
+.feed-box-cat-choice{
+    margin-right: 34px;
+    margin-left: 200px;
+    width: 240px;
+    float: left;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 51px;
+    height: 300px;
+    padding-bottom: 0px;
+    border: 1px solid #D8D8D8;
+    background-color: #FFF;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box; 
 }
