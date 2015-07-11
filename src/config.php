@@ -3,9 +3,13 @@
 const MIN_LENGTH_PASSWORD = 6;
 const HASHING_ALGORITHM = "sha256";
 const DEF_CAT_DIR = "./img/default_cat/";
+const DEF_FEED_ICON_PATH = "./img/utils/feed_icon.png";
+const DEF_ARTICLE_IMAGE_PATH = "./img/utils/default-article.jpg";
 const DEF_CATS_PER_ROW = 4;
 const FEEDS_PER_ROW = 3;
 const DATE_FORMAT = "D j F Y G i";
+const MAX_LENGTH_DESC = 100;
+const MAX_LENGTH_TITLE = 75;
 
 $MONTHS = array(
     "January" => "gennaio",

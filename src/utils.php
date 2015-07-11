@@ -28,14 +28,16 @@ function td($cell){
     return '<td>'.$cell.'</td>';
 }
 
-function img($src, $alt){
-    return '<img src="'.$src.'" alt="'.$alt.'"></img>';
+function img($class, $src, $alt){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    return '<img'.$class_assign.' src="'.$src.'" alt="'.$alt.'"></img>';
 }
 
-function div($content, $id, $class){
+function div($content, $id, $class, $title=null){
     $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<div'.$id_assign.$class_assign.'>'.$content.'</div>';
+    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
+    return '<div'.$id_assign.$class_assign.$title_assign.'>'.$content.'</div>';
 }
 
 function empty_div($background_image_url, $class){

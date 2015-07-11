@@ -68,7 +68,7 @@ INSERT INTO Categories (c_name,is_default) VALUES ("Cinema", "1");
 
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("Corriere", "http://xml.corriereobjects.it/rss/homepage.xml", "1");
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("Repubblica", "http://www.repubblica.it/rss/homepage/rss2.0.xml", "1");
-INSERT INTO Feeds (f_name,url,default_cat) VALUES ("NYT International", "http://rss.nytimes.com/services/xml/rss/nyt/InternationalHome.xml", "1");
+INSERT INTO Feeds (f_name,url,default_cat) VALUES ("RSS di Ultima Ora - ANSA.it", "http://www.ansa.it/sito/notizie/topnews/topnews_rss.xml", "1");
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("Il Giornale", "http://www.ilgiornale.it/feed.xml", "1");
 
 INSERT INTO Feeds (f_name,url,default_cat) VALUES ("Gizmodo", "http://feeds.gawker.com/gizmodo/full", "2");

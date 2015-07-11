@@ -1,8 +1,3 @@
-/* 
-    Created on : Jun 11, 2015, 10:17:27 AM
-    Author     : Luca Bettinelli
-*/
-
 /* Mask for background, by default is not display */
 #mask {
     display: none;
@@ -20,8 +15,8 @@
 /* You can customize to your needs  */
 .access-popup {
     display: none;
-    /*background: #333;*/
-    background: #c54101;
+    /* background: #333; */
+    background: #FB8248;
     padding: 10px;
     border: 2px solid #ddd;
     float: left;
@@ -67,13 +62,13 @@ form.signin .textbox span {
 }
 
 form.signin p, form.signin span {
-    color: #999;
+    color: darkred;
     font-size: 13px;
     line-height: 18px;
 }
 
 form.signin .textbox input {
-    background: #8f3c3c;
+    background: #EF6821;
     border-bottom: 1px solid #333;
     border-left: 1px solid #000;
     border-right: 1px solid #333;
@@ -121,7 +116,7 @@ form.signin input::-webkit-input-placeholder {
 }
 
 .error{
-    color: rgba(188, 255, 70, 0.71);
+    color: rgba(255, 0, 0, 1);
     text-align: left;
 }
 
@@ -133,6 +128,6 @@ form.signin input::-webkit-input-placeholder {
 
 .popup-title{
     font-size: 14px;
-    color: darkturquoise;
+    color: darkred;
     text-align: center;
 }
