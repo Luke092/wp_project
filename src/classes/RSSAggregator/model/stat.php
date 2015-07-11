@@ -7,11 +7,13 @@ class stat implements JsonSerializable {
     
     private $articles = array();
     
-    public function __construct($email) {
+    private static $TABLE = "Stats";
+    
+    private function __construct($email) {
         $this->user_id = $email;
     }
     
-    public function set_articles($articles){
+    private function set_articles($articles){
         $this->articles = $articles;
     }
 
@@ -56,6 +58,13 @@ class stat implements JsonSerializable {
         return false;
     }
     
+    public function saveStatsToFile(){
+        $path = self::fetch_data($this->user_id)['file_path'];
+        $json = self::export_JSON($this);
+        $res = file_put_contents($path, $json);
+        return ($res != false)? true : false;
+    }
+    
     public function jsonSerialize() {
         return [
             "email" => $this->user_id,
@@ -78,6 +87,43 @@ class stat implements JsonSerializable {
         $stat->set_articles($article_array);
         
         return $stat;
+    }
+    
+    public static function getStat($email){
+        $elem = self::fetch_data($email);
+        if($elem != null){
+            $path = $elem['file_path'];
+            if(!file_exists($path) && !is_readable($path)){
+                return null;
+            }
+            else{
+                $json = file_get_contents($path);
+                return self::import_JSON($json);
+            }
+        }
+        else{
+            $path = "./json/stats/" . $email . ".json";
+            self::insert($email, $path);
+            return new stat($email);
+        }
+    }
+    
+    private static function fetch_data($email){
+        $db = dbUtil::connect();
+        $sql = "SELECT * FROM". self::$TABLE ."WHERE email = ?";
+        $stm = $db->prepare($sql);
+        $stm->execute(array($email));
+        dbUtil::close($db);
+        $elems = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return ($elems != null)? $elems[0] : null;
+    }
+    
+    private static function insert($email, $file_path){
+        if (dbUtil::insert(self::$TABLE, array("email", "file_path"), array($c_name, $file_path))) {
+            return self::$CORRECT_INSERT;
+        } else {
+            return self::$ERROR_INSERT;
+        }
     }
     
 }

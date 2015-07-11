@@ -1,6 +1,6 @@
 <?php
 namespace RSSAggregator\model;
-use PDO;
+
 class article implements JsonSerializable {
     
     private $id, $c_id, $text;
