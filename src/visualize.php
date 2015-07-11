@@ -21,7 +21,7 @@ function visualize_default_feeds($default_categories, $cat_name){
     $category = $default_categories->getCatByName($cat_name);
     $feeds = $category->get_array();
     $i = 0;
-    echo div($cat_name, null, "table-header");
+    echo div(span("Categorie > ", "back-to-cat", null).$cat_name, null, "table-header");
     $body = "<tr>";
     foreach($feeds as $feed){
         $rss = new SimplePie();

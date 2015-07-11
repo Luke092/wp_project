@@ -44,3 +44,17 @@ function empty_div($background_image_url, $class){
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
     return '<div'.$class_assign.' style="background-image:url('.$background_image_url.')"></div>';
 }
+
+function span($content, $id, $class, $title=null){
+    $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
+    return '<span'.$id_assign.$class_assign.$title_assign.'>'.$content.'</span>';
+}
+
+function br($n = 1){
+    $content = '';
+    for($i = 1; $i <= $n; $i++)
+        $content .= '<br />';
+    return $content;
+}

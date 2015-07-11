@@ -19,6 +19,7 @@
         }
 	require_once($class);
     }
+    
 ?>
 <div id="search-bar">
     <form>
@@ -30,9 +31,14 @@
 <?php
     $default_categories = categories::getCategories(categories::$DEFAULT_CAT);
     $default_categories_array = $default_categories->get_array();
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["catName"])){
-        $cat_name = $_POST["catName"];
-        visualize_default_feeds($default_categories, $cat_name);
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["catName"])){
+            $cat_name = $_POST["catName"];
+            visualize_default_feeds($default_categories, $cat_name);
+        }
+        else if(isset($_POST["back-to-cat"])){
+            visualize_default_categories($default_categories_array);
+        }
     }
     else{
         visualize_default_categories($default_categories_array);
