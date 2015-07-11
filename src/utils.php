@@ -1,6 +1,7 @@
 <?php
 require_once("./config.php");
 
+// login and register validation
 function show_form_errors($errors){
     if(!empty($errors))
         echo "Errori riscontrati:<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
@@ -14,29 +15,7 @@ function is_empty_field($field){
     return (strlen($field) == 0) || (preg_match('/^[[:space:]]+$/', $field));
 }
 
-function load_directory($dir){
-    global $ERROR_MESSAGES;
-    $d = @opendir($dir);
-    if($d == false){
-        echo $MSG_ERRORI[7] . $dir;
-        return false;
-    }
-    $files = array();
-    while(($file = readdir($d)) !== false){
-        if(!is_dir($file) && is_image($file))
-            $files[] = $dir . $file;
-    }
-    closedir($d);
-    return $files;
-}
-
-function is_image($file){
-    $image_formats = '/^.*\.(jpg|jpeg|png|gif)$/i';
-    if(preg_match($image_formats, $file))
-        return true;
-    return false;
-}
-
+// HTML functions
 function table($body){
     return '<table>'.$body.'</table>';
 }
@@ -49,14 +28,16 @@ function td($cell){
     return '<td>'.$cell.'</td>';
 }
 
-function img($src, $alt){
-    return '<img src="'.$src.'" alt="'.$alt.'"></img>';
+function img($class, $src, $alt){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    return '<img'.$class_assign.' src="'.$src.'" alt="'.$alt.'"></img>';
 }
 
-function div($content, $id, $class){
+function div($content, $id, $class, $title=null){
     $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
     $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<div'.$id_assign.$class_assign.'>'.$content.'</div>';
+    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
+    return '<div'.$id_assign.$class_assign.$title_assign.'>'.$content.'</div>';
 }
 
 function empty_div($background_image_url, $class){

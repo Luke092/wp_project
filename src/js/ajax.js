@@ -94,11 +94,18 @@ function sendData(xhr, url, method, param, callback){
             }
             xhr.open("GET", uri, true);
             xhr.onreadystatechange = function(){
-                if(xhr.readyState === readyState.LOADED){
+                if(xhr.readyState === readyState.SENT){
+                    var loadingImage = $("img");
+                    loadingImage.attr("id", "waiting");
+                    loadingImage.attr("src", "./img/utils/loading_page.gif");
+                    $(document.body).append(loadingImage);
+                }
+                else if(xhr.readyState === readyState.LOADED){
                     if(statusText[xhr.status] === "OK")
                         callback();
                     else
                         alert("Spiacente, si e' verificato il seguente errore: " + xhr);//statusText[xhr.status]);
+                    $("#waiting").remove();
                 }
             };
             xhr.send(null);
@@ -120,7 +127,8 @@ function sendData(xhr, url, method, param, callback){
                     if(statusText[xhr.status] === "OK")
                         callback();
                     else
-                        alert("Spiacente, si e' verificato il seguente errore: " + statusText[xhr.status]);
+                        alert("Spiacente, si e' verificato il seguente errore: " + xhr);//statusText[xhr.status]);
+                    $("#waiting").remove();
                 }
             };
             xhr.send((content == "")? null : content);
@@ -139,4 +147,22 @@ function pageRequest(xhr, url, method, param){
         $("#page").html(xhr.responseText);
     };
     sendData(xhr, url, method, param, callback);
+}
+
+function waitResponse(){
+    var loadingImage = document.createElement("img");
+    loadingImage.src = "./img/utils/loading_page.gif";
+    loadingImage.id = "waiting";
+    loadingImage.style.position = "absolute";
+    var pos = $("#page").position();
+    var h = $("#page").height();
+    var w = $("#page").width();
+    var top_margin = pos.top - h/2;
+    var left_margin = pos.left + w/2;
+    loadingImage.style.marginTop = top_margin+"px";
+    loadingImage.style.marginLeft = left_margin+"px";
+    $("#page *").fadeTo(600, 0);
+    $(".block").css("cursor", "initial");
+    $(".minicover, .label").unbind("click");
+    $(document.body).append($(loadingImage));
 }

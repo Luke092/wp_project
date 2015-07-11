@@ -84,6 +84,7 @@ table{
 
 .table-header{
     margin-left: 130px;
+    margin-bottom: 25px;
     font-weight: bold;
     color: darkslategray;
     font-size: 25px;
@@ -98,4 +99,130 @@ table{
     cursor: pointer;
     margin: 15px;
     transition: border-color 0.2s linear;
+}
+
+.img-art{
+    width: 150px;
+    height: 100px;
+}
+
+.feed-header{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.feed-icon{
+    width: 45px;
+    height: 45px;
+    border-radius: 3px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    margin-right: 10px;
+}
+
+.feed-name{
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: -0.04em;
+    line-height: 30px;
+    max-height: 30px;
+    overflow: hidden;
+    text-transform: capitalize;
+    cursor: pointer;
+    padding-top: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.feed-description{
+    font-size: 13px;
+    overflow: hidden;
+    height: 51px;
+    line-height: 17px;
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add-feed{
+    height: 30px;
+    width: 240px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.add-feed > img{
+    margin-left: 43%;
+    height: 30px;
+}
+
+.feed-box{
+    margin-right: 34px;
+    width: 240px;
+    float: left;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 51px;
+    height: 369px;
+    padding-bottom: 0px;
+    border: 1px solid #D8D8D8;
+    background-color: #FFF;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.feed-footer{
+    width: 240px;
+    height: 186px;
+}
+
+.article-box .article-image {
+    width: 258px;
+    height: 186px;
+    overflow: hidden;
+    background-color: #FFF;
+    background-repeat: no-repeat;
+    background-size: 240px 133px;
+    border: 0px;
+    border-radius: 0px;
+}
+
+.article-box .vignette{
+    margin-top: -53px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    position: relative;
+    height: 32px;
+    overflow: hidden;
+    background-color: #FFF;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.article-title{
+    max-height: 32px;
+    overflow: hidden;
+    position: relative;
+    bottom: 0px;
+    font-size: 12px;
+}
+
+.feed-box .article-box{
+    width: 238px;
+    height: 186px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 3px;
+    border-width: 1px;
+    border-style: solid; 
+    border-color: #EEE #DDD #BBB;
+}
+
+.feed-box .article-box:hover{
+    border-color: #999;
 }
