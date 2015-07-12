@@ -17,13 +17,13 @@
     else{
         $email = session::get_info("email");
         $categories = user::getCategories($email);
-        if($categories->count() == 0){
+//        if($categories->count() == 0){
             header("Location: ./add_content.php?back-to-cat=true");
         }
-        else{
+//        else{
 ?>
             
 <?php
-        }
-    }
+//        }
+//    }
 ?>

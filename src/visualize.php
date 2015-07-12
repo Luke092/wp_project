@@ -1,26 +1,13 @@
 <?php
-// use RSSAggregator\model\categories;
-//use RSSAggregator\model\category;
+use RSSAggregator\model\user;
+use RSSAggregator\model\categories;
+use RSSAggregator\model\category;
 use RSSAggregator\model\feed;
 
 require_once("./config.php");
 require_once("./utils.php");
 
-//function __autoload($class) {
-//
-//    // convert namespace to full file path
-//    if (strpos($class, 'SimplePie') !== 0)
-//    {
-//            $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
-//    }
-//    else{
-//        $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-//    }
-//    require_once($class);
-//}
-
 function visualize_default_categories($default_categories_array){
-    $categories_names = array();
     $i = 0;
     echo div("Categorie", null, "table-header");
     $body = "<tr>";
@@ -134,8 +121,49 @@ function get_first_article_title($rss){
     return $res;
 }
 
-function show_category_choice($feed_id){
+function show_category_choice($feed_id, $email){
     $feed = new feed($feed_id);
+    $user_categories = user::getCategories($email)->getCategories(categories::$USER_CAT, $email)->get_array();
+    $feed_def_cat_index = $feed->getDefaultCat();
     $feed_box = visualize_single_feed_box($feed, false, "feed-box-cat-choice");
-    echo $feed_box;
+    $choices = '';
+    if($feed_def_cat_index == null){
+        $choices = print_all_user_categories($user_categories);
+        $choices .= print_last_radio_button("Nuova categoria", true);
+    }
+    else{
+        $feed_user_def_cat = user::getCategories($email)->getCatById($feed_def_cat_index);
+        $feed_def_cat = categories::getCategories(categories::$DEFAULT_CAT)->getCatById($feed_def_cat_index);
+        if($feed_user_def_cat === false){
+            $choices = print_all_user_categories($user_categories);
+            $choices .= print_last_radio_button($feed_def_cat->getName(), true);
+        }
+        else{
+            $last_checked = true;
+            foreach($user_categories as $category){
+                if($feed_def_cat->getName() != $category->getName()){
+                    $choices .= radio_button($category->getName(), $category->getName(), "category", false);
+//                    $last_checked = true;
+                }
+                else{
+                    $choices .= radio_button($category->getName(), $category->getName(), "category", true);
+                    $last_checked = false;
+                }
+            }
+            $choices .= print_last_radio_button("Nuova categoria", $last_checked);
+        }
+    }
+    echo $feed_box.$choices;
+}
+
+function print_all_user_categories($user_categories){
+    $choices = '';
+    foreach($user_categories as $category){
+        $choices .= radio_button($category->getName(), $category->getName(), "category", false);
+    }
+    return $choices;
+}
+
+function print_last_radio_button($text, $checked){
+    return radio_button(input_text($text, "other-choice"), $text, "category", $checked);
 }

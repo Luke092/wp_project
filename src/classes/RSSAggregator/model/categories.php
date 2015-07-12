@@ -115,6 +115,15 @@ class categories{
         return false;
     }
     
+    public function getCatById($id){
+        foreach ($this->categories as $cat){
+            if($cat->getId() == $id){
+                return $cat;
+            }
+        }
+        return false;
+    }
+    
     public function getFeedsByTitleURL($title, $url){
         $res = array();
         foreach ($this->categories as $cat){

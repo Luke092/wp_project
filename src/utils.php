@@ -53,6 +53,17 @@ function span($content, $id, $class, $title=null){
     return '<span'.$id_assign.$class_assign.$title_assign.'>'.$content.'</span>';
 }
 
+function radio_button($text, $value, $name, $checked, $class = null){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    $check = ($checked ? ' checked="checked"' : '');
+    return '<input name="'.$name.'" type="radio" value="'.$value.'"'.$class_assign.$check.'>'.$text.'<br>';
+}
+
+function input_text($default_text, $class = null){
+    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+    return '<input'.$class_assign.' name="other-choice" type="text" value="'.$default_text.'">';
+}
+
 //function br($n = 1){
 //    $content = '';
 //    for($i = 1; $i <= $n; $i++)
