@@ -13,7 +13,8 @@ $(document).ready(function(){
    });
    $(".feed").click(function(){
         var feed_id = $(this).attr("id");
-        var param = ["feedId" , feed_id];
+        var cat_name = $(this).parent().children(".cName").attr("id");
+        var param = ["feedId" , feed_id, "catName", cat_name];
         var xhr = new XMLHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
