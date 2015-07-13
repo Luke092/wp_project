@@ -75,7 +75,7 @@ class categories{
 
     public function add_Category($c_name){
         $res = category::insert($c_name);
-        $present_cat = $this->getCatByName($name);
+        $present_cat = $this->getCatByName($c_name);
         if($present_cat == false){
             if($res == category::$ERROR_INSERT){
                 return false;
