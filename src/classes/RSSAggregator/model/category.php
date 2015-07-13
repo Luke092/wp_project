@@ -87,6 +87,7 @@ class category {
         else{
             return false;
         }
+        return true;
     }
 
     public function remove_Feed($feed) {
