@@ -17,13 +17,26 @@
     else{
         $email = session::get_info("email");
         $categories = user::getCategories($email);
-//        if($categories->count() == 0){
+        if($categories->count() == 0){
             header("Location: ./add_content.php?back-to-cat=true");
         }
-//        else{
+        else{
+            
 ?>
             
 <?php
-//        }
-//    }
+            if(isset($_POST["feedId"]) && isset($_POST["catName"])){
+                $feed_id = $_POST["feedId"];
+                $cat_name = $_POST["catName"];
+                
+                visualize_articles_by_feed
+            }
+            else if(isset($_POST["catName"])){
+                
+            }
+            else{
+                
+            }
+        }
+    }
 ?>

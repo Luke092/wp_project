@@ -9,7 +9,7 @@ $(".minicover, .label").click(function(){
 //    history.pushState();
 });
 
-$(".add-feed > img").click(function(){
+$(".add-feed-box > img.add-feed").click(function(){
     var feedId = $(this).parent().parent().attr("id");
 //    alert(feedName);
     var xhr = myGetXmlHttpRequest();

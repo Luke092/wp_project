@@ -148,17 +148,24 @@ table{
     margin-bottom: 10px;
 }
 
-.add-feed{
+.add-feed-box{
     height: 30px;
     width: 240px;
     margin-top: 15px;
     margin-bottom: 30px;
 }
 
-.add-feed > img{
+.add-feed-box > img{
     margin-left: 43%;
     height: 30px;
+}
+
+img.add-feed{
     cursor: pointer;
+}
+
+img.disabled-add-feed{
+    cursor: initial;
 }
 
 .feed-box{

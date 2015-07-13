@@ -34,8 +34,10 @@ function __autoload($class) {
     $default_categories_array = $default_categories->get_array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["catName"]) && !isset($_POST["feedId"])){
+            session::start();
+            $email = session::get_info("email");
             $cat_name = $_POST["catName"];
-            visualize_default_feeds($default_categories, $cat_name);
+            visualize_default_feeds($default_categories, $cat_name, $email);
         }
         else if(isset($_POST["feedId"]) && !isset($_POST["catName"])){
             $feed_id = $_POST["feedId"];
@@ -53,6 +55,7 @@ function __autoload($class) {
             $added_category = $user_categories->add_Category($cat_name);
             $feed = new feed($feed_id);
             $added_category->add_Feed_obj($feed);
+            header("Location: ./home.php");
         }
         else if(isset($_POST["back-to-cat"])){
             visualize_default_categories($default_categories_array);
