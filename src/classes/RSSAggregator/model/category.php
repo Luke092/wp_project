@@ -75,14 +75,18 @@ class category {
             return false;
         }
         $feed = new feed(feed::fetch_by_name_url($f_name, $url)['id']);
-        if($this->getFeedByNameURL($feed->getName(), $feed->getURL()) != false){
+        $this->add_Feed_obj($feed);
+        $this->feeds = array();
+        $this->buildFeedArray($this->email);
+    }
+    
+    public function add_Feed_obj($feed){
+        if($this->getFeedByNameURL($feed->getName(), $feed->getURL()) == false){
             feed::insert_UCF_data($this->email, $this->id, $feed->getId());
         }
         else{
             return false;
         }
-        $this->feeds = array();
-        $this->buildFeedArray($this->email);
     }
 
     public function remove_Feed($feed) {
