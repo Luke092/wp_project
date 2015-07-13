@@ -10,7 +10,7 @@ class category {
     private $id;
     private $c_name;
     private $is_default;
-    private $feeds;
+    private $feeds = array();
     private $email;
 
     public function __construct($id, $email = null) {
