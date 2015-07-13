@@ -283,3 +283,34 @@ button{
     background-image: linear-gradient(to bottom, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdbca', endColorstr='#8c1b0b',GradientType=0 ); /* IE6-9 */
 }
+
+.category{
+    margin-bottom: 15px;
+    clear: both;
+}
+
+.feed{
+    margin-left: 40px;
+    margin-top: 10px;
+    clear: both;
+}
+
+.navigation{
+    width: 24px;
+    height: 24px;
+}
+
+.navigation_arrow{
+     float:left;
+}
+
+.icon{
+    width: 24px;
+    height: 24px;
+}
+
+.cName{
+    float:left;
+    margin-top: 3px;
+    margin-left: 3px;
+}

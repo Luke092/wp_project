@@ -110,6 +110,15 @@ class category {
         }
         return false;
     }
+    
+    public function getFeedById($id) {
+        foreach ($this->feeds as $feed) {
+            if ($feed->getId() == $id) {
+                return $feed;
+            }
+        }
+        return false;
+    }
 
     public function get_array() {
         return $this->feeds;
