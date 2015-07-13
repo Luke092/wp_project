@@ -19,7 +19,7 @@
     -ms-flex: 1;               /* IE 10 */
     flex: 1;                   /* NEW, Spec - Opera 12.1, Firefox 20+ */
     
-    //debug style
+    /*debug style*/
     border-color: black;
     border-style: solid;
 }
@@ -30,9 +30,10 @@
     padding: 5px;
     width: 80%;
     
-    //debug style
+    /*debug style*/
     border-color: black;
     border-style: solid;
+    background-color: rgb(255, 248, 218);
 }
 
 #search-bar{
@@ -55,6 +56,7 @@
     border-color: red;
     outline: none;
     font-size: 18px;
+    background-color: cornsilk;
 }
 
 .minicover{
@@ -62,7 +64,7 @@ height: 100px;
 background-size: cover;
 background-repeat: no-repeat;
 background-position: center center;
-border-bottom: 1px solid #EFEFEF;
+border-bottom: 1px solid #EBA2A2;
 }
 
 .label{
@@ -94,7 +96,7 @@ table{
     float: left;
     border-radius: 3px;
     width: 116px;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #EBA2A2;
     overflow: hidden;
     cursor: pointer;
     margin: 15px;
@@ -168,7 +170,7 @@ table{
     margin-bottom: 51px;
     height: 369px;
     padding-bottom: 0px;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #EBA2A2;
     background-color: #FFF;
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
@@ -220,7 +222,7 @@ table{
     box-shadow: rgba(0, 0, 0, 0.15) 0 1px 3px;
     border-width: 1px;
     border-style: solid; 
-    border-color: #EEE #DDD #BBB;
+    border-color: #EBA2A2 #EBA2A2 #FE7575;
 }
 
 .article-box:hover{
@@ -237,9 +239,47 @@ table{
     margin-bottom: 51px;
     height: 300px;
     padding-bottom: 0px;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #EBA2A2;
     background-color: #FFF;
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box; 
+}
+
+.category-choice{
+    margin-left: 60%;
+}
+
+.category-choice input[type=radio]{
+    margin-top: 10px;
+    cursor: pointer;
+
+}
+
+.category-choice input[type=text]{
+    font-size: 16px;
+    border: inset 1px red;
+}
+
+button{
+    cursor: pointer;
+    margin-top: 75px;
+    margin-left: 15%;
+    width: 12em;
+    padding: .5em;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000;
+    
+    -webkit-box-shadow: 1px 1px 2px #999;   // Safari
+    box-shadow: 2px 2px 2px #bbb;
+    
+    background-color: #c54101;
+    background-image: -webkit-gradient(linear, left top, left bottom, 
+        from(#ffdbca), to(#c54101), color-stop(0.6, #8c1b0b));
+    background-image: -moz-linear-gradient(top, #ffdbca 0%, #c54101 100%, #8c1b0b 60%); /* FF3.6+ */
+    background-image: -webkit-linear-gradient(top, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* Chrome10+,Safari5.1+ */
+    background-image: -o-linear-gradient(top, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* IE10+ */
+    background-image: linear-gradient(to bottom, #ffdbca 0%,#c54101 100%,#8c1b0b 60%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdbca', endColorstr='#8c1b0b',GradientType=0 ); /* IE6-9 */
 }

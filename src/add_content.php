@@ -33,15 +33,26 @@ function __autoload($class) {
     $default_categories = categories::getCategories(categories::$DEFAULT_CAT);
     $default_categories_array = $default_categories->get_array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST["catName"])){
+        if(isset($_POST["catName"]) && !isset($_POST["feedId"])){
             $cat_name = $_POST["catName"];
             visualize_default_feeds($default_categories, $cat_name);
         }
-        else if(isset($_POST["feedId"])){
+        else if(isset($_POST["feedId"]) && !isset($_POST["catName"])){
             $feed_id = $_POST["feedId"];
             session::start();
             $email = session::get_info("email");
-            show_category_choice($feed_id, $email);
+            $feed = new feed($feed_id);
+            show_category_choice($feed, $email);
+        }
+        else if(isset($_POST["feedId"]) && isset($_POST["catName"])){
+            $cat_name = $_POST["catName"];
+            $feed_id = $_POST["feedId"];
+            session::start();
+            $email = session::get_info("email");
+            $user_categories = categories::getCategories(categories::$USER_CAT, $email);
+            $added_category = $user_categories->add_Category($cat_name);
+            $feed = new feed($feed_id);
+            $added_category->add_Feed_obj($feed);
         }
         else if(isset($_POST["back-to-cat"])){
             visualize_default_categories($default_categories_array);

@@ -121,15 +121,14 @@ function get_first_article_title($rss){
     return $res;
 }
 
-function show_category_choice($feed_id, $email){
-    $feed = new feed($feed_id);
+function show_category_choice($feed, $email){
     $user_categories = user::getCategories($email)->getCategories(categories::$USER_CAT, $email)->get_array();
     $feed_def_cat_index = $feed->getDefaultCat();
     $feed_box = visualize_single_feed_box($feed, false, "feed-box-cat-choice");
     $choices = '';
     if($feed_def_cat_index == null){
         $choices = print_all_user_categories($user_categories);
-        $choices .= print_last_radio_button("Nuova categoria", true);
+        $choices .= print_last_radio_button("", true, "Nuova categoria");
     }
     else{
         $feed_user_def_cat = user::getCategories($email)->getCatById($feed_def_cat_index);
@@ -143,17 +142,18 @@ function show_category_choice($feed_id, $email){
             foreach($user_categories as $category){
                 if($feed_def_cat->getName() != $category->getName()){
                     $choices .= radio_button($category->getName(), $category->getName(), "category", false);
-//                    $last_checked = true;
                 }
                 else{
                     $choices .= radio_button($category->getName(), $category->getName(), "category", true);
                     $last_checked = false;
                 }
             }
-            $choices .= print_last_radio_button("Nuova categoria", $last_checked);
+            $choices .= print_last_radio_button("", $last_checked, "Nuova categoria");
         }
     }
-    echo $feed_box.$choices;
+    $choices = div($choices, null, "category-choice");
+    $button = button("Aggiungi", $feed->getId());
+    echo $feed_box.$choices.$button;
 }
 
 function print_all_user_categories($user_categories){
@@ -164,6 +164,8 @@ function print_all_user_categories($user_categories){
     return $choices;
 }
 
-function print_last_radio_button($text, $checked){
-    return radio_button(input_text($text, "other-choice"), $text, "category", $checked);
+function print_last_radio_button($text, $checked, $placeholder = false){
+    if($placeholder == false)
+        return radio_button(input_text($text, "other-choice"), $text, "category", $checked);
+    return radio_button(input_text_with_placeholder($placeholder, "other-choice"), $text, "category", $checked);
 }
