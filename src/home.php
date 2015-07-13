@@ -80,11 +80,13 @@
                                 $rss->init();
                         ?>
                             <div id="<?php echo $feed->getId(); ?>" class="feed">
-                                <div style="float:left;">
-                                    <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo get_feed_icon_url($rss) ?>"/>
-                                </div>
-                                <div style="float:left; margin-top: 3px; margin-left: 3px;">
-                                    <span><?php echo $feed->getName();?></span>
+                                <div style="clear:both; width: 100%">
+                                    <div style="float:left; width: 20%">
+                                        <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo get_feed_icon_url($rss) ?>"/>
+                                    </div>
+                                    <div style="float:left; margin-top: 3px; margin-left: 3px;width: 75%">
+                                        <span><?php echo $feed->getName();?></span>
+                                    </div>
                                 </div>
                             </div>
                         <?php

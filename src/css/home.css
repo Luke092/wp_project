@@ -293,11 +293,15 @@ button{
     margin-left: 40px;
     margin-top: 10px;
     clear: both;
+    
+    cursor: pointer;
 }
 
 .navigation{
     width: 24px;
     height: 24px;
+    
+    cursor: pointer;
 }
 
 .navigation_arrow{
@@ -313,4 +317,6 @@ button{
     float:left;
     margin-top: 3px;
     margin-left: 3px;
+    
+    cursor: pointer;
 }
