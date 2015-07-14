@@ -52,7 +52,7 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
         $feed_add .= div(get_add_feed_icon($user_categories, $feed), null, "add-feed-box");    
     }
     $feed_header = div($feed_icon.$feed_name.$feed_desc, null, "feed-header");
-    $article_image = empty_div(get_first_article_image_url($rss), "article-image");
+    $article_image = empty_div(get_article_image_url($rss->get_item(0)->get_description()), "article-image");
     $article_title = div(div(get_first_article_title($rss), null, "article-title"), null, "vignette");
     $feed_article = div($article_image.$article_title, null, "article-box");
     $feed_footer = div($feed_article, null, "feed-footer");
@@ -121,7 +121,7 @@ function print_last_radio_button($text, $checked, $placeholder = false){
 }
 
 function visualize_article($article){
-    $article_image = td(get_article_image($article->get_description()));
+    $article_image = td(img("article-image", get_article_image_url($article->get_description()), "Immagine"));
     $article_title = h(get_article_title($article), 4);
     $article_description = get_partial_article_description($article->get_description());
     $article_preview = td($article_title.br().$article_description);

@@ -159,7 +159,6 @@ function get_feed_description($rss){
 //}
 
 function get_article_title($article){
-//    $article = $rss->get_item($index);
     $title = $article != null ? strip_tags($article->get_title()) : null;
     $res = null;
     if($title == null || trim($title) == "")
@@ -175,7 +174,7 @@ function get_first_article_title($rss){
     return get_article_title($rss, 0);
 }
 
-function get_article_image($article_content){
+function get_article_image_url($article_content){
     $dom = new DOMDocument();
     @$dom->loadHTML($article_content);
     $image_tags = $dom->getElementsByTagName('img');
@@ -183,7 +182,7 @@ function get_article_image($article_content){
         $src = $image_tags[0]->getAttribute("src");
     else
         $src = DEF_ARTICLE_IMAGE_PATH;
-    return img("article-image", $src, "Immagine");
+    return $src;
 }
 
 function get_full_article_description($article_content){
