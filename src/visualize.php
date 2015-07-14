@@ -120,21 +120,30 @@ function print_last_radio_button($text, $checked, $placeholder = false){
     return radio_button(input_text_with_placeholder($placeholder, "other-choice"), $text, "category", $checked);
 }
 
+function visualize_article($article){
+    $article_image = td(get_article_image($article->get_description()));
+    $article_title = h(get_article_title($article), 4);
+    $article_description = get_partial_article_description($article->get_description());
+    $article_preview = td($article_title.br().$article_description);
+    return tr($article_image.$article_preview);
+}
+
 function visualize_articles_by_feed($feed){
     $rss = new SimplePie();
     $rss->set_feed_url($feed->getURL());
     $rss->init();
     $feed_title = h(hlink($rss->get_base(), $feed->getName(), "_blank"));
     $timeline = "";
-    for($i = 0; $i < ARTICLES_PER_FEED; $i++){
-        $article_image = td(img("article-media", get_article_image_url($rss, $i), "Image ".$i));
-        $article_title = h(get_article_title($rss, $i), 4);
+    for($i = 0; $i < $rss->get_item_quantity(); $i++){
+//        $article_image = td(img("article-media", get_article_image_url($rss, $i), "Image ".$i));
+//        $article_image = td(get_image($rss->get_item($i)->get_description()));
+//        $article_title = h(get_article_title($rss, $i), 4);
         
 //        $article_description = $rss->get_item($i)->get_description();
-        $article_description = get_desc($rss->get_item($i)->get_description());
-        $article_preview = td($article_title.br().$article_description);
-        $article_item = tr($article_image.$article_preview);
-        $timeline .= $article_item;
+//        $article_description = get_desc($rss->get_item($i)->get_description());
+//        $article_preview = td($article_title.br().$article_description);
+//        $article_item = tr($article_image.$article_preview);
+        $timeline .= visualize_article($rss->get_item($i));
     }
     $timeline = table($timeline);
     echo $feed_title.$timeline;

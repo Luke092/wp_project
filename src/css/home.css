@@ -343,3 +343,8 @@ h1{
     font-family: sans-serif;
 }
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
+
+.article-image{
+    width: 150px;
+    height: 100px;
+}

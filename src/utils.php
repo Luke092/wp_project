@@ -148,18 +148,18 @@ function get_feed_description($rss){
     return $res;
 }
 
-function get_article_image_url($rss, $index){
-    $article = $rss->get_item($index);
-    $url = $article != null ? $article->get_enclosure()->get_link() : "//?#";
-    return $url != "//?#" ? $url : DEF_ARTICLE_IMAGE_PATH;
-}
+//function get_article_image_url($rss, $index){
+//    $article = $rss->get_item($index);
+//    $url = $article != null ? $article->get_enclosure()->get_link() : "//?#";
+//    return $url != "//?#" ? $url : DEF_ARTICLE_IMAGE_PATH;
+//}
+//
+//function get_first_article_image_url($rss){
+//    return get_article_image_url($rss, 0);
+//}
 
-function get_first_article_image_url($rss){
-    return get_article_image_url($rss, 0);
-}
-
-function get_article_title($rss, $index){
-    $article = $rss->get_item($index);
+function get_article_title($article){
+//    $article = $rss->get_item($index);
     $title = $article != null ? strip_tags($article->get_title()) : null;
     $res = null;
     if($title == null || trim($title) == "")
@@ -175,25 +175,37 @@ function get_first_article_title($rss){
     return get_article_title($rss, 0);
 }
 
-function get_image($content){
-    $doc = new DOMDocument();
-    @$doc->loadHTML($content);
-    $imageTags = $doc->getElementsByTagName('img');
-    $src = $imageTags[0]->getAttribute("src");
-//    foreach($imageTags as $tag) {
-//        echo $tag->getAttribute('src');
-//    }
-    return img(null, $src, "alt");
+function get_article_image($article_content){
+    $dom = new DOMDocument();
+    @$dom->loadHTML($article_content);
+    $image_tags = $dom->getElementsByTagName('img');
+    if($image_tags[0] != null)
+        $src = $image_tags[0]->getAttribute("src");
+    else
+        $src = DEF_ARTICLE_IMAGE_PATH;
+    return img("article-image", $src, "Immagine");
 }
 
-function get_desc($content){
-    $doc = new DOMDocument();
-    @$doc->loadHTML($content);
-    $xpath = new DOMXPath($doc);
-    $textnodes = $xpath->query('//text()');
+function get_full_article_description($article_content){
+    $dom = new DOMDocument();
+    @$dom->loadHTML($article_content);
+    $xpath = new DOMXPath($dom);
+    $text_nodes = $xpath->query('//text()');
     $body = "";
-    foreach($textnodes as $textnode){
-        $body .= " ".$textnode->textContent;
+    foreach($text_nodes as $text_node){
+        $body .= " ".$text_node->textContent;
     }
     return $body;
+}
+
+function get_partial_article_description($article_content){
+    $body = get_full_article_description($article_content);
+    $res = null;
+    if($body == null || trim($body) == "")
+        $res = "Contenuto non disponibile";
+    else if(strlen($body) > MAX_LENGTH_SUMMARY)
+        $res = substr($body, 0, MAX_LENGTH_SUMMARY).'...';
+    else
+        $res = $body;
+    return $res;
 }
