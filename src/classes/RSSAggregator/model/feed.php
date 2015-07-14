@@ -1,12 +1,14 @@
 <?php
+
 namespace RSSAggregator\model;
+
 use PDO;
+
 class feed {
 
     public static $ALREADY_PRESENT = 0;
     public static $ERROR_INSERT = 1;
     public static $CORRECT_INSERT = 2;
-    
     private static $TABLE = "Feeds";
     private static $T_HEADER = ["id", "f_name", "url", "default_cat"];
     private $id, $f_name, $url, $default_cat;
@@ -27,20 +29,20 @@ class feed {
         $stmt->execute(array($this->id));
         return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
     }
-    
-    public function getId(){
+
+    public function getId() {
         return $this->id;
     }
-    
-    public function getName(){
+
+    public function getName() {
         return $this->f_name;
     }
-    
-    public function getURL(){
+
+    public function getURL() {
         return $this->url;
     }
-    
-    public function getDefaultCat(){
+
+    public function getDefaultCat() {
         return $this->default_cat;
     }
 
@@ -56,8 +58,8 @@ class feed {
             return self::$ALREADY_PRESENT;
         }
     }
-    
-    public static function insert_UCF_data($email, $c_id, $f_id){
+
+    public static function insert_UCF_data($email, $c_id, $f_id) {
         $table = "UCF";
         if (!dbUtil::alreadyPresent($table, ["email", "c_id", "f_id"], [$email, $c_id, $f_id])) {
             if (dbUtil::insert($table, array("email", "c_id", "f_id"), array($email, $c_id, $f_id))) {
@@ -73,9 +75,9 @@ class feed {
     public static function delete($id) {
         return dbUtil::delete(self::$TABLE, array("id"), array($id));
     }
-    
+
     public static function delete_UCF_data($email, $c_id, $f_id) {
-        return dbUtil::delete("UCF", array("email","c_id", "f_id"), array($email,$c_id, $f_id));
+        return dbUtil::delete("UCF", array("email", "c_id", "f_id"), array($email, $c_id, $f_id));
     }
 
     // modifies name, url and default category of the entry with the specified id.
@@ -116,13 +118,18 @@ class feed {
 
         return $present;
     }
-    
-    public static function fetch_by_name_url($f_name, $f_url){
+
+    public static function fetch_by_name_url($f_name, $f_url) {
         $db = dbUtil::connect();
         $sql = "SELECT * FROM " . self::$TABLE . " WHERE f_name=? AND url=?";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($f_name,$f_url));
-        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+        $stmt->execute(array($f_name, $f_url));
+        dbUtil::close($db);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) != 0)
+            return $result[0];
+        else
+            return null;
     }
 
 }

@@ -1,6 +1,9 @@
 <?php
+
 namespace RSSAggregator\model;
+
 use PDO;
+
 class dbUtil {
 
     public static $HOSTNAME = "localhost";
@@ -62,20 +65,27 @@ class dbUtil {
     // updates the entry with id $idvalues setting the fields specified in $fields to the new values specified in $values.
     // return true if query was executed with success, false otherwise
     public static function update($table, $fields, $values, $idnames, $idvalues) {
-        $sql = "UPDATE $table SET $fields[0] = :$fields[0]";
+        $sql = "UPDATE $table SET $fields[0] = :field0";
+        $valuesArray = array('field0' => $values[0]);
+        $idValuesArray = array('idname0' => $idvalues[0]);
+        
         for ($i = 1; $i < count($fields); $i++) {
-            $sql .= ", $fields[$i] = :$fields";
+            $sql .= ", $fields[$i] = :field$i";
+            $valuesArray["field$i"] = $values[$i];
         }
-        $sql .= " WHERE $idnames[0] = :$idnames[0]";
+        $sql .= " WHERE $idnames[0] = :idname0";
         for ($i = 1; $i < count($idnames); $i++) {
-            $sql .= " AND $idnames[$i] = :$idnames[$i]";
+            $sql .= " AND $idnames[$i] = :idname$i";
+            $idValuesArray["idname$i"] = $idvalues[$i];
         }
+        
+        $totalArray = array_merge($valuesArray, $idValuesArray);
 
         $db = self::connect();
         $stmt = $db->prepare($sql);
-        self::mybind($stmt, $fields, $values);
-        self::mybind($stmt, $idnames, $idvalues);
-        $stmt->execute();
+//        self::mybind($stmt, $fields, $values);
+//        self::mybind($stmt, $idnames, $idvalues);
+        $stmt->execute($totalArray);
         self::close($db);
 
         return self::checkError($stmt);

@@ -1,1 +1,100 @@
+#pageHeader {
+    padding-top: 30pt;
+    margin-right: 30pt;
+    margin-left: 60pt;
+}
+
+#titleBar {
+    font-size: 20pt;
+    line-height: 18pt;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+#mainArea {
+    display: inline-block;
+    margin-right: 30pt;
+    margin-left: 30pt;
+}
+
+
+.itemContentsHolder {
+    display: inline-block;
+    float:left;
+    margin-left: 30pt;
+    width: 250pt;
+}
+
+.itemContentsHolder h2 .categoryName {
+    /*    margin-top: 0px;
+        margin-bottom: 0px;*/
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden; 
+}
+
+h2 {
+    font-weight: 600;
+    color: grey;
+    font-size: 10pt;
+    line-height: 1.4em;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+.categoryName {
+    display: inline;
+}
+
+.modCanc {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+}
+
+.subscriptionContentsHolder {
+    border: 1pt solid lightgrey;
+    padding: 5pt;
+    min-height: 200pt;
+    border-radius: 2pt;
+}
+
+.subscriptionContents {
+    cursor: pointer;
+    font-size: 10pt;
+    height: 18pt;
+    line-height: 18pt;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 2pt;
+}
+
+.feedName {
+    display: inline-block;
+}
+
+.feedId {
+    display: none;
+}
+
+.newCategory {
+    border: 1px dashed lightgrey;
+    padding-top: 40px;
+    padding-right: 17px;
+    padding-bottom: 17px;
+    padding-left: 17px;
+    font-size: 13pt;
+    text-align: center;
+    line-height: 20pt;
+    color: lightgrey;
+    min-height: 90pt;
+    cursor: default;
+}
+
+.hovered {
+    border: 1pt solid grey;
+    background: lightgoldenrodyellow;
+}
 
