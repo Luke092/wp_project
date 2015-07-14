@@ -20,14 +20,16 @@ $db = dbUtil::connect();
 
 $regex = "/(https?:\/\/)/";
 
+$term = $_GET['term'];
+
 preg_match_all($regex, $term, $matches);
 
 if(count($matches) != 0){
-    $term = "%" . $_GET['term'] . "%";
+    $term = "%" . $term . "%";
     $sql = "SELECT * FROM Feeds WHERE url LIKE ? AND default_cat <> \"NULL\"";
 }
 else{
-    $term = "%" . $_GET['term'] . "%";
+    $term = "%" . $term . "%";
     $sql = "SELECT * FROM Feeds WHERE f_name LIKE ? AND default_cat <> \"NULL\"";
 }
 
