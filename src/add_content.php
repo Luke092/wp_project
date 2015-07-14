@@ -25,7 +25,8 @@ function __autoload($class) {
 <div id="search-bar">
     <form>
         <span>
-            <input type="text" class="search" name="search-token" placeholder="Cerca feed per categoria, nome o URL">
+            <input id="search-input" type="text" class="search" name="search-token" placeholder="Cerca feed per categoria, nome o URL">
+            <input id="search-input-id" type="hidden" value="-1">
         </span>
     </form>
 </div>
@@ -65,4 +66,8 @@ function __autoload($class) {
         visualize_default_categories($default_categories_array);
     }
 ?>
+<link rel="stylesheet" href="./lib/jquryUi/jquery-ui.css">
+<script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
+<script src="lib/jquryUi/jquery-ui.js"></script>
 <script type="text/javascript" src="./js/add_content.js"></script>
+<script type="text/javascript" src="./js/search.js"></script>

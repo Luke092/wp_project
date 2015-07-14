@@ -11,14 +11,7 @@ $(".minicover, .label").click(function(){
 
 $(".add-feed-box > img.add-feed").click(function(){
     var feedId = $(this).parent().parent().attr("id");
-//    alert(feedName);
-    var xhr = myGetXmlHttpRequest();
-    var url = "./add_content.php";
-    var method = "POST";
-    var param = ["feedId", feedId];
-    pageRequest(xhr, url, method, param);
-    waitResponse();
-//    history.pushState();
+    addFeed(feedId);
 });
 
 $("#back-to-cat").click(function(){
@@ -62,3 +55,14 @@ $("button").click(function(){
 //    location.href = "./home.php";
     }
 });
+
+function addFeed(feedId){
+//    alert(feedName);
+    var xhr = myGetXmlHttpRequest();
+    var url = "./add_content.php";
+    var method = "POST";
+    var param = ["feedId", feedId];
+    pageRequest(xhr, url, method, param);
+    waitResponse();
+//    history.pushState();
+}
