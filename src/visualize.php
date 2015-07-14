@@ -59,40 +59,6 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
     return div($feed_header.$feed_add.$feed_footer, $feed->getId(), $class);
 }
 
-function date_transform($date_format){
-    global $DAYS, $MONTHS;
-    $date_parts = explode(" ", $date_format);
-    $day = $DAYS[$date_parts[0]];
-    $date = $date_parts[1];
-    $month = $MONTHS[$date_parts[2]];
-    $year = $date_parts[3];
-    $hour = $date_parts[4];
-    $minutes = $date_parts[5];
-    return $day.' '.$date.' '.$month.' '.$year.', '.$hour.':'.$minutes;
-}
-
-function get_feed_icon_url($rss){
-    $icon_url = $rss->get_image_url();
-    $res = null;
-    if(isset($icon_url) && $icon_url != null)
-        $res = $icon_url;
-    else
-        $res = DEF_FEED_ICON_PATH;
-    return $res;
-}
-
-function get_feed_description($rss){
-    $desc = strip_tags($rss->get_description());
-    $res = null;
-    if($desc == null || trim($desc) == "")
-        $res = "Descrizione non disponibile";
-    else if(strlen($desc) > MAX_LENGTH_DESC)
-        $res = substr($desc, 0, MAX_LENGTH_DESC).'...';
-    else
-        $res = $desc;
-    return $res;
-}
-
 function get_add_feed_icon($user_categories, $feed){
     $title = $feed->getName();
     $url = $feed->getURL();
@@ -102,25 +68,6 @@ function get_add_feed_icon($user_categories, $feed){
         $res = img("add-feed", "./img/utils/add-icon.png", "add-icon", "Aggiungi feed");
     else
         $res = img("disabled-add-feed", "./img/utils/add-disabled-icon.png", "add-icon", "Aggiunto");
-    return $res;
-}
-
-function get_first_article_image_url($rss){
-    $article = $rss->get_item();
-    $url = $article != null ? $article->get_enclosure()->get_link() : "//?#";
-    return $url != "//?#" ? $url : DEF_ARTICLE_IMAGE_PATH;
-}
-
-function get_first_article_title($rss){
-    $article = $rss->get_item();
-    $title = $article != null ? strip_tags($article->get_title()) : null;
-    $res = null;
-    if($title == null || trim($title) == "")
-        $res = "Descrizione articolo non disponibile";
-    else if(strlen($title) > MAX_LENGTH_TITLE)
-        $res = substr($title, 0, MAX_LENGTH_TITLE).'...';
-    else
-        $res = $title;
     return $res;
 }
 
@@ -171,4 +118,32 @@ function print_last_radio_button($text, $checked, $placeholder = false){
     if($placeholder == false)
         return radio_button(input_text($text, "other-choice"), $text, "category", $checked);
     return radio_button(input_text_with_placeholder($placeholder, "other-choice"), $text, "category", $checked);
+}
+
+function visualize_articles_by_feed($feed){
+    $rss = new SimplePie();
+    $rss->set_feed_url($feed->getURL());
+    $rss->init();
+    $feed_title = h(hlink($rss->get_base(), $feed->getName(), "_blank"));
+    $timeline = "";
+    for($i = 0; $i < ARTICLES_PER_FEED; $i++){
+        $article_image = td(img("article-media", get_article_image_url($rss, $i), "Image ".$i));
+        $article_title = h(get_article_title($rss, $i), 4);
+        
+//        $article_description = $rss->get_item($i)->get_description();
+        $article_description = get_desc($rss->get_item($i)->get_description());
+        $article_preview = td($article_title.br().$article_description);
+        $article_item = tr($article_image.$article_preview);
+        $timeline .= $article_item;
+    }
+    $timeline = table($timeline);
+    echo $feed_title.$timeline;
+}
+
+function visualize_articles_by_category($category){
+    
+}
+
+function visualize_all_articles($email){
+    
 }

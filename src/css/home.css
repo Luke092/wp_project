@@ -328,4 +328,18 @@ button{
     cursor: pointer;
 }
 
+a{
+    color: #816060;
+    text-decoration: none;
+}
+
+h1{
+    margin-left: 100px;
+    margin-top: 25px;
+    padding: 0px;
+    text-transform: capitalize;
+    font-size: 36px;
+    letter-spacing: -0.04em;
+    font-family: sans-serif;
+}
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}

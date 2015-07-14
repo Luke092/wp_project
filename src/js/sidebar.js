@@ -15,14 +15,14 @@ $(document).ready(function(){
         var feed_id = $(this).attr("id");
         var cat_name = $(this).parent().children(".cName").attr("id");
         var param = ["feedId" , feed_id, "catName", cat_name];
-        var xhr = new XMLHttpRequest();
+        var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
    });
    $(".cName").click(function(){
         var c_name = $(this).attr("id");
         var param = ["catName" , c_name];
-        var xhr = new XMLHttpRequest();
+        var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
    });
