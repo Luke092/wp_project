@@ -110,13 +110,13 @@ table{
 }
 
 .feed-header{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
 .feed-icon{
-    width: 45px;
-    height: 45px;
+    width: 20px;
+    height: 30px;
     border-radius: 3px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -147,13 +147,13 @@ table{
     line-height: 17px;
     clear: both;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: px;
 }
 
 .add-feed-box{
-    height: 30px;
+    height: 10px;
     width: 240px;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 30px;
 }
 
@@ -177,7 +177,7 @@ img.disabled-add-feed{
     border-radius: 3px;
     padding: 10px;
     margin-bottom: 51px;
-    height: 369px;
+    height: 340px;
     padding-bottom: 0px;
     border: 1px solid #EBA2A2;
     background-color: #FFF;
@@ -296,6 +296,7 @@ button{
 .category{
     margin-bottom: 15px;
     clear: both;
+    font-size: 14px;
 }
 
 .feed{
@@ -318,8 +319,8 @@ button{
 }
 
 .icon{
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
 }
 
 .cName{
