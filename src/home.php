@@ -39,6 +39,7 @@
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="js/ajax.js"></script>
         <script type="text/javascript" src="js/sidebar.js"></script>
+        <script type="text/javascript" src="js/top-menu.js"></script>
         
         <script type="text/javascript">
             $(document).ready(function(){
@@ -58,6 +59,48 @@
         <div class="wrapper">
             <div class="header">
                 <!-- Top menu for account name, link to profile and manage button -->
+                <div class="top-menu">
+                    <div id="home" class="menu-entry">
+                        <div>
+                            <img src="./img/utils/menu_icons/home.png">
+                        </div>
+                        <div class="text-entry">
+                            <span>Home</span>
+                        </div>
+                    </div>
+                    <div id="add_content" class="menu-entry">
+                        <div>
+                            <img src="./img/utils/menu_icons/add.png">
+                        </div>
+                        <div class="text-entry">
+                            <span>Aggiungi Feed</span>
+                        </div>
+                    </div>
+                    <div id="organize" class="menu-entry">
+                        <div>
+                            <img src="./img/utils/menu_icons/organize.png">
+                        </div>
+                        <div class="text-entry">
+                            <span>Organizza Feed</span>
+                        </div>
+                    </div>
+                    <div id="logout" class="menu-entry">
+                        <div>
+                            <img src="./img/utils/menu_icons/logout.png">
+                        </div>
+                        <div class="text-entry">
+                            <span>Logout</span>
+                        </div>
+                    </div>
+                    <div id="profile" class="menu-entry">
+                        <div>
+                            <img src="./img/utils/menu_icons/profile.png">
+                        </div>
+                        <div class="text-entry">
+                            <span>Profilo</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="content">
                 <div id="sidebar">
