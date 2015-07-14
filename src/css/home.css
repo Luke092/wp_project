@@ -4,6 +4,8 @@
     display: -ms-flexbox;        /* TWEENER - IE 10 */
     display: -webkit-flex;       /* NEW - Chrome */
     display: flex;               /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    
+    clear: both;
 }
 
 #sidebar{
@@ -347,4 +349,40 @@ h1{
 .article-image{
     width: 150px;
     height: 100px;
+}
+
+.top-menu{
+    background-color: #ddd;
+    width: 100%;
+    height: 35px;
+}
+
+.menu-entry{
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.menu-entry div{
+    float: left;
+    cursor: pointer;
+}
+
+.menu-entry img{
+    height: 32px;
+    width: 32px;
+}
+
+.menu-entry .text-entry{
+    margin-top: 7px;
+    margin-left: 4px;
+}
+
+.top-menu #logout{
+    float: right;
+    margin-right: 10px;
+}
+
+.top-menu #profile{
+    float: right;
 }

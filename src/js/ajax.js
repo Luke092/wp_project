@@ -94,13 +94,7 @@ function sendData(xhr, url, method, param, callback){
             }
             xhr.open("GET", uri, true);
             xhr.onreadystatechange = function(){
-                if(xhr.readyState === readyState.SENT){
-                    var loadingImage = $("img");
-                    loadingImage.attr("id", "waiting");
-                    loadingImage.attr("src", "./img/utils/loading_page.gif");
-                    $(document.body).append(loadingImage);
-                }
-                else if(xhr.readyState === readyState.LOADED){
+                if(xhr.readyState === readyState.LOADED){
                     if(statusText[xhr.status] === "OK")
                         callback();
                     else
