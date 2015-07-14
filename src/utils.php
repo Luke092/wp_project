@@ -171,7 +171,7 @@ function get_article_title($article){
 }
 
 function get_first_article_title($rss){
-    return get_article_title($rss, 0);
+    return get_article_title($rss->get_item(0));
 }
 
 function get_article_image_url($article_content){

@@ -114,7 +114,7 @@
                             <img class="navigation" src="img/utils/down_arrow.png" />
                         </div>
                         <div  id="<?php echo $cat->getName() ?>" class="cName">
-                            <span><?php echo $cat->getName();?></span>
+                            <span style="font-weight: bold;"><?php echo $cat->getName();?></span>
                         </div>
                         <?php
                             foreach ($cat->get_array() as $feed){
@@ -127,7 +127,7 @@
                                     <div style="float:left; width: 20%">
                                         <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo get_feed_icon_url($rss) ?>"/>
                                     </div>
-                                    <div style="float:left; margin-top: 3px; margin-left: 3px;width: 75%">
+                                    <div style="float:left; margin-top: 3px; margin-left: 3px;width: 75%;line-height: 15px">
                                         <span><?php echo $feed->getName();?></span>
                                     </div>
                                 </div>
