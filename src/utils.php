@@ -178,8 +178,8 @@ function get_article_image_url($article_content){
     $dom = new DOMDocument();
     @$dom->loadHTML($article_content);
     $image_tags = $dom->getElementsByTagName('img');
-    if($image_tags[0] != null)
-        $src = $image_tags[0]->getAttribute("src");
+    if($image_tags->item(0) != null)
+        $src = $image_tags->item(0)->getAttribute("src");
     else
         $src = DEF_ARTICLE_IMAGE_PATH;
     return $src;
