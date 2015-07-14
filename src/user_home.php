@@ -4,12 +4,19 @@
     use RSSAggregator\model\categories;
     
     require_once("./config.php");
+    require_once ("./visualize.php");
     function __autoload($class) {
 
-	// convert namespace to full file path
-	$class = 'classes/' . str_replace('\\', '/', $class) . '.php';
-	require_once($class);
+    // convert namespace to full file path
+    if (strpos($class, 'SimplePie') !== 0)
+    {
+            $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
     }
+    else{
+        $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+    }
+    require_once($class);
+}
     
     session::start();
     if(!session::user_is_logged())
@@ -28,14 +35,17 @@
             if(isset($_POST["feedId"]) && isset($_POST["catName"])){
                 $feed_id = $_POST["feedId"];
                 $cat_name = $_POST["catName"];
-                
-                visualize_articles_by_feed
+                $category = categories::getCategories(categories::$USER_CAT, $email)->getCatByName($cat_name);
+                $feed = $category->getFeedById($feed_id);
+                visualize_articles_by_feed($feed);
             }
             else if(isset($_POST["catName"])){
-                
+                $cat_name = $_POST["catName"];
+                $category = categories::getCategories(categories::$USER_CAT, $email)->getCatByName($cat_name);
+                visualize_articles_by_category($category);
             }
             else{
-                
+                visualize_all_articles($email);
             }
         }
     }
