@@ -130,12 +130,13 @@ function visualize_article($article){
 //    $article_preview = td($article_title.br().$article_description);
 //    return tr($article_image.$article_preview);
     $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
-    $article_title = h(get_article_title($article), 4, ["class", "article-title-fs"]);
-    $article_summary = span(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
+    $article_title = h(get_article_title($article), 5, ["class", "article-title-fs"]);
+    $article_summary = div(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
+    $article_text = div($article_title.$article_summary, ["class", "article-text"]);
     $article_date = span(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
-    $article_description = div($article_title.$article_summary.br().$article_date, ["class", "article-description-fs"]);
-    $article_read = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "read-article-fs"]);
-    $article_box = div($article_image.$article_description.$article_read, ["class", "article-box-fs"]);
+    $article_description = div($article_text.$article_date, ["class", "article-description-fs"]);
+    $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "article-readbox-fs"]);
+    $article_box = div($article_image.$article_description.$article_read_box, ["class", "article-box-fs"]);
     return $article_box;
 }
 
@@ -146,15 +147,8 @@ function visualize_articles_by_feed($feed){
     $feed_title = h(a($feed->getName(), ["href", $rss->get_base(), "target", "_blank"]));
     $timeline = "";
     for($i = 0; $i < $rss->get_item_quantity(); $i++){
-//        $article_image = td(img("article-media", get_article_image_url($rss, $i), "Image ".$i));
-//        $article_image = td(get_image($rss->get_item($i)->get_description()));
-//        $article_title = h(get_article_title($rss, $i), 4);
-        
-//        $article_description = $rss->get_item($i)->get_description();
-//        $article_description = get_desc($rss->get_item($i)->get_description());
-//        $article_preview = td($article_title.br().$article_description);
-//        $article_item = tr($article_image.$article_preview);
         $timeline .= visualize_article($rss->get_item($i));
+        $timeline .= ($i < $rss->get_item_quantity()-1 ? '<hr>' : '');
     }
     $timeline = div($timeline, ["class", "timeline"]);
     echo $feed_title.$timeline;

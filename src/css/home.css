@@ -340,7 +340,6 @@ h1{
     margin-left: 100px;
     margin-top: 25px;
     padding: 0px;
-    text-transform: capitalize;
     font-size: 36px;
     letter-spacing: -0.04em;
     font-family: sans-serif;
@@ -406,21 +405,46 @@ h1{
     width: 20%;
 }
 
+.article-title-fs{
+    font-size: 17px;
+}
+
 .article-description-fs{
     float: left;
     width: 60%;
+    margin-left: 15px;
 }
 
-.read-article-fs{
+.article-readbox-fs{
     float: left;
     width: 15%;
+    height: 120px;
 }
 
 .envelope-img{
-    width: 64px;
+    width: 64px;     
+    margin-top: 25%;
+    margin-left: 25%;
 }
 
 .article-image-fs{
-    width: 150px;
-    height: 100px;
+    width: 170px;
+    height: 120px;
+}
+
+.article-summary-fs{
+    font-size: 14px;
+    height: 43px;
+    margin-top: 7px;
+}
+
+.article-date-fs{
+    font-size: 12px;
+    font-style: italic;
+    color: gray;
+}
+
+.article-text{
+    height: 104px;
+    width: 95%;
 }

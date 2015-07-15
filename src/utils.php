@@ -159,9 +159,9 @@ function get_feed_icon_url($url){
 }
 
 function get_feed_description($rss){
-    $desc = strip_tags($rss->get_description());
+    $desc = trim(strip_tags($rss->get_description()));
     $res = null;
-    if($desc == null || trim($desc) == "")
+    if($desc == null || $desc == "")
         $res = "Descrizione non disponibile";
     else if(strlen($desc) > MAX_LENGTH_DESC)
         $res = substr($desc, 0, MAX_LENGTH_DESC).'...';
@@ -222,9 +222,9 @@ function get_full_article_description($article_content){
 }
 
 function get_partial_article_description($article_content){
-    $body = get_full_article_description($article_content);
+    $body = trim(get_full_article_description($article_content));
     $res = null;
-    if($body == null || trim($body) == "")
+    if($body == null || $body == "")
         $res = "Contenuto non disponibile";
     else if(strlen($body) > MAX_LENGTH_SUMMARY)
         $res = substr($body, 0, MAX_LENGTH_SUMMARY).'...';
