@@ -21,7 +21,7 @@ class feed implements \JsonSerializable{
         $this->f_name = $attributes["f_name"];
         $this->url = $attributes["url"];
         $this->default_cat = $attributes["default_cat"];
-        $this->image_url = get_feed_icon_url($this->url);
+        $this->image_url = $attributes["image_url"];
     }
 
     // returns the attributes of the feed from the database
@@ -65,8 +65,9 @@ class feed implements \JsonSerializable{
 
     public static function insert($f_name, $url, $default_cat) {
 //        if (!self::alreadyPresent($f_name, $url)) {
+        $image_url = get_feed_icon_url($url);
         if (!dbUtil::alreadyPresent(self::$TABLE, ["f_name", "url"], [$f_name, $url])) {
-            if (dbUtil::insert(self::$TABLE, array("f_name", "url", "default_cat"), array($f_name, $url, $default_cat))) {
+            if (dbUtil::insert(self::$TABLE, array("f_name", "url", "default_cat", "image_url"), array($f_name, $url, $default_cat, $image_url))) {
                 return self::$CORRECT_INSERT;
             } else {
                 return self::$ERROR_INSERT;
