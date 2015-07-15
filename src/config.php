@@ -13,7 +13,7 @@ const ARTICLES_PER_CATEGORY = 5;
 const DATE_FORMAT = "D j F Y G i";
 const MAX_LENGTH_DESC = 100;
 const MAX_LENGTH_TITLE = 75;
-const MAX_LENGTH_SUMMARY = 250;
+const MAX_LENGTH_SUMMARY = 200;
 
 $MONTHS = array(
     "January" => "gennaio",

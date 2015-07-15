@@ -197,7 +197,7 @@ img.disabled-add-feed{
     overflow: hidden;
     background-color: #FFF;
     background-repeat: no-repeat;
-    background-size: 240px 133px;
+    background-size: cover;
     border: 0px;
     border-radius: 0px;
 }
@@ -308,8 +308,8 @@ button{
 }
 
 .navigation{
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     
     cursor: pointer;
 }
@@ -325,7 +325,7 @@ button{
 
 .cName{
     float:left;
-    margin-top: 3px;
+    /* margin-top: 3px; */
     margin-left: 3px;
     
     cursor: pointer;
