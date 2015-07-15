@@ -28,7 +28,7 @@ function visualize_default_feeds($default_categories, $cat_name, $email){
     $category = $default_categories->getCatByName($cat_name);
     $feeds = $category->get_array();
     $i = 0;
-    echo div(span("Categorie > ", ["class", "back-to-cat"]).$cat_name, ["class", "table-header"]);
+    echo div(span("Categorie > ", ["id", "back-to-cat"]).$cat_name, ["class", "table-header"]);
     $body = "<tr>";
     foreach($feeds as $feed){
         $feed_box = visualize_single_feed_box($feed, $default_categories, "feed-box", $email);
@@ -53,7 +53,7 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
         $feed_add .= div(get_add_feed_icon($user_categories, $feed), ["class", "add-feed-box"]);    
     }
     $feed_header = div($feed_icon.$feed_name.$feed_desc, ["class", "feed-header"]);
-    $article_desc = $rss->get_item(0)->get_description();
+    $article_desc = ($rss->get_item(0) == null ? null : $rss->get_item(0)->get_description());
     $article_image = div('',["style", "background-image:url(".get_article_image_url($article_desc).");", "class", "article-image"]);
     $article_title = div(div(get_first_article_title($rss), ["class", "article-title"]), ["class", "vignette"]);
     $feed_article = div($article_image.$article_title, ["class", "article-box"]);
@@ -124,11 +124,19 @@ function print_last_radio_button($text, $checked, $placeholder = ""){
 }
 
 function visualize_article($article){
-    $article_image = td(img(["class", "article-image", "src", get_article_image_url($article->get_description()), "alt", "Immagine"]));
-    $article_title = h(get_article_title($article), 4);
-    $article_description = get_partial_article_description($article->get_description());
-    $article_preview = td($article_title.br().$article_description);
-    return tr($article_image.$article_preview);
+//    $article_image = td(img(["class", "article-image", "src", get_article_image_url($article->get_description()), "alt", "Immagine"]));
+//    $article_title = h(get_article_title($article), 4);
+//    $article_description = get_partial_article_description($article->get_description());
+//    $article_preview = td($article_title.br().$article_description);
+//    return tr($article_image.$article_preview);
+    $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
+    $article_title = h(get_article_title($article), 4, ["class", "article-title-fs"]);
+    $article_summary = span(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
+    $article_date = span(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
+    $article_description = div($article_title.$article_summary.br().$article_date, ["class", "article-description-fs"]);
+    $article_read = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "read-article-fs"]);
+    $article_box = div($article_image.$article_description.$article_read, ["class", "article-box-fs"]);
+    return $article_box;
 }
 
 function visualize_articles_by_feed($feed){
@@ -148,7 +156,7 @@ function visualize_articles_by_feed($feed){
 //        $article_item = tr($article_image.$article_preview);
         $timeline .= visualize_article($rss->get_item($i));
     }
-    $timeline = table($timeline);
+    $timeline = div($timeline, ["class", "timeline"]);
     echo $feed_title.$timeline;
 }
 

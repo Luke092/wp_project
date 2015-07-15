@@ -297,6 +297,7 @@ button{
     margin-bottom: 10px;
     clear: both;
     font-size: 14px;
+    overflow: hidden;
 }
 
 .feed{
@@ -346,12 +347,6 @@ h1{
 }
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
 
-.article-image{
-    width: 150px;
-    height: 100px;
-    vertical-align: middle;
-}
-
 .top-menu{
     background-color: #ddd;
     width: 100%;
@@ -390,4 +385,42 @@ h1{
 
 .top-menu #profile{
     float: right;
+}
+
+.timeline{
+    width: 80%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.article-box-fs{
+    clear: both;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.article-image-box-fs{
+    float: left;
+    width: 20%;
+}
+
+.article-description-fs{
+    float: left;
+    width: 60%;
+}
+
+.read-article-fs{
+    float: left;
+    width: 15%;
+}
+
+.envelope-img{
+    width: 64px;
+}
+
+.article-image-fs{
+    width: 150px;
+    height: 100px;
 }

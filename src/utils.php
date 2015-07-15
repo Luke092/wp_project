@@ -134,6 +134,8 @@ function date_transform($date_format){
 function get_favicon($url){
     $api_url = FAVICON_API_URL;
     $domain = get_domain($url);
+    if(trim($domain) == "")
+        return DEF_FEED_ICON_PATH;
     return $api_url . $domain;
 }
 
@@ -193,13 +195,17 @@ function get_first_article_title($rss){
 }
 
 function get_article_image_url($article_content){
-    $dom = new DOMDocument();
-    @$dom->loadHTML($article_content);
-    $image_tags = $dom->getElementsByTagName('img');
-    if($image_tags->item(0) != null)
-        $src = $image_tags->item(0)->getAttribute("src");
-    else
+    if($article_content == null)
         $src = DEF_ARTICLE_IMAGE_PATH;
+    else{
+        $dom = new DOMDocument();
+        @$dom->loadHTML($article_content);
+        $image_tags = $dom->getElementsByTagName('img');
+        if($image_tags->item(0) != null)
+            $src = $image_tags->item(0)->getAttribute("src");
+        else
+            $src = DEF_ARTICLE_IMAGE_PATH;
+    }
     return $src;
 }
 
