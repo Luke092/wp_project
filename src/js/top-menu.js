@@ -16,7 +16,9 @@ $(document).ready(function(){
        //TODO: add profile click action
    });
    $("#organize").click(function(){
-       //TODO: add organize click action
+       var xhr = myGetXmlHttpRequest();
+       var url = "./organize.php";
+       pageRequest(xhr, url, "GET");
    });
    $(".menu-entry").mouseover(function(){
        $(this).css("backgroundColor", "#bbb");

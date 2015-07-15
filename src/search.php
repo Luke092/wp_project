@@ -1,5 +1,9 @@
 <?php
-use RSSAggregator\model\dbUtil;
+use RSSAggregator\model\categories;
+use RSSAggregator\model\category;
+use RSSAggregator\model\feed;
+use RSSAggregator\model\user;
+use RSSAggregator\model\session;
 
 require_once("./visualize.php");
 
@@ -16,32 +20,22 @@ function __autoload($class) {
     require_once($class);
 }
 
-$db = dbUtil::connect();
+function compare_feeds($feed1, $feed2){
+    return $feed1->getId() - $feed2->getId();
+}
 
-$regex = "/(https?:\/\/)/";
+$email = session::get_info("email");
+
 
 $term = $_GET['term'];
 
-preg_match_all($regex, $term, $matches);
 
-if(count($matches) != 0){
-    $term = "%" . $term . "%";
-    $sql = "SELECT * FROM Feeds WHERE url LIKE ? AND default_cat <> \"NULL\"";
-}
-else{
-    $term = "%" . $term . "%";
-    $sql = "SELECT * FROM Feeds WHERE f_name LIKE ? AND default_cat <> \"NULL\"";
-}
+$default_categories = categories::getCategories(categories::$DEFAULT_CAT);
+$user_categories = categories::getCategories(categories::$USER_CAT, $email);
 
-$stm = $db->prepare($sql);
-$stm->execute(array($term));
-$rows = $stm->fetchAll(PDO::FETCH_ASSOC);
-foreach ($rows as $row){
-    $rss = new SimplePie();
-    $rss->set_feed_url($row['url']);
-    $rss->init();
-    $row['image_url'] = get_feed_icon_url($rss);
-    $results[] = $row;
-}
-echo json_encode($results, JSON_UNESCAPED_SLASHES);
-dbUtil::close($db);
+$feeds = $default_categories->searchFeedsByTitleURL($term, $term);
+$user_feeds = $user_categories->searchFeedsByTitleURL($term, $term);
+
+$result_feeds = array_udiff($feeds, $user_feeds, 'compare_feeds');
+
+echo json_encode($result_feeds);

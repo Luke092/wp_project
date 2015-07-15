@@ -81,7 +81,7 @@ class category {
     }
     
     public function add_Feed_obj($feed){
-        if($this->getFeedByNameURL($feed->getName(), $feed->getURL()) == false){
+        if($this->getFeedByName($feed->getName(), $feed->getURL()) == false){
             feed::insert_UCF_data($this->email, $this->id, $feed->getId());
         }
         else{
@@ -102,10 +102,33 @@ class category {
         }
     }
 
-    public function getFeedByNameURL($name, $url) {
+    public function getFeedByName($name, $url = null) {
         foreach ($this->feeds as $feed) {
-            if ($feed->getName() == $name && $feed->getURL() == $url) {
-                return $feed;
+            if($url != null){
+                if ($feed->getName() == $name && $feed->getURL() == $url) {
+                    return $feed;
+                }
+            }
+            else{
+                if ($feed->getName() == $name) {
+                    return $feed;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public function searchFeedByName($name, $url = null){
+        foreach ($this->feeds as $feed) {
+            if($url != null){
+                if (strstr($feed->getName(), $name) || strstr($feed->getURL(), $url)) {
+                    return $feed;
+                }
+            }
+            else{
+                if (strstr($feed->getName(), $name)) {
+                    return $feed;
+                }
             }
         }
         return false;

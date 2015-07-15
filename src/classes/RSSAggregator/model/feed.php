@@ -4,14 +4,16 @@ namespace RSSAggregator\model;
 
 use PDO;
 
-class feed {
+require_once ("./utils.php");
+
+class feed implements \JsonSerializable{
 
     public static $ALREADY_PRESENT = 0;
     public static $ERROR_INSERT = 1;
     public static $CORRECT_INSERT = 2;
     private static $TABLE = "Feeds";
     private static $T_HEADER = ["id", "f_name", "url", "default_cat"];
-    private $id, $f_name, $url, $default_cat;
+    private $id, $f_name, $url, $default_cat, $image_url;
 
     public function __construct($id) {
         $this->id = $id;
@@ -19,6 +21,7 @@ class feed {
         $this->f_name = $attributes["f_name"];
         $this->url = $attributes["url"];
         $this->default_cat = $attributes["default_cat"];
+        $this->image_url = get_feed_icon_url($this->url);
     }
 
     // returns the attributes of the feed from the database
@@ -41,9 +44,23 @@ class feed {
     public function getURL() {
         return $this->url;
     }
+    
+    public function getIconURL() {
+        return $this->image_url;
+    }
 
     public function getDefaultCat() {
         return $this->default_cat;
+    }
+    
+    public function jsonSerialize() {
+        return [
+            "id" => $this->id,
+            "f_name" => $this->f_name,
+            "url" => $this->url,
+            "default_cat" => $this->default_cat,
+            "image_url" => $this->image_url
+        ];
     }
 
     public static function insert($f_name, $url, $default_cat) {

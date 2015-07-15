@@ -58,6 +58,15 @@ class stat implements JsonSerializable {
         return false;
     }
     
+    public function getArticleById($id){
+        foreach ($this->articles as $article) {
+            if($article->getId() == $id){
+                return $article;
+            }
+        }
+        return false;
+    }
+    
     public function saveStatsToFile(){
         $path = self::fetch_data($this->user_id)['file_path'];
         $json = self::export_JSON($this);

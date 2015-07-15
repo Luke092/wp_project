@@ -118,14 +118,11 @@
                         </div>
                         <?php
                             foreach ($cat->get_array() as $feed){
-                                $rss = new SimplePie();
-                                $rss->set_feed_url($feed->getURL());
-                                $rss->init();
                         ?>
                             <div id="<?php echo $feed->getId(); ?>" class="feed">
                                 <div style="clear:both; width: 100%">
                                     <div style="float:left; width: 20%">
-                                        <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo get_feed_icon_url($rss) ?>"/>
+                                        <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo get_favicon($feed->getURL()) ?>"/>
                                     </div>
                                     <div style="float:left; margin-top: 3px; margin-left: 3px;width: 75%;line-height: 15px">
                                         <span><?php echo $feed->getName();?></span>

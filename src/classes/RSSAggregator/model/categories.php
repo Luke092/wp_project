@@ -127,7 +127,18 @@ class categories{
     public function getFeedsByTitleURL($title, $url){
         $res = array();
         foreach ($this->categories as $cat){
-            $feed = $cat->getFeedByNameURL($title, $url);
+            $feed = $cat->getFeedByName($title, $url);
+            if ($feed != false){
+                $res[] = $feed;
+            }
+        }
+        return $res;
+    }
+    
+    public function searchFeedsByTitleURL($title, $url = null){
+        $res = array();
+        foreach ($this->categories as $cat){
+            $feed = $cat->searchFeedByName($title, $url);
             if ($feed != false){
                 $res[] = $feed;
             }

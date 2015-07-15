@@ -134,13 +134,16 @@ function sendData(xhr, url, method, param, callback){
 
 function pageRequest(xhr, url, method, param){
     var callback = function (){
-        // import target page css
-//        $(document.head).append($(xhr.responseText).filter("link[rel=\"stylesheet\"]"));
-        // load remote page in the correct place
-//        document.getElementById("page").innerHTML = $(xhr.responseText).filter("div").html();
         $("#page").html(xhr.responseText);
     };
     sendData(xhr, url, method, param, callback);
+}
+
+function sidebar_reload(xhr, method, param){
+    var callback = function (){
+        $("#sidebar").html(xhr.responseText);
+    };
+    sendData(xhr, "./sidebar.php", method, param, callback);
 }
 
 function waitResponse(){
