@@ -23,71 +23,74 @@ function is_empty_field($field){
 /////////////////// XHTML writer functions ///////////////////
 //////////////////////////////////////////////////////////////
 
-function table($body){
-    return '<table>'.$body.'</table>';
+function table($content, $attribute_assign = array()){
+    return '<table'.add_attributes($attribute_assign).'>'.$content.'</table>';
 }
 
-function tr($row){
-    return '<tr>'.$row.'</tr>';
+function tr($content, $attribute_assign = array()){
+    return '<tr'.add_attributes($attribute_assign).'>'.$content.'</tr>';
 }
 
-function td($cell){
-    return '<td>'.$cell.'</td>';
+function td($content, $attribute_assign = array()){
+    return '<td'.add_attributes($attribute_assign).'>'.$content.'</td>';
 }
 
-function img($class, $src, $alt, $title = null){
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
-    return '<img'.$class_assign.' src="'.$src.'" alt="'.$alt.'"'.$title_assign.'></img>';
+function img($attribute_assign = array()){
+    return '<img'.add_attributes($attribute_assign).' />';
 }
 
-function div($content, $id, $class, $title = null){
-    $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
-    return '<div'.$id_assign.$class_assign.$title_assign.'>'.$content.'</div>';
+function div($content, $attribute_assign = array()){
+    return '<div'.add_attributes($attribute_assign).'>'.$content.'</div>';
 }
 
-function empty_div($background_image_url, $class){
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<div'.$class_assign.' style="background-image:url('.$background_image_url.')"></div>';
+function span($content, $attribute_assign = array()){
+    return '<span'.add_attributes($attribute_assign).'>'.$content.'</span>';
 }
 
-function span($content, $id, $class, $title=null){
-    $id_assign = (isset($id) ? ' id="'.$id.'"' : '');
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    $title_assign = (isset($title) ? ' title="'.$title.'"' : '');
-    return '<span'.$id_assign.$class_assign.$title_assign.'>'.$content.'</span>';
+//function radio_button($text, $value, $name, $checked, $class = null){
+//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+//    $check = ($checked ? ' checked="checked"' : '');
+//    return '<input name="'.$name.'" type="radio" value="'.$value.'"'.$class_assign.$check.'>&nbsp;&nbsp;'.$text.'<br>';
+//}
+
+function radio_button($text, $attribute_assign = array()){
+    return '<input type="radio"'.add_attributes($attribute_assign).'>'.nbsp(2).$text.'<br>';
 }
 
-function radio_button($text, $value, $name, $checked, $class = null){
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    $check = ($checked ? ' checked="checked"' : '');
-    return '<input name="'.$name.'" type="radio" value="'.$value.'"'.$class_assign.$check.'>&nbsp;&nbsp;'.$text.'<br>';
+//function input_text($default_text, $attribute_assign = array()){
+//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+//    return '<input'.$class_assign.' type="text" value="'.$default_text.'">';
+//}
+//
+//function input_text_with_placeholder($placeholder, $class = null){
+//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
+//    return '<input'.$class_assign.' type="text" value="" placeholder="'.$placeholder.'">';
+//}
+
+function input_text($attribute_assign = array()){
+    return'<input type="text"'.add_attributes($attribute_assign).'>';
 }
 
-function input_text($default_text, $class = null){
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<input'.$class_assign.' type="text" value="'.$default_text.'">';
+//function button($text, $value){
+//    return '<button value="'.$value.'">'.$text.'</button>';
+//}
+
+function button($text, $attribute_assign = array()){
+    return '<button'.  add_attributes($attribute_assign).'>'.$text.'</button>';
 }
 
-function input_text_with_placeholder($placeholder, $class = null){
-    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-    return '<input'.$class_assign.' type="text" value="" placeholder="'.$placeholder.'">';
+//function hlink($ref, $label, $target = null){
+//    $target_assign = (isset($target) ? ' target="'.$target.'"' : '');
+//    return "<a" . $target_assign ." href='". $ref . "'>".$label."</a> ";
+//}
+
+function a($text, $attribute_assign = array()){
+    return '<a'.  add_attributes($attribute_assign).'>'.$text.'</a>';
 }
 
-function button($text, $value){
-    return '<button value="'.$value.'">'.$text.'</button>';
-}
-
-function hlink($ref, $label, $target = null){
-    $target_assign = (isset($target) ? ' target="'.$target.'"' : '');
-    return "<a" . $target_assign ." href='". $ref . "'>".$label."</a> ";
-}
-
-function h($text, $size = 1){
+function h($text, $size = 1, $attribute_assign = array()){
     $head = 'h' . $size;
-    return "<$head>".$text."</$head>";
+    return '<'.$head.add_attributes($attribute_assign).'>'.$text.'</'.$head.'>';
 }
 
 function br($n = 1){
@@ -97,6 +100,20 @@ function br($n = 1){
     return $content;
 }
 
+function nbsp($n = 1){
+    $content = '';
+    for($i = 1; $i <= $n; $i++)
+        $content .= '&nbsp;';
+    return $content;
+}
+
+function add_attributes($attribute_assign){
+    $res = '';
+    for($i = 0; $i < count($attribute_assign); $i += 2){
+        $res .= ' '.$attribute_assign[$i].'='.'"'.$attribute_assign[$i+1].'"';
+    }
+    return $res;
+}
 
 //////////////////////////////////////////////////////////////
 /////////////////// XHTML reader functions ///////////////////
@@ -127,7 +144,10 @@ function get_domain($url){
 }
 
 
-function get_feed_icon_url($rss){
+function get_feed_icon_url($url){
+    $rss = new SimplePie();
+    $rss->set_feed_url($url);
+    $rss->init();
     $icon_url = get_favicon($rss->get_base());
     if(isset($icon_url) && $icon_url != null)
         $res = $icon_url;
@@ -163,8 +183,6 @@ function get_article_title($article){
     $res = null;
     if($title == null || trim($title) == "")
         $res = "Titolo articolo non disponibile";
-    else if(strlen($title) > MAX_LENGTH_TITLE)
-        $res = substr($title, 0, MAX_LENGTH_TITLE).'...';
     else
         $res = $title;
     return $res;

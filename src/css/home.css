@@ -350,6 +350,7 @@ h1{
 .article-image{
     width: 150px;
     height: 100px;
+    vertical-align: middle;
 }
 
 .top-menu{
