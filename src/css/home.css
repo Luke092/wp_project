@@ -294,16 +294,15 @@ button{
 }
 
 .category{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     clear: both;
     font-size: 14px;
 }
 
 .feed{
     margin-left: 40px;
-    margin-top: 10px;
     clear: both;
-    
+    overflow: hidden;
     cursor: pointer;
 }
 

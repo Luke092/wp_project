@@ -26,5 +26,16 @@ $(document).ready(function(){
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
    });
-   
+   $(".feed").mouseover(function(){
+      $(this).css("backgroundColor", "#ddd"); 
+   });
+   $(".feed").mouseout(function(){
+      $(this).css("backgroundColor", "#fff"); 
+   });
+   $(".cName").mouseover(function(){
+      $(this).css("backgroundColor", "#ddd"); 
+   });
+   $(".cName").mouseout(function(){
+      $(this).css("backgroundColor", "#fff"); 
+   });
 });
