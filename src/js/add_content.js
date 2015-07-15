@@ -66,3 +66,14 @@ function addFeed(feedId){
     waitResponse();
 //    history.pushState();
 }
+
+function addNewFeed(feedId, feedUrl){
+//    alert(feedName);
+    var xhr = myGetXmlHttpRequest();
+    var url = "./add_content.php";
+    var method = "POST";
+    var param = ["feedId", feedId, "feedUrl", feedUrl];
+    pageRequest(xhr, url, method, param);
+    waitResponse();
+//    history.pushState();
+}

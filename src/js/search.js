@@ -21,5 +21,18 @@ $(document).ready(function(){
                             + "</span></a>").appendTo(ul);
         };
     });
+    $("#search-bar form").submit(function (event){
+        var feedId = $("#search-input-id").val();
+        var feedUrl = $("#search-input").val();
+        var regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]){2,6}([/\w\.-]*)*\/?$/;
+        if(feedUrl.match(regex) != null){
+            addNewFeed(feedId, feedUrl);
+        }
+        else{
+            alert("Url Feed non valido!");
+        }
+        event.preventDefault();
+        return false;
+    });
 });
     

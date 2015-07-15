@@ -139,11 +139,11 @@ function pageRequest(xhr, url, method, param){
     sendData(xhr, url, method, param, callback);
 }
 
-function sidebar_reload(xhr, method, param){
+function sidebar_reload(xhr, method){
     var callback = function (){
         $("#sidebar").html(xhr.responseText);
     };
-    sendData(xhr, "./sidebar.php", method, param, callback);
+    sendData(xhr, "./sidebar.php", method, null, callback);
 }
 
 function waitResponse(){

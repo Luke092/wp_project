@@ -63,11 +63,11 @@ class feed implements \JsonSerializable{
         ];
     }
 
-    public static function insert($f_name, $url, $default_cat) {
+    public static function insert($f_name, $url) {
 //        if (!self::alreadyPresent($f_name, $url)) {
         $image_url = get_feed_icon_url($url);
         if (!dbUtil::alreadyPresent(self::$TABLE, ["f_name", "url"], [$f_name, $url])) {
-            if (dbUtil::insert(self::$TABLE, array("f_name", "url", "default_cat", "image_url"), array($f_name, $url, $default_cat, $image_url))) {
+            if (dbUtil::insert(self::$TABLE, array("f_name", "url", "image_url"), array($f_name, $url, $image_url))) {
                 return self::$CORRECT_INSERT;
             } else {
                 return self::$ERROR_INSERT;

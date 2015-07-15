@@ -5,8 +5,6 @@ use RSSAggregator\model\feed;
 use RSSAggregator\model\user;
 use RSSAggregator\model\session;
 
-require_once("./visualize.php");
-
 function __autoload($class) {
 
     // convert namespace to full file path
@@ -24,6 +22,7 @@ function compare_feeds($feed1, $feed2){
     return $feed1->getId() - $feed2->getId();
 }
 
+session::start();
 $email = session::get_info("email");
 
 
@@ -31,7 +30,7 @@ $term = $_GET['term'];
 
 
 $default_categories = categories::getCategories(categories::$DEFAULT_CAT);
-$user_categories = categories::getCategories(categories::$USER_CAT, $email);
+$user_categories = user::getCategories($email);
 
 $feeds = $default_categories->searchFeedsByTitleURL($term, $term);
 $user_feeds = $user_categories->searchFeedsByTitleURL($term, $term);
