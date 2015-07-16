@@ -14,6 +14,7 @@ const DATE_FORMAT = "D j F Y G i";
 const MAX_LENGTH_DESC = 100;
 const MAX_LENGTH_TITLE = 75;
 const MAX_LENGTH_SUMMARY = 200;
+const ARTICLES_PER_PAGE = 5;
 
 $MONTHS = array(
     "January" => "gennaio",
