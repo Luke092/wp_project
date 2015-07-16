@@ -170,16 +170,6 @@ function get_feed_description($rss){
     return $res;
 }
 
-//function get_article_image_url($rss, $index){
-//    $article = $rss->get_item($index);
-//    $url = $article != null ? $article->get_enclosure()->get_link() : "//?#";
-//    return $url != "//?#" ? $url : DEF_ARTICLE_IMAGE_PATH;
-//}
-//
-//function get_first_article_image_url($rss){
-//    return get_article_image_url($rss, 0);
-//}
-
 function get_article_title($article){
     $title = $article != null ? strip_tags($article->get_title()) : null;
     $res = null;
@@ -241,4 +231,21 @@ function get_articles_quantity($feed){
     $rss->set_feed_url($feed->getURL());
     $rss->init();
     return $rss->get_item_quantity();
+}
+
+function get_articles_from_category($category){
+    $articles = array();
+    foreach($category->get_array() as $feed){
+        $rss = new SimplePie();
+        $rss->set_feed_url($feed->getURL());
+        $rss->init();
+        for($i = 0; $i < ARTICLES_PER_CATEGORY; $i++)
+            $articles[]= $rss->get_item($i);
+    }
+    usort($articles, 'compare_articles');
+    return $articles;
+}
+
+function compare_articles($article1, $article2){
+    return $article2->get_date('U') - $article1->get_date('U');
 }

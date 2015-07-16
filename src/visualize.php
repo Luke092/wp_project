@@ -123,12 +123,15 @@ function print_last_radio_button($text, $checked, $placeholder = ""){
             return radio_button(input_text(["value", $text, "class", "other-choice", "placeholder", $placeholder]), ["value", $text, "name", "category"]);
 }
 
-function visualize_article($article){
+function visualize_article($article, $feed_name = null){
     $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
     $article_title = a(h(get_article_title($article), 5, ["class", "article-title-fs"]), ["href", $article->get_link(), "target", "_blank"]);
     $article_summary = div(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
     $article_text = div($article_title.$article_summary, ["class", "article-text"]);
-    $article_date = div(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
+    if($feed_name != null)
+        $article_date = div($feed_name.' | '.date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
+    else
+        $article_date = div(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
     $article_description = div($article_text.$article_date, ["class", "article-description-fs"]);
     $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "article-readbox-fs"]);
     $article_box = div($article_image.$article_description.$article_read_box, ["class", "article-box-fs"]);
@@ -178,7 +181,15 @@ function visualize_page_navigation_bar($pages, $feed_id, $cat_name, $current_pag
 }
 
 function visualize_articles_by_category($category){
-    
+    $cat_name = h($category->getName(), 1, ["class", "category-header"]);
+    $articles = get_articles_from_category($category);
+    $timeline = "";
+    foreach($articles as $article){
+        $feed = $category->getFeedByURL($article->get_feed()->subscribe_url());
+        $timeline .= visualize_article($article, $feed->getName());
+    }
+    $timeline = div($timeline, ["class", "timeline"]);
+    echo $cat_name.$timeline;
 }
 
 function visualize_all_articles($email){

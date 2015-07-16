@@ -118,6 +118,15 @@ class category {
         return false;
     }
     
+    public function getFeedByURL($url) {
+        foreach ($this->feeds as $feed) {
+            if ($feed->getURL() == $url) {
+                return $feed;
+            }
+        }
+        return false;
+    }
+    
     public function searchFeedByName($name, $url = null){
         foreach ($this->feeds as $feed) {
             if($url != null){
