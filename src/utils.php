@@ -240,7 +240,7 @@ function get_articles_from_category($category){
         $rss->set_feed_url($feed->getURL());
         $rss->init();
         for($i = 0; $i < ARTICLES_PER_CATEGORY; $i++)
-            $articles[]= $rss->get_item($i);
+            $articles[] = $rss->get_item($i);
     }
     usort($articles, 'compare_articles');
     return $articles;
@@ -248,4 +248,11 @@ function get_articles_from_category($category){
 
 function compare_articles($article1, $article2){
     return $article2->get_date('U') - $article1->get_date('U');
+}
+
+function get_articles_in_range($articles, $from, $n){
+    $result = array();
+    for($i = $from; ($i < $from + $n) && ($i < count($articles)); $i++)
+        $result[] = $articles[$i];
+    return $result;
 }

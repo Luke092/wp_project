@@ -138,23 +138,19 @@ function visualize_article($article, $feed_name = null){
     return $article_box;
 }
 
-//function visualize_articles_in_range($rss, $from, $n){
-//    for($i = $from; ($i < $from + $n) && ($i < $rss->get_item_quantity()); $i++){
-//        $article= $rss->get_item($i);
-//        visualize_article($article);
-//    }
-//}
-
 function visualize_articles_by_feed($feed, $from, $n){
     $rss = new SimplePie();
     $rss->set_feed_url($feed->getURL());
     $rss->init();
     $feed_title = h(a($feed->getName(), ["href", $rss->get_base(), "target", "_blank"]));
     $timeline = "";
-    for($i = $from; ($i < $from + $n) && ($i < get_articles_quantity($feed)); $i++){
-        $article= $rss->get_item($i);
+    $articles = $rss->get_items();
+    $varticles = get_articles_in_range($articles, $from, $n);
+    $i = $from;
+    foreach ($varticles as $article){
         $timeline .= visualize_article($article);
         $timeline .= (($i < $from + $n - 1) && ($i < get_articles_quantity($feed)-1) ? '<hr>' : '');
+        $i++;
     }
     $timeline = div($timeline, ["class", "timeline"]);
     echo $feed_title.$timeline;
@@ -180,11 +176,12 @@ function visualize_page_navigation_bar($pages, $feed_id, $cat_name, $current_pag
     echo $div;
 }
 
-function visualize_articles_by_category($category){
+function visualize_articles_by_category($category, $from, $n){
     $cat_name = h($category->getName(), 1, ["class", "category-header"]);
     $articles = get_articles_from_category($category);
+    $varticles = get_articles_in_range($articles, $from, $n);
     $timeline = "";
-    foreach($articles as $article){
+    foreach($varticles as $article){
         $feed = $category->getFeedByURL($article->get_feed()->subscribe_url());
         $timeline .= visualize_article($article, $feed->getName());
     }
