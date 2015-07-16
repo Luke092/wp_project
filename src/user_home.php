@@ -44,7 +44,7 @@
                     $page = $_POST["page"];
                 visualize_articles_by_feed($feed, ($page-1)*ARTICLES_PER_PAGE+1, ARTICLES_PER_PAGE);
                 $pages=ceil(get_articles_quantity($feed)/ARTICLES_PER_PAGE);
-                visualize_page_navigation_bar($pages, $feed_id, $cat_name);
+                visualize_page_navigation_bar($pages, $feed_id, $cat_name, $page);
             }
             else if(isset($_POST["catName"])){
                 $cat_name = $_POST["catName"];

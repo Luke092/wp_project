@@ -157,11 +157,24 @@ function visualize_articles_by_feed($feed, $from, $n){
     echo $feed_title.$timeline;
 }
 
-function visualize_page_navigation_bar($pages, $feed_id, $cat_name){
-    echo "<p>Pagine: ";
-    for($i = 1; $i <= $pages; $i++)
-      echo span($i, ["class", "paging-header", "id", $i.'#'.$feed_id.'#'.$cat_name]);
-    echo "</p>\n";
+function visualize_page_navigation_bar($pages, $feed_id, $cat_name, $current_page = 1){
+    $p = "<p>";
+    $p .= h("Pagine", 3);
+    $p .= span("<<", ["class", "paging-header", "id", (1).'#'.$feed_id.'#'.$cat_name]);
+    $p .= span("<", ["class", "paging-header", "id", ($current_page-1).'#'.$feed_id.'#'.$cat_name]);
+    for($i = 1; $i <= $pages; $i++){
+        if($i == $current_page){
+            $p .= span($i, ["class", "paging-header-selected", "id", $i.'#'.$feed_id.'#'.$cat_name]);
+        }
+        else {
+            $p .= span($i, ["class", "paging-header", "id", $i.'#'.$feed_id.'#'.$cat_name]);
+        }
+    }
+    $p .= span(">", ["class", "paging-header", "id", ($current_page+1).'#'.$feed_id.'#'.$cat_name]);
+    $p .= span(">>", ["class", "paging-header", "id", ($pages).'#'.$feed_id.'#'.$cat_name]);
+    $p .= "</p>\n";
+    $div = div($p,["class", "paging"]);
+    echo $div;
 }
 
 function visualize_articles_by_category($category){

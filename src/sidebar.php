@@ -27,7 +27,7 @@ function __autoload($class) {
     <div style="float: left;width: 20%;">
         <img src="./img/utils/collapse.png" class="icon"/>
     </div>
-    <div style="float: left;width: 20%;">
+    <div style="float: left;">
         <span>Chiudi tutto</span>
     </div>
 </div>

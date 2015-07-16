@@ -10,4 +10,10 @@ $(document).ready(function(){
                 "catName", ids[2]);
         pageRequest(xhr, url, method, param);
    });
+   $(".paging-header").mouseover(function(){
+       $(this).css("backgroundColor", "rgb(255, 208, 168)");
+   });
+   $(".paging-header").mouseout(function(){
+       $(this).css("backgroundColor", "rgb(255, 248, 218)");
+   });
 });
