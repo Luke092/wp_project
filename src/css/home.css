@@ -407,12 +407,13 @@ h1{
 
 .article-title-fs{
     font-size: 17px;
+    color: rgb(92, 21, 34);
 }
 
 .article-description-fs{
     float: left;
     width: 60%;
-    margin-left: 15px;
+    margin-left: 43px;
 }
 
 .article-readbox-fs{
@@ -428,8 +429,8 @@ h1{
 }
 
 .article-image-fs{
-    width: 170px;
-    height: 120px;
+    width: 200px;
+    height: 140px;
 }
 
 .article-summary-fs{
@@ -442,9 +443,10 @@ h1{
     font-size: 12px;
     font-style: italic;
     color: gray;
+    margin-top: 5px;
 }
 
 .article-text{
-    height: 104px;
+    min-height: 120px;
     width: 95%;
 }

@@ -201,8 +201,11 @@ function get_article_image_url($article_content){
         $dom = new DOMDocument();
         @$dom->loadHTML($article_content);
         $image_tags = $dom->getElementsByTagName('img');
-        if($image_tags->item(0) != null)
+        if($image_tags->item(0) != null){
             $src = $image_tags->item(0)->getAttribute("src");
+            if(preg_match('/rc\.img$/', $src))
+                    $src = DEF_ARTICLE_IMAGE_PATH;
+        }
         else
             $src = DEF_ARTICLE_IMAGE_PATH;
     }
@@ -231,4 +234,11 @@ function get_partial_article_description($article_content){
     else
         $res = $body;
     return $res;
+}
+
+function get_articles_quantity($feed){
+    $rss = new SimplePie();
+    $rss->set_feed_url($feed->getURL());
+    $rss->init();
+    return $rss->get_item_quantity();
 }

@@ -124,32 +124,39 @@ function print_last_radio_button($text, $checked, $placeholder = ""){
 }
 
 function visualize_article($article){
-//    $article_image = td(img(["class", "article-image", "src", get_article_image_url($article->get_description()), "alt", "Immagine"]));
-//    $article_title = h(get_article_title($article), 4);
-//    $article_description = get_partial_article_description($article->get_description());
-//    $article_preview = td($article_title.br().$article_description);
-//    return tr($article_image.$article_preview);
     $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
-    $article_title = h(get_article_title($article), 5, ["class", "article-title-fs"]);
+    $article_title = a(h(get_article_title($article), 5, ["class", "article-title-fs"]), ["href", $article->get_link(), "target", "_blank"]);
     $article_summary = div(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
     $article_text = div($article_title.$article_summary, ["class", "article-text"]);
-    $article_date = span(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
+    $article_date = div(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
     $article_description = div($article_text.$article_date, ["class", "article-description-fs"]);
     $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "article-readbox-fs"]);
     $article_box = div($article_image.$article_description.$article_read_box, ["class", "article-box-fs"]);
     return $article_box;
 }
 
-function visualize_articles_by_feed($feed){
+//function visualize_articles_in_range($rss, $from, $n){
+//    for($i = $from; ($i < $from + $n) && ($i < $rss->get_item_quantity()); $i++){
+//        $article= $rss->get_item($i);
+//        visualize_article($article);
+//    }
+//}
+
+function visualize_articles_by_feed($feed, $from, $n){
     $rss = new SimplePie();
     $rss->set_feed_url($feed->getURL());
     $rss->init();
     $feed_title = h(a($feed->getName(), ["href", $rss->get_base(), "target", "_blank"]));
     $timeline = "";
-    for($i = 0; $i < $rss->get_item_quantity(); $i++){
-        $timeline .= visualize_article($rss->get_item($i));
-        $timeline .= ($i < $rss->get_item_quantity()-1 ? '<hr>' : '');
+    for($i = $from; ($i < $from + $n) && ($i < get_articles_quantity($feed)); $i++){
+        $article= $rss->get_item($i);
+        $timeline .= visualize_article($article);
+        $timeline .= (($i < $from + $n - 1) && ($i < get_articles_quantity($feed)-1) ? '<hr>' : '');
     }
+//    for($i = 0; $i < $rss->get_item_quantity(); $i++){
+//        $timeline .= visualize_article($rss->get_item($i));
+//        $timeline .= ($i < $rss->get_item_quantity()-1 ? '<hr>' : '');
+//    }
     $timeline = div($timeline, ["class", "timeline"]);
     echo $feed_title.$timeline;
 }

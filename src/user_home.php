@@ -1,3 +1,4 @@
+<script type="text/javascript" src="./js/paging.js"/>
 <?php
     use RSSAggregator\model\session;
     use RSSAggregator\model\user;
@@ -37,7 +38,18 @@
                 $cat_name = $_POST["catName"];
                 $category = categories::getCategories(categories::$USER_CAT, $email)->getCatByName($cat_name);
                 $feed = $category->getFeedById($feed_id);
-                visualize_articles_by_feed($feed);
+                if(!isset($_POST["page"]))
+                    $page=1;
+                else
+                    $page = $_POST["page"];
+                visualize_articles_by_feed($feed, ($page-1)*ARTICLES_PER_PAGE+1, ARTICLES_PER_PAGE);
+                echo "<p>Pagine: ";
+
+                $pages=ceil(get_articles_quantity($feed)/ARTICLES_PER_PAGE);
+                for($i = 1; $i <= $pages; $i++)
+                  echo span($i, ["class", "paging-header", "id", $i.'#'.$feed_id.'#'.$cat_name]);
+                echo "</p>\n";
+                
             }
             else if(isset($_POST["catName"])){
                 $cat_name = $_POST["catName"];
