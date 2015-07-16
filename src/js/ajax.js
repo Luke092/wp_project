@@ -139,7 +139,9 @@ function pageRequest(xhr, url, method, param){
     sendData(xhr, url, method, param, callback);
 }
 
-function sidebar_reload(xhr, method){
+function sidebar_reload(){
+    var xhr = myGetXmlHttpRequest();
+    var method = "POST";
     var callback = function (){
         $("#sidebar").html(xhr.responseText);
     };
