@@ -52,7 +52,6 @@
 ?>
 <script>
     $(document).ready(function(){
-        var xhr = myGetXmlHttpRequest();
-        sidebar_reload(xhr, "POST");
+        sidebar_reload();
     });
 </script>

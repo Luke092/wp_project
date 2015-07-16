@@ -85,8 +85,8 @@ function __autoload($class) {
         visualize_default_categories($default_categories_array);
     }
 ?>
-<link rel="stylesheet" href="./lib/jquryUi/jquery-ui.css">
+<link rel="stylesheet" href="lib/jqueryUi/jquery-ui.css">
 <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
-<script src="lib/jquryUi/jquery-ui.js"></script>
+<script src="lib/jqueryUi/jquery-ui.js"></script>
 <script type="text/javascript" src="./js/add_content.js"></script>
 <script type="text/javascript" src="./js/search.js"></script>

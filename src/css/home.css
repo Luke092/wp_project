@@ -353,6 +353,8 @@ h1{
 }
 
 .menu-entry{
+    cursor: pointer;
+    
     float: left;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -360,11 +362,15 @@ h1{
     padding-right: 5px;
     margin-right: 3px;
     margin-left: 3px;
+    height: 35px;
+    
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
 }
 
 .menu-entry div{
     float: left;
-    cursor: pointer;
 }
 
 .menu-entry img{

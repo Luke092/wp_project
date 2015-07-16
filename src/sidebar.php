@@ -22,6 +22,16 @@ function __autoload($class) {
 }
 
 ?>
+
+<div style="overflow: hidden;" id="tv-commands">
+    <div style="float: left;width: 20%;">
+        <img src="./img/utils/collapse.png" class="icon"/>
+    </div>
+    <div style="float: left;width: 20%;">
+        <span>Chiudi tutto</span>
+    </div>
+</div>
+
 <?php
     session::start();
     $email = session::get_info("email");

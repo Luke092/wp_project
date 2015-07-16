@@ -2,7 +2,7 @@ $(document).ready(function(){
    $(".navigation_arrow").click(function(){
       var cat_div = $(this).parent();
       var img = $(this).children("img");
-      $(cat_div.children(".feed")).toggle("medium", function(){
+      $(cat_div.children(".feed")).toggle("medium", "swing", function(){
           if($(this).css("display") == "none"){
               img.attr("src", "./img/utils/right_arrow.png");
           }
@@ -37,5 +37,23 @@ $(document).ready(function(){
    });
    $(".cName").mouseout(function(){
       $(this).css("backgroundColor", "#fff"); 
+   });
+   
+   $("#tv-commands").click(function(){
+      var icon = $("#tv-commands img").attr("src");
+      if(icon == "./img/utils/expand.png"){
+          $("#tv-commands img").attr("src", "./img/utils/collapse.png");
+          $("#tv-commands span").text("Chiudi tutto");
+          $(".feed").fadeIn(400, "swing", function(){
+              $(".navigation").attr("src", "./img/utils/down_arrow.png");
+          });
+      }
+      else{
+          $("#tv-commands img").attr("src", "./img/utils/expand.png");
+          $("#tv-commands span").text("Espandi tutto");
+          $(".feed").fadeOut(400, "swing", function(){
+              $(".navigation").attr("src", "./img/utils/right_arrow.png");
+          });
+      }
    });
 });
