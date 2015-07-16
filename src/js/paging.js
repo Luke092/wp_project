@@ -20,7 +20,7 @@ $(document).ready(function(){
                         "page", ids[0]);
         }
         pageRequest(xhr, url, method, param);
-        $('html,body').scrollTop(0);
+        $("#page").scrollTop(0);
    });
    $(".paging-header").mouseover(function(){
        $(this).css("backgroundColor", "rgb(255, 208, 168)");

@@ -109,9 +109,9 @@
                 </div>
             </div>
             <div class="push"></div>
-        </div>
         <?php
             require("./footer.php");
         ?>
+        </div>
     </body>
 </html>
