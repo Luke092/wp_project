@@ -153,12 +153,15 @@ function visualize_articles_by_feed($feed, $from, $n){
         $timeline .= visualize_article($article);
         $timeline .= (($i < $from + $n - 1) && ($i < get_articles_quantity($feed)-1) ? '<hr>' : '');
     }
-//    for($i = 0; $i < $rss->get_item_quantity(); $i++){
-//        $timeline .= visualize_article($rss->get_item($i));
-//        $timeline .= ($i < $rss->get_item_quantity()-1 ? '<hr>' : '');
-//    }
     $timeline = div($timeline, ["class", "timeline"]);
     echo $feed_title.$timeline;
+}
+
+function visualize_page_navigation_bar($pages, $feed_id, $cat_name){
+    echo "<p>Pagine: ";
+    for($i = 1; $i <= $pages; $i++)
+      echo span($i, ["class", "paging-header", "id", $i.'#'.$feed_id.'#'.$cat_name]);
+    echo "</p>\n";
 }
 
 function visualize_articles_by_category($category){
