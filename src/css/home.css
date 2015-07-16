@@ -461,6 +461,9 @@ h1{
     cursor: pointer;
 }
 
+.category-header{
+    color: #816060;
+}
 .paging{
     text-align: center;
 }
