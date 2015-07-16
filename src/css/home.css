@@ -454,3 +454,7 @@ h1{
     height: 104px;
     width: 95%;
 }
+
+#tv-commands{
+    cursor: pointer;
+}
