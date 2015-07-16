@@ -1,6 +1,9 @@
 <?php
+
 namespace RSSAggregator\model;
+
 use PDO;
+
 class category {
 
     public static $ALREADY_PRESENT = 0;
@@ -79,12 +82,11 @@ class category {
         $this->feeds = array();
         $this->buildFeedArray($this->email);
     }
-    
-    public function add_Feed_obj($feed){
-        if($this->getFeedByName($feed->getName(), $feed->getURL()) == false){
+
+    public function add_Feed_obj($feed) {
+        if ($this->getFeedByName($feed->getName(), $feed->getURL()) == false) {
             feed::insert_UCF_data($this->email, $this->id, $feed->getId());
-        }
-        else{
+        } else {
             return false;
         }
         return true;
@@ -104,12 +106,11 @@ class category {
 
     public function getFeedByName($name, $url = null) {
         foreach ($this->feeds as $feed) {
-            if($url != null){
+            if ($url != null) {
                 if ($feed->getName() == $name && $feed->getURL() == $url) {
                     return $feed;
                 }
-            }
-            else{
+            } else {
                 if ($feed->getName() == $name) {
                     return $feed;
                 }
@@ -117,7 +118,7 @@ class category {
         }
         return false;
     }
-    
+
     public function getFeedByURL($url) {
         foreach ($this->feeds as $feed) {
             if ($feed->getURL() == $url) {
@@ -126,15 +127,14 @@ class category {
         }
         return false;
     }
-    
-    public function searchFeedByName($name, $url = null){
+
+    public function searchFeedByName($name, $url = null) {
         foreach ($this->feeds as $feed) {
-            if($url != null){
+            if ($url != null) {
                 if (strstr($feed->getName(), $name) || strstr($feed->getURL(), $url)) {
                     return $feed;
                 }
-            }
-            else{
+            } else {
                 if (strstr($feed->getName(), $name)) {
                     return $feed;
                 }
@@ -142,7 +142,7 @@ class category {
         }
         return false;
     }
-    
+
     public function getFeedById($id) {
         foreach ($this->feeds as $feed) {
             if ($feed->getId() == $id) {
@@ -175,6 +175,10 @@ class category {
 
     public static function delete_UCF_data($id, $email) {
         return dbUtil::delete("UCF", array("email", "c_id"), array($email, $id));
+    }
+
+    public static function update_UCF_data($oldId, $newId, $email) {
+        dbUtil::update("UCF", ["c_id"], [$newId], ["email", "c_id"], [$email, $oldId]); 
     }
 
     public static function modifyName($id, $newName) {

@@ -6,7 +6,7 @@ use PDO;
 
 require_once ("./utils.php");
 
-class feed implements \JsonSerializable{
+class feed implements \JsonSerializable {
 
     public static $ALREADY_PRESENT = 0;
     public static $ERROR_INSERT = 1;
@@ -44,7 +44,7 @@ class feed implements \JsonSerializable{
     public function getURL() {
         return $this->url;
     }
-    
+
     public function getIconURL() {
         return $this->image_url;
     }
@@ -52,7 +52,7 @@ class feed implements \JsonSerializable{
     public function getDefaultCat() {
         return $this->default_cat;
     }
-    
+
     public function jsonSerialize() {
         return [
             "id" => $this->id,
@@ -96,6 +96,10 @@ class feed implements \JsonSerializable{
 
     public static function delete_UCF_data($email, $c_id, $f_id) {
         return dbUtil::delete("UCF", array("email", "c_id", "f_id"), array($email, $c_id, $f_id));
+    }
+
+    public static function update_UCF_data($email, $oldC_id, $newC_id, $f_id) {
+        return dbUtil::update("UCF", ["c_id"], [$newC_id], ["email", "c_id", "f_id"], [$email, $oldC_id, $f_id]);
     }
 
     // modifies name, url and default category of the entry with the specified id.

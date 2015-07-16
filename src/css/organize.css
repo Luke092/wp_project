@@ -40,7 +40,6 @@ h2 {
     line-height: 1.4em;
     margin-top: 3rem;
     margin-bottom: 1rem;
-    text-transform: uppercase;
     font-family: sans-serif;
 }
 
@@ -58,6 +57,7 @@ h2 {
     border: 1pt solid lightgrey;
     padding: 5pt;
     min-height: 200pt;
+    /*max-height: 200pt;*/
     border-radius: 2pt;
 }
 
@@ -73,6 +73,7 @@ h2 {
 
 .feedName {
     display: inline-block;
+    padding-left: 5pt;
 }
 
 .feedId {
@@ -96,5 +97,10 @@ h2 {
 .hovered {
     border: 1pt solid grey;
     background: lightgoldenrodyellow;
+}
+
+.feedIcon {
+    float: left;
+    margin-top: 4pt;
 }
 

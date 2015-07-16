@@ -1,31 +1,29 @@
 <?php
-    
-    use RSSAggregator\model\session;
-    use RSSAggregator\model\user;
-    use RSSAggregator\model\categories;
-    use RSSAggregator\model\category;
-    use RSSAggregator\model\feed;
-    
-    require_once("./config.php");
-    require_once("./utils.php");
-    require_once("./visualize.php");
 
-    function __autoload($class) {
+use RSSAggregator\model\session;
+use RSSAggregator\model\user;
+use RSSAggregator\model\categories;
+use RSSAggregator\model\category;
+use RSSAggregator\model\feed;
 
-        // convert namespace to full file path
-        if (strpos($class, 'SimplePie') !== 0)
-        {
-                $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
-        }
-        else{
-            $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-        }
-        require_once($class);
+require_once("./config.php");
+require_once("./utils.php");
+require_once("./visualize.php");
+
+function __autoload($class) {
+
+    // convert namespace to full file path
+    if (strpos($class, 'SimplePie') !== 0) {
+        $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+    } else {
+        $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
     }
+    require_once($class);
+}
 
-    session::start();
-    if(!session::user_is_logged())
-        header("Location: ./index.php");
+session::start();
+if (!session::user_is_logged())
+    header("Location: ./index.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd">
@@ -34,26 +32,34 @@
         <meta charset="ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="./css/generic.css">
         <link rel="stylesheet" type="text/css" href="./css/home.css">
+        <!--<link rel="stylesheet" type="text/css" href="./css/organize.css">-->
+        <!--<link rel="stylesheet" href="./css/jquery-ui.min.css">-->
         <link rel="icon" href="./img/utils/feed_icon.png" type="image/png"/>
-        
+
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
         <script type="text/javascript" src="js/ajax.js"></script>
         <script type="text/javascript" src="js/sidebar.js"></script>
         <script type="text/javascript" src="js/top-menu.js"></script>
-        
+        <!--<script type="text/javascript" src="./js/organize.js"></script>-->
+        <!--<script type="text/javascript" src="./lib/jquery-ui.min.js"></script>-->
+        <!--<script type="text/javascript" src="./lib/json2.js"></script>-->
+
+<!--        <script type="text/javascript" src="./lib/jquery-2.1.4.js"></script>-->
+<!--<script type="text/javascript" src="./js/ajax.js"></script>-->
+
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function () {
                 var xhr = myGetXmlHttpRequest();
                 pageRequest(xhr, "./user_home.php", "POST");
             });
         </script>
-        
+
         <title>Home page</title>
         <!--[if lt IE 7]>
-		<style type="text/css">
-			#wrapper { height:100%; }
-		</style>
-	<![endif]-->
+                <style type="text/css">
+                        #wrapper { height:100%; }
+                </style>
+        <![endif]-->
     </head>
     <body> <!-- da modificare-->
         <div class="wrapper">
@@ -110,7 +116,7 @@
             </div>
             <div class="push"></div>
         <?php
-            require("./footer.php");
+        require("./footer.php");
         ?>
         </div>
     </body>
