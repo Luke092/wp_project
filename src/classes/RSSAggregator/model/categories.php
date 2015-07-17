@@ -124,6 +124,17 @@ class categories{
         return false;
     }
     
+    public function getCatByFeedURL($url){
+        foreach ($this->categories as $cat){
+            foreach($cat->get_array() as $feed){
+                if($feed->getURL() == $url){
+                    return [$cat, $feed];
+                }
+            }
+        }
+        return false;
+    }
+    
     public function getFeedsByTitleURL($title, $url){
         $res = array();
         foreach ($this->categories as $cat){

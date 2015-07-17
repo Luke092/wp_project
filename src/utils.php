@@ -239,7 +239,7 @@ function get_articles_from_category($category){
         $rss = new SimplePie();
         $rss->set_feed_url($feed->getURL());
         $rss->init();
-        for($i = 0; $i < ARTICLES_PER_CATEGORY; $i++)
+        for($i = 0; $i < ARTICLES_PER_FEED; $i++)
             $articles[] = $rss->get_item($i);
     }
     usort($articles, 'compare_articles');
@@ -255,4 +255,13 @@ function get_articles_in_range($articles, $from, $n){
     for($i = $from; ($i < $from + $n) && ($i < count($articles)); $i++)
         $result[] = $articles[$i];
     return $result;
+}
+
+function get_all_articles_for_home($categories){
+    $articles = array();
+    foreach($categories as $category){
+        $articles = array_merge($articles, get_articles_from_category($category));
+    }
+    usort($articles, "compare_articles");
+    return $articles;
 }

@@ -34,14 +34,14 @@
             
 <?php
             if(!isset($_POST["page"]))
-                    $page = 1;
-                else
-                    $page = $_POST["page"];
-            $from = ($page-1)*ARTICLES_PER_PAGE+1;
+                $page = 1;
+            else
+                $page = $_POST["page"];
+            $from = ($page-1)*ARTICLES_PER_PAGE;
             if(isset($_POST["feedId"]) && isset($_POST["catName"])){
                 $feed_id = $_POST["feedId"];
                 $cat_name = $_POST["catName"];
-                $category = categories::getCategories(categories::$USER_CAT, $email)->getCatByName($cat_name);
+                $category = user::getCategories($email)->getCatByName($cat_name);
                 $feed = $category->getFeedById($feed_id);
                 visualize_articles_by_feed($feed, $from, ARTICLES_PER_PAGE);
                 $pages=ceil(get_articles_quantity($feed)/ARTICLES_PER_PAGE);
@@ -49,13 +49,17 @@
             }
             else if(isset($_POST["catName"])){
                 $cat_name = $_POST["catName"];
-                $category = categories::getCategories(categories::$USER_CAT, $email)->getCatByName($cat_name);
-                visualize_articles_by_category($category, $from, ARTICLES_PER_PAGE);
-                $pages=ceil(ARTICLES_PER_CATEGORY*count($category->get_array())/ARTICLES_PER_PAGE);
+                $category = user::getCategories($email)->getCatByName($cat_name);
+                $cat_name_header = h($cat_name, 1, ["class", "category-header"]);
+                echo $cat_name_header . visualize_articles_by_category($category, $from, ARTICLES_PER_PAGE);
+                $pages=ceil(ARTICLES_PER_FEED*count($category->get_array())/ARTICLES_PER_PAGE);
                 visualize_page_navigation_bar($pages, '', $cat_name, $page);
             }
             else{
-                visualize_all_articles($email);
+                $categories = user::getCategories($email);
+                visualize_all_articles($categories, $from, ARTICLES_PER_PAGE);
+                $pages=ceil(ARTICLES_PER_CATEGORY*count($categories->get_array())/ARTICLES_PER_PAGE);
+                visualize_page_navigation_bar($pages, '', '', $page);
             }
         }
     }
