@@ -57,8 +57,9 @@ h2 {
     border: 1pt solid lightgrey;
     padding: 5pt;
     min-height: 200pt;
-    /*max-height: 200pt;*/
+    max-height: 200pt;
     border-radius: 2pt;
+    overflow-y: auto;
 }
 
 .subscriptionContents {

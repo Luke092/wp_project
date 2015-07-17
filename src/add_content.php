@@ -3,6 +3,7 @@ use RSSAggregator\model\session;
 use RSSAggregator\model\categories;
 use RSSAggregator\model\category;
 use RSSAggregator\model\feed;
+use RSSAggregator\model\user;
 
 require_once("./config.php");
 require_once("./utils.php");
@@ -71,7 +72,7 @@ function __autoload($class) {
             $feed_id = $_POST["feedId"];
             session::start();
             $email = session::get_info("email");
-            $user_categories = categories::getCategories(categories::$USER_CAT, $email);
+            $user_categories = user::getCategories($email);
             $added_category = $user_categories->add_Category($cat_name);
             $feed = new feed($feed_id);
             $added_category->add_Feed_obj($feed);

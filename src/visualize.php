@@ -49,7 +49,7 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
     $feed_desc = div(get_feed_description($rss), ["class", "feed-description"]);
     $feed_add = "";
     if($default_categories !== false){
-        $user_categories = user::getCategories($email)->getCategories(categories::$USER_CAT, $email);
+        $user_categories = user::getCategories($email);
         $feed_add .= div(get_add_feed_icon($user_categories, $feed), ["class", "add-feed-box"]);    
     }
     $feed_header = div($feed_icon.$feed_name.$feed_desc, ["class", "feed-header"]);
@@ -74,7 +74,7 @@ function get_add_feed_icon($user_categories, $feed){
 }
 
 function show_category_choice($feed, $email){
-    $user_categories = user::getCategories($email)->getCategories(categories::$USER_CAT, $email)->get_array();
+    $user_categories = user::getCategories($email)->get_array();
     $feed_def_cat_index = $feed->getDefaultCat();
     $feed_box = visualize_single_feed_box($feed, false, "feed-box-cat-choice");
     $choices = '';
@@ -123,15 +123,14 @@ function print_last_radio_button($text, $checked, $placeholder = ""){
             return radio_button(input_text(["value", $text, "class", "other-choice", "placeholder", $placeholder]), ["value", $text, "name", "category"]);
 }
 
-function visualize_article($article, $feed_name = null){
+function visualize_article($article, $feed_name = '', $cat_name = ''){
     $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
     $article_title = a(h(get_article_title($article), 5, ["class", "article-title-fs"]), ["href", $article->get_link(), "target", "_blank"]);
     $article_summary = div(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
     $article_text = div($article_title.$article_summary, ["class", "article-text"]);
-    if($feed_name != null)
-        $article_date = div($feed_name.' | '.date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
-    else
-        $article_date = div(date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
+    $cat_name_intro = ($cat_name == '' ? '' : $cat_name.' | ');
+    $feed_name_intro = ($feed_name == '' ? '' : $feed_name.' | ');
+    $article_date = div($cat_name_intro.$feed_name_intro.date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
     $article_description = div($article_text.$article_date, ["class", "article-description-fs"]);
     $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "article-readbox-fs"]);
     $article_box = div($article_image.$article_description.$article_read_box, ["class", "article-box-fs"]);
@@ -197,18 +196,37 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
 }
 
 function visualize_articles_by_category($category, $from, $n){
-    $cat_name = h($category->getName(), 1, ["class", "category-header"]);
     $articles = get_articles_from_category($category);
     $varticles = get_articles_in_range($articles, $from, $n);
     $timeline = "";
+    $i = $from;
     foreach($varticles as $article){
         $feed = $category->getFeedByURL($article->get_feed()->subscribe_url());
         $timeline .= visualize_article($article, $feed->getName());
+        $timeline .= (($i < $from + $n - 1) && ($i < get_articles_quantity($feed)-1) ? '<hr>' : '');
+        $i++;
     }
     $timeline = div($timeline, ["class", "timeline"]);
-    echo $cat_name.$timeline;
+    return $timeline;
 }
 
-function visualize_all_articles($email){
-    
+function visualize_all_articles($categories, $from, $n){
+    $home_header = h("Le ultime notizie", 1, ["class", "home-header"]);
+    $timeline = "";
+    $articles = get_all_articles_for_home($categories->get_array());
+    $varticles = get_articles_in_range($articles, $from, $n);
+//    for($i = $from; $i < $from + $n; $i++){
+//        $category = $categories[$i];
+//        //$cat_name_header = h($category->getName(), 2, ["class", "category-header"]);
+//        $timeline .= visualize_articles_by_category($category, $from, $n);
+//    }
+    foreach($varticles as $article){
+        $feed_url = $article->get_feed()->subscribe_url();
+        $cat_and_feed = $categories->getCatByFeedURL($feed_url);
+        $category = $cat_and_feed[0];
+        $feed = $cat_and_feed[1];
+        $timeline .= visualize_article($article, $feed->getName(), $category->getName());
+    }
+    $timeline = div($timeline, ["class", "timeline"]);
+    echo $home_header.$timeline;
 }
