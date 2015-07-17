@@ -94,7 +94,7 @@ function newCatDrop(event, ui)
 {
     var newCatName = prompt("Inserisci il nome della nuova categoria");
     if (newCatName !== null) {
-        newCatName = $.trim(prompt("Inserisci il nome della nuova categoria"));
+        newCatName = $.trim(newCatName);
         if (newCatName !== "" && !catNameAlreadyPresent(newCatName))
         {
             var sourceCat = $(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text();
