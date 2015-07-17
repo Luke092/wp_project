@@ -45,7 +45,7 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
     $rss->set_feed_url($feed->getURL());
     $rss->init();
     $feed_icon = div('',["style", "background-image:url(".$feed->getIconURL().");", "class", "feed-icon"]);
-    $feed_name = div($feed->getName(), ["class", "feed-name", "title", $feed->getName()]);
+    $feed_name = div(a($feed->getName(), ["target", "_blank", "href", $rss->get_base()]), ["class", "feed-name", "title", $feed->getName()]);
     $feed_desc = div(get_feed_description($rss), ["class", "feed-description"]);
     $feed_add = "";
     if($default_categories !== false){
@@ -57,7 +57,7 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
     $article_image = div('',["style", "background-image:url(".get_article_image_url($article_desc).");", "class", "article-image"]);
     $article_title = div(div(get_first_article_title($rss), ["class", "article-title"]), ["class", "vignette"]);
     $feed_article = div($article_image.$article_title, ["class", "article-box"]);
-    $feed_footer = div($feed_article, ["class", "feed-footer"]);
+    $feed_footer = a(div($feed_article, ["class", "feed-footer"]), ["target", "_blank", "href", get_first_article_link($rss)]);
     return div($feed_header.$feed_add.$feed_footer, ["id", $feed->getId(), "class", $class]);
 }
 

@@ -214,6 +214,7 @@ img.disabled-add-feed{
     position: relative;
     bottom: 0px;
     font-size: 12px;
+    color: initial;
 }
 
 .article-box{

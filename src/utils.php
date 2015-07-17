@@ -198,7 +198,7 @@ function get_article_image_url($article_content){
         if($image_tags->item(0) != null){
             $src = $image_tags->item(0)->getAttribute("src");
             if(preg_match('/rc\.img$/', $src))
-                    $src = DEF_ARTICLE_IMAGE_PATH;
+                $src = DEF_ARTICLE_IMAGE_PATH;
         }
         else
             $src = DEF_ARTICLE_IMAGE_PATH;
@@ -216,6 +216,10 @@ function get_full_article_description($article_content){
         $body .= " ".$text_node->textContent;
     }
     return $body;
+}
+
+function get_first_article_link($rss){
+    return $rss->get_item(0)->get_link();
 }
 
 function get_partial_article_description($article_content){
