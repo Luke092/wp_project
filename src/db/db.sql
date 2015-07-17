@@ -88,8 +88,8 @@ INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Ricette di Misya"
 
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Soldiblog", "http://feeds.blogo.it/soldiblog/it", "5", "http://www.google.com/s2/favicons?domain=www.soldiblog.it");
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Finanzablog", "http://feeds.blogo.it/finanzablog/it", "5", "http://www.google.com/s2/favicons?domain=www.finanzablog.it");
-INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Risorse, economia e ambiente", "https://aspoitalia.wordpress.com/feed/", "5", "http://www.google.com/s2/favicons?domain=aspoitalia.wordpress.com");
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("RSS di Economia - ANSA.it", "http://www.ansa.it/sito/notizie/economia/economia_rss.xml", "5", "http://www.google.com/s2/favicons?domain=www.ansa.it");
+INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Il Sole 24 ore - Macroeconomia", "http://www.ilsole24ore.com/rss/mondo/macroeconomia.xml", "5", "http://www.google.com/s2/favicons?domain=http://www.ilsole24ore.com");
 
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Gossipblog", "http://feeds.blogo.it/gossipblog/it?format=xml", "6", "http://www.google.com/s2/favicons?domain=www.gossipblog.it");
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Solospettacolo", "http://www.solospettacolo.it/feed", "6", "http://www.google.com/s2/favicons?domain=www.solospettacolo.it");
@@ -97,7 +97,7 @@ INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Vanityfair", "htt
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Gossip", "http://feeds.feedburner.com/gossipnews/news?format=xml", "6", "http://www.google.com/s2/favicons?domain=www.gossip.it");
 
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Frizzifrizzi", "http://feeds.feedburner.com/frizzifrizzi", "7", "http://www.google.com/s2/favicons?domain=www.frizzifrizzi.it");
-INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Fashionblog", "view-source:http://feeds.blogo.it/fashionblog/it", "7", "http://www.google.com/s2/favicons?domain=www.fashionblog.it");
+INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Fashionblog", "http://feeds.blogo.it/fashionblog/it", "7", "http://www.google.com/s2/favicons?domain=www.fashionblog.it");
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("Style.it", "http://www.style.it/feed.aspx", "7", "http://www.google.com/s2/favicons?domain=www.style.it");
 INSERT INTO Feeds (f_name,url,default_cat, image_url) VALUES ("ClioMakeUp Blog", "http://blog.cliomakeup.com/feed/", "7", "http://www.google.com/s2/favicons?domain=blog.cliomakeup.com");
 

@@ -16,9 +16,9 @@
 .access-popup {
     display: none;
     /* background: #333; */
-    background: #FB8248;
+    background: #FFA980;
     padding: 10px;
-    border: 2px solid #ddd;
+    border: 2px solid #BD3A3A;
     float: left;
     font: 13px Arial, Helvetica, sans-serif;
     /*font-size: 1.2em;*/
@@ -68,7 +68,7 @@ form.signin p, form.signin span {
 }
 
 form.signin .textbox input {
-    background: #EF6821;
+    background: #E58756;
     border-bottom: 1px solid #333;
     border-left: 1px solid #000;
     border-right: 1px solid #333;
@@ -116,7 +116,7 @@ form.signin input::-webkit-input-placeholder {
 }
 
 .error{
-    color: rgba(255, 0, 0, 1);
+    color: rgba(245, 8, 8, 1);
     text-align: left;
 }
 

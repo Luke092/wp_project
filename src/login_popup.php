@@ -13,7 +13,7 @@
                 <span>Password</span>
                 <input id="login-password" name="password" value="" type="password" placeholder="Password">
             </label>
-            <button class="submit button" type="button">Accedi</button>     
+            <button class="submit button" type="submit">Accedi</button>     
         </fieldset>
     </form>
 </div>

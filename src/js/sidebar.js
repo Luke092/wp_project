@@ -28,17 +28,23 @@ $(document).ready(function(){
         pageRequest(xhr, url, "POST", param);
         $("#page").scrollTop(0);
    });
-   $(".feed").mouseover(function(){
-      $(this).css("backgroundColor", "#ddd"); 
+//   $(".feed").mouseover(function(){
+//      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
+//   });
+//   $(".feed").mouseout(function(){
+//      $(this).css("backgroundColor", "inherit"); 
+//   });
+//   $(".cName").mouseover(function(){
+//      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
+//   });
+//   $(".cName").mouseout(function(){
+//      $(this).css("backgroundColor", "inherit"); 
+//   });
+   $(".evidence").mouseover(function(){
+      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
    });
-   $(".feed").mouseout(function(){
-      $(this).css("backgroundColor", "#fff"); 
-   });
-   $(".cName").mouseover(function(){
-      $(this).css("backgroundColor", "#ddd"); 
-   });
-   $(".cName").mouseout(function(){
-      $(this).css("backgroundColor", "#fff"); 
+   $(".evidence").mouseout(function(){
+      $(this).css("backgroundColor", "inherit"); 
    });
    
    $("#tv-commands").click(function(){
