@@ -32,6 +32,8 @@ function addEditRemove(parentNode)
 function initDraggable()
 {
     $("div[class='feedName']").draggable({
+        scroll: true,
+        scrollSpeed: 20,
         containment: 'document',
         helper: 'clone'
     });
@@ -78,8 +80,8 @@ function feedDrop(event, ui)
         movedFeedId = movedFeedId.substring(1, movedFeedId.length - 1);
         DBmoveFeed(oldCatName, newCatName, movedFeedId);
         feedMover(oldCatName, newCatName, movedDiv);
-        sidebar_reload();
     }
+    sidebar_reload();
 }
 
 function feedAlreadyPresent(movedFeedId, destinationFeedIds)
@@ -126,6 +128,7 @@ function newCatDrop(event, ui)
     {
         alert("Nome categoria non valido");
     }
+    
     sidebar_reload();
 }
 
