@@ -16,6 +16,8 @@ const MAX_LENGTH_TITLE = 75;
 const MAX_LENGTH_SUMMARY = 200;
 const ARTICLES_PER_PAGE = 5;
 
+const VISIBLE_PAGE_BA = 3;
+
 $MONTHS = array(
     "January" => "gennaio",
     "February" => "febbraio",

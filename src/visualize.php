@@ -161,9 +161,21 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
     $cat_name = ($cat_name == '')? '' : "#" . $cat_name;
     $p = "<p>";
     $p .= h("Pagine", 3);
-    $p .= span("<<", ["class", "paging-header", "id", (1).$feed_id.$cat_name]);
-    $p .= span("<", ["class", "paging-header", "id", ($current_page-1).$feed_id.$cat_name]);
-    for($i = 1; $i <= $pages; $i++){
+    if($current_page != 1){
+        $p .= span("<<", ["class", "paging-header", "id", (1).$feed_id.$cat_name]);
+        $prev = max(array($current_page-1,1));
+        $p .= span("<", ["class", "paging-header", "id", $prev.$feed_id.$cat_name]);
+    }
+    $loop_start = 1;
+    if($current_page - VISIBLE_PAGE_BA > 1){
+        $p .= "...";
+        $loop_start = $current_page - VISIBLE_PAGE_BA;
+    }
+    $loop_end = $pages;
+    if($current_page + VISIBLE_PAGE_BA < $pages){
+        $loop_end = $current_page + VISIBLE_PAGE_BA;
+    }
+    for($i = $loop_start; $i <= $loop_end; $i++){
         if($i == $current_page){
             $p .= span($i, ["class", "paging-header-selected", "id", $i.$feed_id.$cat_name]);
         }
@@ -171,8 +183,14 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
             $p .= span($i, ["class", "paging-header", "id", $i.$feed_id.$cat_name]);
         }
     }
-    $p .= span(">", ["class", "paging-header", "id", ($current_page+1).$feed_id.$cat_name]);
-    $p .= span(">>", ["class", "paging-header", "id", ($pages).$feed_id.$cat_name]);
+    if($loop_end < $pages){
+        $p .= "...";
+    }
+    if($current_page != $pages){
+        $next = min(array($current_page+1,$pages));
+        $p .= span(">", ["class", "paging-header", "id", $next.$feed_id.$cat_name]);
+        $p .= span(">>", ["class", "paging-header", "id", ($pages).$feed_id.$cat_name]);
+    }
     $p .= "</p>\n";
     $div = div($p,["class", "paging"]);
     echo $div;
