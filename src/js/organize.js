@@ -1,6 +1,6 @@
 function init()
 {
-    addEditRemove();
+    addEditRemove($("body"));
     initDraggable();
     initDroppable();
 }
@@ -22,11 +22,11 @@ function runAjax(JSONstring, handler)
     sendData(xhr, "parser.php", "GET", ["json", JSONstring], callback);
 }
 
-function addEditRemove()
+function addEditRemove(parentNode)
 {
-    $("img[class='editCat']").click(editCategory);
-    $("img[class='removeCat']").click(removeCategory);
-    $("img[class='removeFeed']").click(removeFeed);
+    $(parentNode).find("img[class='editCat']").click(editCategory);
+    $(parentNode).find("img[class='removeCat']").click(removeCategory);
+    $(parentNode).find("img[class='removeFeed']").click(removeFeed);
 }
 
 function initDraggable()
@@ -49,6 +49,21 @@ function initDroppable()
         drop: newCatDrop
     });
 }
+
+//function handleFeedOverflow()
+//{
+//    //per ogni subcontholder nascondi i feed che non ci stanno
+//    //Se ci sono feed che non ci stanno metti un div in fondo a subcontholder gestito da un click che li mostra tutti
+//    //allungando subcontholder di quanto è necessario e torna indietro se cliccato ancora.
+//    var outerDivs = $("div[class^='subscriptionContentsHolder']");
+//    for(var i=0; i<outerDivs.length; i++)
+//    {
+//        var feeds = $(outerDivs).children("div[class^='subscriptionContents']");
+//        var feedHeight = $(feeds[0]).outerHeight(true);
+//        var feedsHeight = feedHeight*feeds.length;
+//                
+//    }
+//}
 
 function feedDrop(event, ui)
 {
@@ -126,6 +141,7 @@ function buildItemContentsHolder(newCatName)
         drop: feedDrop
     });
     itemContentsHolder.append(subscriptionContentsHolder);
+    addEditRemove(itemContentsHolder);
     return itemContentsHolder;
 }
 
@@ -133,8 +149,9 @@ function editCategory(event)
 {
     var newName = prompt("Inserisci il nuovo nome da dare alla categoria");
     if (newName !== null) {
+        var oldName = $(event.target).parent().prev().text();
         if (changeCatName(newName, $(event.target).parent().prev()))
-            DBeditCategory($(event.target).parent().prev().text(), newName);
+            DBeditCategory(oldName, newName);
     }
     sidebar_reload();
 }
@@ -147,8 +164,8 @@ function removeCategory(event)
     {
         DBcategoryRemover(catName);
         hideCategory(catName);
-        sidebar_reload();
     }
+    sidebar_reload();
 }
 
 function removeFeed(event)
@@ -167,7 +184,6 @@ function removeFeed(event)
 
 function hideCategory(catName)
 {
-//    $("#category_" + catName + "_contents").hide();
     $("#category_" + catName + "_contents").remove();
 }
 
@@ -183,7 +199,7 @@ function changeCatName(newName, catDiv)
 
 function catNameAlreadyPresent(catName)
 {
-    var categories = $("div[class='categoryName']");
+    var categories = $("div[class='categoryName']:visible");
     for (var i = 0; i < categories.length; i++)
     {
         if ($.trim($(categories[i]).text()) === $.trim(catName))
@@ -196,15 +212,6 @@ function catNameAlreadyPresent(catName)
 
 function hideFeed(feedId, catName)
 {
-//    var feedIds = $("div[class='feedId']:contains(" + feedId + ")");
-//    for (var i = 0; i < feedIds.length; i++) {
-//        if ($(feedIds[i]).parents("div[class^='subscriptionContentsHolder']").children(":visible").length === 1) {
-//            hideCategory($(feedIds[i]).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text());
-//        }
-//        else {
-//            $(feedIds[i]).parent().hide();
-//        }
-//    }
     var idDiv = $("#category_" + catName + "_contents div[class='feedId']:contains(" + feedId + ")");
     if (idDiv.parents("div[class^='subscriptionContentsHolder']").children().length === 1) {
         hideCategory(idDiv.parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text());
