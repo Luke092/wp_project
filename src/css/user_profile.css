@@ -1,0 +1,60 @@
+.profile{
+    overflow: hidden;
+    width: 100%;
+}
+
+.info{
+    width: 100%;
+    overflow: hidden;
+}
+
+.profile-image{
+    float: left;
+    width: 40%;
+}
+
+.profile-modify{
+    float: left;
+    width: 40%;
+    display: none;
+    margin-top: 20px;
+}
+
+.errors{
+    display: none;
+}
+
+.profile-form-row{
+    clear: both;
+    overflow: hidden;
+    height: 30px;
+}
+
+.profile-form-label{
+    float: left;
+    width: 40%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.profile-form-input{
+    float: left;
+    width: calc(60% - 30px);
+    padding-right: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.profile-form-submit{
+    margin-left: 170px;
+}
+
+.profile-form-input input{
+    width: 170px;
+}
+
+.stats{
+    margin-top: 50px;
+    clear: both;
+    width: 100%;
+}

@@ -13,7 +13,9 @@ $(document).ready(function(){
        window.location.href = "./logout.php";
    });
    $("#profile").click(function(){
-       //TODO: add profile click action
+       var xhr = myGetXmlHttpRequest();
+       var url = "./user_profile.php";
+       pageRequest(xhr, url, "GET");
    });
    $("#organize").click(function(){
        var xhr = myGetXmlHttpRequest();
