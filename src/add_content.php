@@ -26,7 +26,7 @@ function __autoload($class) {
 <div id="search-bar">
     <form>
         <span>
-            <input id="search-input" type="text" class="search" name="search-token" placeholder="Cerca feed per categoria, nome o URL">
+            <input id="search-input" type="text" class="search" name="search-token" placeholder="Cerca feed per nome o URL">
             <input id="search-input-id" type="hidden" value="-1">
         </span>
     </form>

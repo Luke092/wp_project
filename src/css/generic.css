@@ -36,3 +36,34 @@ html, body{
     width: 100px;
     height: 100px;
 }
+
+.logout-ok{
+    color: green;
+}
+
+.logout-error{
+    color: red;
+}
+
+.logout-text{
+    font-size: x-large;
+    position: absolute;
+    height: 150px;
+    width: 640px;
+    left: calc(50% - 320px);
+    top: calc(50% - 75px);
+    text-align: center;
+}
+
+.logout-body{
+    background-image: url(../img/utils/index_background.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    alignment-adjust: auto;
+    overflow-x: hidden;
+}
+
+.logout-redirect{
+    font-size: 18px;
+}

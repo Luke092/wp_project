@@ -16,7 +16,7 @@ $(document).ready(function(){
           },
         })
         .autocomplete( "instance" )._renderItem = function( ul, item ) {
-            return $("<li>").append("<a><img src=\"" + item.image_url + "\" style=\"width:32px;height:32px;\">" 
+            return $("<li>").append("<a><img src=\"" + item.image_url + "\" style=\"width:20px;height:20px;\">&nbsp;" 
                             + item.f_name + "<br><span style=\"font-size: xx-small;\">" + item.url 
                             + "</span></a>").appendTo(ul);
         };

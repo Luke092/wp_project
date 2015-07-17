@@ -27,9 +27,9 @@ function __autoload($class) {
         <img src="./img/utils/collapse.png" class="icon"/>
     </div>
     <div style="float: left;">
-        <span>Chiudi tutto</span>
+        <span class="evidence">Chiudi tutto</span>
     </div>
-</div>
+</div><br>
 
 <?php
     session::start();
@@ -41,13 +41,13 @@ function __autoload($class) {
             <div class="navigation_arrow">
                 <img class="navigation" src="img/utils/down_arrow.png" />
             </div>
-            <div  id="<?php echo $cat->getName() ?>" class="cName">
+            <div  id="<?php echo $cat->getName() ?>" class="cName evidence">
                 <span style="font-weight: bold;"><?php echo $cat->getName();?></span>
             </div>
             <?php
                 foreach ($cat->get_array() as $feed){
             ?>
-                <div id="<?php echo $feed->getId(); ?>" class="feed">
+                <div id="<?php echo $feed->getId(); ?>" class="feed evidence">
                     <div style="clear:both; width: 100%">
                         <div style="float:left; width: 20%">
                             <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo $feed->getIconURL(); ?>"/>

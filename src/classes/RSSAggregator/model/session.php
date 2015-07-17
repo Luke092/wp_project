@@ -20,5 +20,10 @@ class session{
 
     public static function user_is_logged(){
        return (isset($_SESSION["login"]) && $_SESSION["login"] == true);
-    }   
+    }
+    
+    public static function delete_cookie(){
+        if(isset($_COOKIE[session_name()]))
+            setcookie(session_name(), "", time() - 42000);
+    }
 }

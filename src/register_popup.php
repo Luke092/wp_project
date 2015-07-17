@@ -17,7 +17,7 @@
                 <span>Ripeti password</span>
                 <input id="re-password" name="password" value="" type="password" placeholder="Ripeti password">
             </label>
-            <button class="submit button" type="button">Registrati</button>
+            <button class="submit button" type="submit">Registrati</button>
         </fieldset>
     </form>
 </div>

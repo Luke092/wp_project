@@ -88,6 +88,10 @@ function a($text, $attribute_assign = array()){
     return '<a'.  add_attributes($attribute_assign).'>'.$text.'</a>';
 }
 
+function p($text, $attribute_assign = array()){
+    return '<p'.  add_attributes($attribute_assign).'>'.$text.'</p>';
+}
+
 function h($text, $size = 1, $attribute_assign = array()){
     $head = 'h' . $size;
     return '<'.$head.add_attributes($attribute_assign).'>'.$text.'</'.$head.'>';
@@ -159,7 +163,7 @@ function get_feed_icon_url($url){
 }
 
 function get_feed_description($rss){
-    $desc = trim(strip_tags($rss->get_description()));
+    $desc = trim(htmlspecialchars_decode(strip_tags($rss->get_description())));
     $res = null;
     if($desc == null || $desc == "")
         $res = "Descrizione non disponibile";
@@ -171,7 +175,7 @@ function get_feed_description($rss){
 }
 
 function get_article_title($article){
-    $title = $article != null ? strip_tags($article->get_title()) : null;
+    $title = $article != null ? htmlspecialchars_decode(strip_tags($article->get_title())) : null;
     $res = null;
     if($title == null || trim($title) == "")
         $res = "Titolo articolo non disponibile";

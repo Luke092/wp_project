@@ -215,17 +215,15 @@ function visualize_all_articles($categories, $from, $n){
     $timeline = "";
     $articles = get_all_articles_for_home($categories->get_array());
     $varticles = get_articles_in_range($articles, $from, $n);
-//    for($i = $from; $i < $from + $n; $i++){
-//        $category = $categories[$i];
-//        //$cat_name_header = h($category->getName(), 2, ["class", "category-header"]);
-//        $timeline .= visualize_articles_by_category($category, $from, $n);
-//    }
+    $i = $from;
     foreach($varticles as $article){
         $feed_url = $article->get_feed()->subscribe_url();
         $cat_and_feed = $categories->getCatByFeedURL($feed_url);
         $category = $cat_and_feed[0];
         $feed = $cat_and_feed[1];
         $timeline .= visualize_article($article, $feed->getName(), $category->getName());
+        $timeline .= (($i < $from + $n - 1) && ($i < get_articles_quantity($feed)-1) ? '<hr>' : '');
+        $i++;
     }
     $timeline = div($timeline, ["class", "timeline"]);
     echo $home_header.$timeline;

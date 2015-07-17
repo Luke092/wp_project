@@ -1,9 +1,9 @@
 var xhr = null;
 $(document).ready(function(){
-    $("#login-box :button").click(sendLoginData);
+    $("#login-box form").submit(sendLoginData);
 });
 
-function sendLoginData(){
+function sendLoginData(event){
     xhr = myGetXmlHttpRequest();
     var url = "./login.php";
     var method = "POST";
@@ -13,6 +13,8 @@ function sendLoginData(){
             "email", email.trim(),
             "password", password.trim());
     sendData(xhr, url, method, param, loginValidate);
+    event.preventDefault();
+    return false;
 }
 
 function loginValidate(){

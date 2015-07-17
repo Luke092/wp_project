@@ -1,9 +1,9 @@
 var xhr = null;
 $(document).ready(function(){
-    $("#register-box :button").click(sendRegisterData);
+    $("#register-box form").submit(sendRegisterData);
 });
 
-function sendRegisterData(){
+function sendRegisterData(event){
     xhr = myGetXmlHttpRequest();
     var url = "./register.php";
     var method = "POST";
@@ -15,6 +15,8 @@ function sendRegisterData(){
             "password", password.trim(),
             "repassword", repassword.trim());
     sendData(xhr, url, method, param, registerValidate);
+    event.preventDefault();
+    return false;
 }
 
 function registerValidate(){

@@ -21,9 +21,10 @@ $(document).ready(function(){
        pageRequest(xhr, url, "GET");
    });
    $(".menu-entry").mouseover(function(){
-       $(this).css("backgroundColor", "#bbb");
+//       $(this).css("backgroundColor", "#bbb");
+        $(this).css("backgroundColor", "#fe8181");
    });
    $(".menu-entry").mouseout(function(){
-       $(this).css("backgroundColor", "#ddd");
+       $(this).css("backgroundColor", "inherit");
    });
 });
