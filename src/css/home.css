@@ -26,6 +26,8 @@
 
     overflow: auto;
     height: 100%;
+    
+    position: relative;
 }
 
 #search-bar{

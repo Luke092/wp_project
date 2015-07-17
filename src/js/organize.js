@@ -52,21 +52,6 @@ function initDroppable()
     });
 }
 
-//function handleFeedOverflow()
-//{
-//    //per ogni subcontholder nascondi i feed che non ci stanno
-//    //Se ci sono feed che non ci stanno metti un div in fondo a subcontholder gestito da un click che li mostra tutti
-//    //allungando subcontholder di quanto è necessario e torna indietro se cliccato ancora.
-//    var outerDivs = $("div[class^='subscriptionContentsHolder']");
-//    for(var i=0; i<outerDivs.length; i++)
-//    {
-//        var feeds = $(outerDivs).children("div[class^='subscriptionContents']");
-//        var feedHeight = $(feeds[0]).outerHeight(true);
-//        var feedsHeight = feedHeight*feeds.length;
-//                
-//    }
-//}
-
 function feedDrop(event, ui)
 {
     var destinationFeedIds = $(event.target).find("div[class='feedId']");
@@ -107,28 +92,30 @@ function feedMover(oldCatName, newCatName, movedDiv)
 
 function newCatDrop(event, ui)
 {
-    var newCatName = $.trim(prompt("Inserisci il nome della nuova categoria"));
-
-    if (newCatName !== "" && !catNameAlreadyPresent(newCatName))
-    {
-        var sourceCat = $(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text();
-        var feedId = $(ui.draggable).parent().children("div[class='feedId']").text();
-        var movedFeed = $(ui.draggable).parent();
-
-        var itemContentsHolder = buildItemContentsHolder(newCatName);
-        $(event.target).parents("div[class='itemContentsHolder']").before(itemContentsHolder);
-
-        DBaddCategory(newCatName);
-
-        feedMover(sourceCat, newCatName, movedFeed);
-
-        DBmoveFeed(sourceCat, newCatName, feedId.substring(1, feedId.length - 1));
+    var newCatName = prompt("Inserisci il nome della nuova categoria");
+    if (newCatName !== null) {
+        newCatName = $.trim(prompt("Inserisci il nome della nuova categoria"));
+        if (newCatName !== "" && !catNameAlreadyPresent(newCatName))
+        {
+            var sourceCat = $(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text();
+            var feedId = $(ui.draggable).parent().children("div[class='feedId']").text();
+            var movedFeed = $(ui.draggable).parent();
+            var itemContentsHolder = buildItemContentsHolder(newCatName);
+            $(event.target).parents("div[class='itemContentsHolder']").before(itemContentsHolder);
+            DBaddCategory(newCatName);
+            feedMover(sourceCat, newCatName, movedFeed);
+            DBmoveFeed(sourceCat, newCatName, feedId.substring(1, feedId.length - 1));
+        }
+        else
+        {
+            alert("Nome categoria non valido");
+        }
     }
     else
     {
-        alert("Nome categoria non valido");
+        alert("La categoria non e' stata aggiunta");
     }
-    
+
     sidebar_reload();
 }
 
