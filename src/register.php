@@ -24,27 +24,27 @@
         
         // check email field
         if(is_empty_field($email))
-            $errors[] = $ERROR_MESSAGES[0];
+            $errors[] = $USER_MESSAGES[1];
         else if(!is_valid_email($email))
-            $errors[] = $ERROR_MESSAGES[1];
+            $errors[] = $USER_MESSAGES[2];
         
         // check password fields
         if(is_empty_field($password))
-            $errors[] = $ERROR_MESSAGES[3];
+            $errors[] = $USER_MESSAGES[4];
         else if(strlen($password) < MIN_LENGTH_PASSWORD)
-            $errors[] = $ERROR_MESSAGES[4];
+            $errors[] = $USER_MESSAGES[5];
         else if($password != $repassword)
-            $errors[] = $ERROR_MESSAGES[5];
+            $errors[] = $USER_MESSAGES[6];
         
         // if no errors occured, then register user
         if(empty($errors)){
             $password = hash(HASHING_ALGORITHM, $password);
             switch(user::insert($email, $password)){
                 case user::$ALREADY_PRESENT:
-                    $errors[] = $ERROR_MESSAGES[2];
+                    $errors[] = $USER_MESSAGES[3];
                     break;
                 case user::$ERROR_INSERT:
-                    $errors[] = $ERROR_MESSAGES[8];
+                    $errors[] = $USER_MESSAGES[8];
                     break;
                 case user::$CORRECT_INSERT:
                     session::set_info("login", true);

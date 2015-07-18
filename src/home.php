@@ -116,7 +116,7 @@ if (!session::user_is_logged())
             </div>
             <div class="push"></div>
         <?php
-        require("./footer.php");
+            require("./footer.php");
         ?>
         </div>
     </body>

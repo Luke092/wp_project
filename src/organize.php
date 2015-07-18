@@ -53,7 +53,7 @@
         <?php
         session::start();
         $email = session::get_info("email");
-        $categories = categories::getCategories(categories::$USER_CAT, $email)->get_array();
+        $categories = user::getCategories($email)->get_array();
         foreach ($categories as $category) {
             $feeds = $category->get_array();
             if (count($feeds) > 0) {
@@ -79,7 +79,7 @@
         }
         $html = "<div class=\"itemContentsHolder\">";
         $html .= "<h2 class=\"categoryHeader\">";
-        $html .= "nuova categoria";
+        $html .= "Nuova categoria";
         $html .= "</h2>";
         $html .= "<div class=\"newCategory\">";
         $html .= "Trascina un feed qui per creare una nuova categoria";

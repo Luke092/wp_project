@@ -22,12 +22,12 @@ function __autoload($class) {
 
 ?>
 
-<div style="overflow: hidden;" id="tv-commands">
+<div style="overflow: hidden;" id="tv-commands" class="evidence">
     <div style="float: left;width: 20%;">
         <img src="./img/utils/collapse.png" class="icon"/>
     </div>
     <div style="float: left;">
-        <span class="evidence">Chiudi tutto</span>
+        <span>Chiudi tutto</span>
     </div>
 </div><br>
 

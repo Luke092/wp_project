@@ -1,4 +1,5 @@
 <script type="text/javascript" src="./js/paging.js"/>
+
 <?php
     use RSSAggregator\model\session;
     use RSSAggregator\model\user;
@@ -69,3 +70,4 @@
         sidebar_reload();
     });
 </script>
+<script type="text/javascript" src="./js/read_article.js"/>

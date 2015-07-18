@@ -32,9 +32,9 @@ html, body{
 }
 
 #waiting{
-    position: absolute;
-    width: 100px;
-    height: 100px;
+    position: fixed;
+    width: 130px;
+    height: 130px;
 }
 
 .logout-ok{

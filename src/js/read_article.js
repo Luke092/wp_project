@@ -20,4 +20,28 @@ $(document).ready(function(){
             $(this).attr("title", MSG_NO_READ);
         }
     });
+    $(".article-box-fs").mouseover(function(){
+        $(this).css("backgroundColor", "rgb(255, 238, 181)");
+    });
+    $(".article-box-fs").mouseout(function(){
+        $(this).css("backgroundColor", "");
+    });
+    
+    $(".link-evidence").mouseover(function(){
+        $(this).css("fontWeight", "bold");
+        $(this).css("color", "red");
+    });
+    $(".link-evidence").mouseout(function(){
+        $(this).css("fontWeight", "");
+        $(this).css("color", "");
+    });
+    
+    $(".cat-name-fs").click(function(){
+        var xhr = myGetXmlHttpRequest();
+        var url = "./user_home.php";
+        var method = "POST";
+        var param = ["catName", $(this).text()];
+        pageRequest(xhr, url, method, param);
+        waitResponse(); 
+    });
 });

@@ -104,7 +104,7 @@ table{
 
 .feed-header{
     margin-bottom: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .feed-icon{
@@ -173,7 +173,7 @@ img.disabled-add-feed{
     height: 340px;
     padding-bottom: 0px;
     border: 1px solid #EBA2A2;
-    background-color: #FFF;
+    background-color: rgba(255, 185, 185, 0.56);
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box;
@@ -204,7 +204,7 @@ img.disabled-add-feed{
     position: relative;
     height: 32px;
     overflow: hidden;
-    background-color: #FFF;
+    background-color: #FED2C2;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -243,7 +243,7 @@ img.disabled-add-feed{
     height: 300px;
     padding-bottom: 0px;
     border: 1px solid #EBA2A2;
-    background-color: #FFF;
+    background-color: #FED2C2;
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box; 
@@ -311,6 +311,7 @@ button{
 
 .navigation_arrow{
      float:left;
+     padding: 5px;
 }
 
 .icon{
@@ -319,6 +320,7 @@ button{
 }
 
 .cName{
+    padding: 5px;
     float:left;
     /* margin-top: 3px; */
     margin-left: 3px;
@@ -379,6 +381,10 @@ h1{
     margin-left: 4px;
 }
 
+.menu-entry:hover, .selected-menu-entry{
+    background-color: #fe8181;
+}
+
 .top-menu #logout{
     float: right;
     margin-right: 10px;
@@ -428,6 +434,7 @@ h1{
     width: 64px;     
     margin-top: 25%;
     margin-left: 25%;
+    cursor: pointer;
 }
 
 .article-image-fs{
@@ -439,6 +446,10 @@ h1{
     font-size: 14px;
     height: 43px;
     margin-top: 7px;
+}
+
+.cat-name-fs{
+    cursor: pointer;
 }
 
 .article-date-fs{
@@ -455,6 +466,8 @@ h1{
 
 #tv-commands{
     cursor: pointer;
+    padding: 5px;
+    background-color: #FFC7A4;
 }
 
 h1.category-header, h1.home-header{

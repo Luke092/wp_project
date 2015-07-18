@@ -6,8 +6,10 @@ require_once("./config.php");
 //////////////////////////////////////////////////////////////
 
 function show_form_errors($errors){
-    if(!empty($errors))
-        echo "Errori riscontrati:<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+    if(!empty($errors)){
+        global $USER_MESSAGES;
+        echo $USER_MESSAGES[0].":<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+    }
 }
 
 function is_valid_email($email){
@@ -47,42 +49,17 @@ function span($content, $attribute_assign = array()){
     return '<span'.add_attributes($attribute_assign).'>'.$content.'</span>';
 }
 
-//function radio_button($text, $value, $name, $checked, $class = null){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    $check = ($checked ? ' checked="checked"' : '');
-//    return '<input name="'.$name.'" type="radio" value="'.$value.'"'.$class_assign.$check.'>&nbsp;&nbsp;'.$text.'<br>';
-//}
-
 function radio_button($text, $attribute_assign = array()){
     return '<input type="radio"'.add_attributes($attribute_assign).'>'.nbsp(2).$text.'<br>';
 }
-
-//function input_text($default_text, $attribute_assign = array()){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    return '<input'.$class_assign.' type="text" value="'.$default_text.'">';
-//}
-//
-//function input_text_with_placeholder($placeholder, $class = null){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    return '<input'.$class_assign.' type="text" value="" placeholder="'.$placeholder.'">';
-//}
 
 function input_text($attribute_assign = array()){
     return'<input type="text"'.add_attributes($attribute_assign).'>';
 }
 
-//function button($text, $value){
-//    return '<button value="'.$value.'">'.$text.'</button>';
-//}
-
 function button($text, $attribute_assign = array()){
     return '<button'.  add_attributes($attribute_assign).'>'.$text.'</button>';
 }
-
-//function hlink($ref, $label, $target = null){
-//    $target_assign = (isset($target) ? ' target="'.$target.'"' : '');
-//    return "<a" . $target_assign ." href='". $ref . "'>".$label."</a> ";
-//}
 
 function a($text, $attribute_assign = array()){
     return '<a'.  add_attributes($attribute_assign).'>'.$text.'</a>';
@@ -144,9 +121,8 @@ function get_favicon($url){
 }
 
 function get_domain($url){
-//        $sUrl = str_ireplace('www.', '', $sUrl);
-        $host = parse_url($url, PHP_URL_HOST);
-        return $host;
+    $host = parse_url($url, PHP_URL_HOST);
+    return $host;
 }
 
 
@@ -197,7 +173,8 @@ function get_article_image_url($article_content){
         $image_tags = $dom->getElementsByTagName('img');
         if($image_tags->item(0) != null){
             $src = $image_tags->item(0)->getAttribute("src");
-            if(preg_match('/rc\.img$/', $src))
+            list($width, $height) = getimagesize($src);
+            if($width < MIN_IMAGE_WIDTH || $height < MIN_IMAGE_HEIGHT)
                 $src = DEF_ARTICLE_IMAGE_PATH;
         }
         else

@@ -3,11 +3,13 @@ $(document).ready(function(){
        var xhr = myGetXmlHttpRequest();
        var url = "./add_content.php";
        pageRequest(xhr, url, "GET");
+        waitResponse();
    });
    $("#home").click(function(){
        var xhr = myGetXmlHttpRequest();
        var url = "./user_home.php";
        pageRequest(xhr, url, "GET");
+       waitResponse();
    });
    $("#logout").click(function(){
        window.location.href = "./logout.php";
@@ -16,17 +18,16 @@ $(document).ready(function(){
        var xhr = myGetXmlHttpRequest();
        var url = "./user_profile.php";
        pageRequest(xhr, url, "GET");
+       waitResponse();
    });
    $("#organize").click(function(){
        var xhr = myGetXmlHttpRequest();
        var url = "./organize.php";
        pageRequest(xhr, url, "GET");
+       waitResponse();
    });
-   $(".menu-entry").mouseover(function(){
-//       $(this).css("backgroundColor", "#bbb");
-        $(this).css("backgroundColor", "#fe8181");
-   });
-   $(".menu-entry").mouseout(function(){
-       $(this).css("backgroundColor", "inherit");
-   });
+    $(".menu-entry").click(function(){
+        $(this).addClass("selected-menu-entry");
+        $(".menu-entry").not(this).removeClass("selected-menu-entry");
+    })
 });

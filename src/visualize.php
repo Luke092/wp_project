@@ -33,7 +33,7 @@ function visualize_default_feeds($default_categories, $cat_name, $email){
     foreach($feeds as $feed){
         $feed_box = visualize_single_feed_box($feed, $default_categories, "feed-box", $email);
         $body .= td($feed_box);
-        if(++$i % FEEDS_PER_ROW == 0)
+        if(++$i % DEF_FEEDS_PER_ROW == 0)
             $body .= "</tr><tr>";
     }
     $body .= "</tr>";
@@ -125,14 +125,15 @@ function print_last_radio_button($text, $checked, $placeholder = ""){
 
 function visualize_article($article, $feed_name = '', $cat_name = ''){
     $article_image = div(img(["src", get_article_image_url($article->get_description()), "class", "article-image-fs"]), ["class", "article-image-box-fs"]);
-    $article_title = a(h(get_article_title($article), 5, ["class", "article-title-fs"]), ["href", $article->get_link(), "target", "_blank"]);
+    $article_link = $article->get_link();
+    $article_title = a(h(get_article_title($article), 5, ["class", "article-title-fs"]), ["href", $article_link, "target", "_blank"]);
     $article_summary = div(get_partial_article_description($article->get_description()), ["class", "article-summary-fs"]);
     $article_text = div($article_title.$article_summary, ["class", "article-text"]);
-    $cat_name_intro = ($cat_name == '' ? '' : $cat_name.' | ');
-    $feed_name_intro = ($feed_name == '' ? '' : $feed_name.' | ');
+    $cat_name_intro = ($cat_name == '' ? '' : span($cat_name, ["class", "cat-name-fs link-evidence"]).' | ');
+    $feed_name_intro = ($feed_name == '' ? '' : a($feed_name, ["target", "_blank", "href", $article->get_feed()->get_base(), "class", "link-evidence"]).' | ');
     $article_date = div($cat_name_intro.$feed_name_intro.date_transform($article->get_date(DATE_FORMAT)), ["class", "article-date-fs"]);
     $article_description = div($article_text.$article_date, ["class", "article-description-fs"]);
-    $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img"]), ["class", "article-readbox-fs"]);
+    $article_read_box = div(img(["src", "./img/utils/closed_envelope.png", "class", "envelope-img", "id", $article_link]), ["class", "article-readbox-fs"]);
     $article_box = div($article_image.$article_description.$article_read_box, ["class", "article-box-fs"]);
     return $article_box;
 }
@@ -166,13 +167,13 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
         $p .= span("<", ["class", "paging-header", "id", $prev.$feed_id.$cat_name]);
     }
     $loop_start = 1;
-    if($current_page - VISIBLE_PAGE_BA > 1){
+    if($current_page - VISIBLE_PAGE_NUM_BEF_AFT > 1){
         $p .= "...";
-        $loop_start = $current_page - VISIBLE_PAGE_BA;
+        $loop_start = $current_page - VISIBLE_PAGE_NUM_BEF_AFT;
     }
     $loop_end = $pages;
-    if($current_page + VISIBLE_PAGE_BA < $pages){
-        $loop_end = $current_page + VISIBLE_PAGE_BA;
+    if($current_page + VISIBLE_PAGE_NUM_BEF_AFT < $pages){
+        $loop_end = $current_page + VISIBLE_PAGE_NUM_BEF_AFT;
     }
     for($i = $loop_start; $i <= $loop_end; $i++){
         if($i == $current_page){

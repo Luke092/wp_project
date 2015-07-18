@@ -20,6 +20,7 @@ function runAjax(JSONstring, handler)
         };
     }
     sendData(xhr, "parser.php", "GET", ["json", JSONstring], callback);
+    waitResponse();
 }
 
 function addEditRemove(parentNode)

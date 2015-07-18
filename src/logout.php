@@ -13,6 +13,7 @@
 }
 
     require_once("./utils.php");
+    require_once("./config.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd">
@@ -31,12 +32,12 @@
             session::start();
             $text = "";
             if(session::user_is_logged())
-                $text = div(p("Logout effettuato con successo."), ["class", "logout-ok"]);
+                $text = div(p($USER_MESSAGES[11]), ["class", "logout-ok"]);
             else
-                $text = div(p("Logout non effettuato: non eri autenticato!"), ["class", "logout-error"]);
-            $text .= "Verrai reindirizzato a breve alla pagina iniziale...";
-            $index_link = a("qui", ["href", "./index.php"]);
-            $text .= br(2).span("Se non vieni reindirizzato, clicca " . $index_link, ["class", "logout-redirect"]);
+                $text = div(p($USER_MESSAGES[12]), ["class", "logout-error"]);
+            $text .= $USER_MESSAGES[13];
+            $index_link = a($USER_MESSAGES[15], ["href", "./index.php"]);
+            $text .= br(2).span($USER_MESSAGES[14] . $index_link, ["class", "logout-redirect"]);
             echo div($text, ["class", "logout-text"]);
             $_SESSION = array();
             session::delete_cookie();
