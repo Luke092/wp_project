@@ -74,6 +74,7 @@ function get_add_feed_icon($user_categories, $feed){
 }
 
 function show_category_choice($feed, $email){
+    $header = span("Scegli la categoria per questo feed", ["class", "category-choice-header"]);
     $user_categories = user::getCategories($email)->get_array();
     $feed_def_cat_index = $feed->getDefaultCat();
     $feed_box = visualize_single_feed_box($feed, false, "feed-box-cat-choice");
@@ -105,7 +106,7 @@ function show_category_choice($feed, $email){
     }
     $choices = div($choices, ["class", "category-choice"]);
     $button = button("Aggiungi", ["value", $feed->getId()]);
-    echo $feed_box.$choices.$button;
+    echo $feed_box.$header.$choices.$button;
 }
 
 function print_all_user_categories($user_categories){

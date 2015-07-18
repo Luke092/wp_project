@@ -251,6 +251,7 @@ img.disabled-add-feed{
 
 .category-choice{
     margin-left: 60%;
+    margin-top: 25px;
 }
 
 .category-choice input[type=radio]{
@@ -264,16 +265,22 @@ img.disabled-add-feed{
     border: inset 1px red;
 }
 
+.category-choice-header{
+    font-size: 19px;
+    color: darkred;
+    margin-left: 125px;
+}
+
 button{
     cursor: pointer;
-    margin-top: 75px;
-    margin-left: 15%;
+    margin-top: 32px;
+    margin-left: 19%;
     width: 12em;
     padding: .5em;
     color: #ffffff;
     text-shadow: 1px 1px 1px #000;
     
-    -webkit-box-shadow: 1px 1px 2px #999;   // Safari
+    /* -webkit-box-shadow: 1px 1px 2px #999; */   // Safari
     box-shadow: 2px 2px 2px #bbb;
     
     background-color: #c54101;
@@ -502,4 +509,12 @@ h1.category-header, h1.home-header{
     font-weight: bold;
     
     cursor: pointer;
+}
+
+.sidebar-header{
+    margin-left: 11%;
+    margin-top: 6%;
+    font-size: 15px;
+    color: darkred;
+    font-style: italic;
 }
