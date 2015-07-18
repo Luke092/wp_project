@@ -146,7 +146,6 @@ function sidebar_reload(){
         $("#sidebar").html(xhr.responseText);
     };
     sendData(xhr, "./sidebar.php", method, null, callback);
-    waitResponse();
 }
 
 function waitResponse(){
