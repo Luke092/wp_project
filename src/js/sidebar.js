@@ -18,6 +18,7 @@ $(document).ready(function(){
         var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
+        waitResponse();
         $("#page").scrollTop(0);
    });
    $(".cName").click(function(){
@@ -26,6 +27,7 @@ $(document).ready(function(){
         var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
+        waitResponse();
         $("#page").scrollTop(0);
    });
    

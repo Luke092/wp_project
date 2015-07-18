@@ -51,6 +51,7 @@ if (!session::user_is_logged())
             $(document).ready(function () {
                 var xhr = myGetXmlHttpRequest();
                 pageRequest(xhr, "./user_home.php", "POST");
+                waitResponse();
             });
         </script>
 
