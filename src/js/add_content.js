@@ -55,6 +55,8 @@ $(document).ready(function(){
         if(catName == "")
             alert("Devi assegnare un nome alla nuova categoria!");
         else{
+            $("#add_content").removeClass("selected-menu-entry");
+            $("#home").addClass("selected-menu-entry");
             var feedId = $(this).attr("value");
             var xhr = myGetXmlHttpRequest();
             var url = "./add_content.php";

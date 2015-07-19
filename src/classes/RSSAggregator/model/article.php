@@ -1,5 +1,6 @@
 <?php
 namespace RSSAggregator\model;
+use JSONSerializable;
 
 class article implements JsonSerializable {
     

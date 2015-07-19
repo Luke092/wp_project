@@ -22,7 +22,7 @@ $decoded = json_decode($_GET['json']);
 
 session::start();
 $email = session::get_info("email");
-$cats = categories::getCategories(categories::$USER_CAT, $email);
+$cats = user::getCategories($email);
 
 if ($decoded->type == "editCategory") {
     $oldCat = $cats->getCatByName($decoded->oldName);

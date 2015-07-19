@@ -1,4 +1,5 @@
 <script type="text/javascript" src="./js/paging.js"/>
+<script type="text/javascript" src="./lib/json2.js"/>
 
 <?php
     use RSSAggregator\model\session;
@@ -7,14 +8,13 @@
     
     require_once("./config.php");
     require_once ("./visualize.php");
-    function __autoload($class) {
+    
+function __autoload($class) {
 
     // convert namespace to full file path
-    if (strpos($class, 'SimplePie') !== 0)
-    {
-            $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
-    }
-    else{
+    if (strpos($class, 'SimplePie') !== 0) {
+        $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+    } else {
         $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
     }
     require_once($class);
@@ -33,7 +33,7 @@
             
 ?>
             
-<?php
+        <?php
             if(!isset($_POST["page"]))
                 $page = 1;
             else
@@ -51,8 +51,12 @@
             else if(isset($_POST["catName"])){
                 $cat_name = $_POST["catName"];
                 $category = user::getCategories($email)->getCatByName($cat_name);
-                $cat_name_header = h($cat_name, 1, ["class", "category-header"]);
-                echo $cat_name_header . visualize_articles_by_category($category, $from, ARTICLES_PER_PAGE);
+        ?>
+                <h1 class="category-header">
+                    <?php echo $cat_name ?>
+                </h1>
+<?php
+                visualize_articles_by_category($category, $from, ARTICLES_PER_PAGE);
                 $pages=ceil(ARTICLES_PER_FEED*count($category->get_array())/ARTICLES_PER_PAGE);
                 visualize_page_navigation_bar($pages, '', $cat_name, $page);
             }
