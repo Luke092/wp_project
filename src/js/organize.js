@@ -138,8 +138,8 @@ function buildItemContentsHolder(newCatName)
 
 function editCategory(event)
 {
-    var newName = prompt("Inserisci il nuovo nome da dare alla categoria").trim();
-    if (newName !== null) {
+    var newName = $.trim(prompt("Inserisci il nuovo nome da dare alla categoria"));
+    if (newName !== null && newName !== "") {
         newName = $.trim(newName);
         var oldName = $.trim($(event.target).parent().prev().text());
         if (catNameAlreadyPresent(newName)) {
