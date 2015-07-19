@@ -32,17 +32,18 @@ if (!session::user_is_logged())
         <meta charset="ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="./css/generic.css">
         <link rel="stylesheet" type="text/css" href="./css/home.css">
-        <!--<link rel="stylesheet" type="text/css" href="./css/organize.css">-->
+        <link rel="stylesheet" type="text/css" href="./css/organize.css">
         <!--<link rel="stylesheet" href="./css/jquery-ui.min.css">-->
         <link rel="icon" href="./img/utils/feed_icon.png" type="image/png"/>
 
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
+<!--        <script type="text/javascript" src="lib/json2.js"></script>-->
         <script type="text/javascript" src="js/ajax.js"></script>
         <script type="text/javascript" src="js/sidebar.js"></script>
         <script type="text/javascript" src="js/top-menu.js"></script>
-        <!--<script type="text/javascript" src="./js/organize.js"></script>-->
-        <!--<script type="text/javascript" src="./lib/jquery-ui.min.js"></script>-->
-        <!--<script type="text/javascript" src="./lib/json2.js"></script>-->
+<!--        <script type="text/javascript" src="./js/organize.js"></script>
+        <script type="text/javascript" src="./lib/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./lib/json2.js"></script>-->
 
 <!--        <script type="text/javascript" src="./lib/jquery-2.1.4.js"></script>-->
 <!--<script type="text/javascript" src="./js/ajax.js"></script>-->
@@ -111,6 +112,9 @@ if (!session::user_is_logged())
             </div>
             <div class="content">
                 <div id="sidebar">
+                    <script type="text/javascript">
+                        sidebar_reload();
+                    </script>
                 </div>
                 <div id="page">
                 </div>

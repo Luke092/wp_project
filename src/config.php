@@ -27,8 +27,8 @@ const VISIBLE_PAGE_NUM_BEF_AFT = 3;
 const MAX_LENGTH_DESC = 100;
 const MAX_LENGTH_TITLE = 75;
 const MAX_LENGTH_SUMMARY = 200;
-const MIN_IMAGE_WIDTH = 30;
-const MIN_IMAGE_HEIGHT = 30;
+const MIN_IMAGE_WIDTH = 140;
+const MIN_IMAGE_HEIGHT = 140;
 
 
 //////////////////////////////////

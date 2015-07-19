@@ -62,4 +62,8 @@ $(document).ready(function(){
           });
       }
    });
+   $(".feed, .cName").click(function(){
+        $("#home").addClass("selected-menu-entry");
+        $(".menu-entry").not("#home").removeClass("selected-menu-entry");
+   });
 });

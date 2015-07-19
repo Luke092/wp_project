@@ -64,16 +64,15 @@ function __autoload($class) {
                     }
                 ?>
             </div>
-    <?php
+<?php
         }
     }
     else{
-    ?>
-    <div class="sidebar-header">
-        In questa sezione saranno elencati i feed organizzati per categoria.<br><br>
-        Al momento non sei iscritto ad alcun feed.
-    </div>
-    
+?>
+        <div class="sidebar-header">
+            In questa sezione saranno elencati i feed organizzati per categoria.<br><br>
+            Al momento non sei iscritto ad alcun feed.
+        </div>
 <?php
     }
 ?>

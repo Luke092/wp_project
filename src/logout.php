@@ -30,15 +30,32 @@
     <body onload="waitLogout()" class="logout-body">
         <?php
             session::start();
-            $text = "";
-            if(session::user_is_logged())
-                $text = div(p($USER_MESSAGES[11]), ["class", "logout-ok"]);
-            else
-                $text = div(p($USER_MESSAGES[12]), ["class", "logout-error"]);
-            $text .= $USER_MESSAGES[13];
-            $index_link = a($USER_MESSAGES[15], ["href", "./index.php"]);
-            $text .= br(2).span($USER_MESSAGES[14] . $index_link, ["class", "logout-redirect"]);
-            echo div($text, ["class", "logout-text"]);
+        ?>
+            <div class="logout-text">
+            <?php
+                if(session::user_is_logged()){
+            ?>
+                    <div class="logout-ok">
+                        <p><?php echo $USER_MESSAGES[11] ?></p>
+                    </div>
+            <?php
+                }
+                else{
+            ?>
+                    <div class="logout-error">
+                        <p><?php echo $USER_MESSAGES[12] ?></p>
+                    </div>
+            <?php
+                }
+                echo $USER_MESSAGES[13];
+            ?>
+                <br><br>
+                <span class="logout-redirect">
+                    <?php echo $USER_MESSAGES[14] ?>
+                    <a href="./index.php"><?php echo $USER_MESSAGES[15] ?></a>
+                </span>
+            </div>
+        <?php
             $_SESSION = array();
             session::delete_cookie();
             session::destroy();
