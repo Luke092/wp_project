@@ -88,7 +88,7 @@ class dbUtil {
         $stmt->execute($totalArray);
         self::close($db);
 
-        return self::checkError($stmt);
+        return !self::checkError($stmt);
     }
 
     private static function mybind($stmt, $fields, $values) {
@@ -99,7 +99,7 @@ class dbUtil {
 
     public static function checkError($stmt) {
         if ($stmt->errorInfo()[0] !== '00000') { // if an error has taken place
-            echo $stmt->errorInfo()[2]; // the message that describes the error
+//            echo $stmt->errorInfo()[2]; // the message that describes the error
             return true;
         }
         return false;
