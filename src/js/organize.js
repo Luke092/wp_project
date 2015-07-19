@@ -121,6 +121,7 @@ function newCatDrop(event, ui)
 
 function buildItemContentsHolder(newCatName)
 {
+    newCatName = newCatName.trim();
     var itemContentsHolder = $("<div id=\"category_" + newCatName + "_contents\" class=\"itemContentsHolder\"></div>");
     var categoryHeader = $("<h2 class=\"categoryHeader\"></h2>");
     categoryHeader.append($("<div class=\"categoryName\">" + newCatName + "</div>"));
@@ -137,7 +138,7 @@ function buildItemContentsHolder(newCatName)
 
 function editCategory(event)
 {
-    var newName = prompt("Inserisci il nuovo nome da dare alla categoria");
+    var newName = prompt("Inserisci il nuovo nome da dare alla categoria").trim();
     if (newName !== null) {
         newName = $.trim(newName);
         var oldName = $.trim($(event.target).parent().prev().text());
@@ -180,7 +181,7 @@ function removeFeed(event)
 
 function hideCategory(catName)
 {
-    $("#category_" + catName + "_contents").remove();
+    $("#category_" + catName.trim() + "_contents").remove();
 }
 
 //function changeCatName(newName, catDiv)
