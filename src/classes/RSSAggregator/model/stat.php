@@ -9,6 +9,10 @@ class stat implements JsonSerializable {
     public static $ERROR_INSERT = 0;
     public static $ALREADY_PRESENT = 2;
     
+    public static $LAST_MONTH = '-1 month';
+    public static $LAST_WEEK = '-1 week';
+    public static $SINCE_REGISTERED = '1 January 2000';
+    
     private $user_id;
     
     private $articles = array();
@@ -24,20 +28,22 @@ class stat implements JsonSerializable {
     }
 
 
-    public function feed_count($c_id){
+    public function feed_count($c_id, $from){
         $count = 0;
+        $max_aged = strtotime($from);
         foreach ($this->articles as $article) {
-            if($article->getCId() == $c_id){
+            if($article->getCId() == $c_id && $article->getTimestamp() > $max_aged){
                 $count++;
             }
         }
         return $count;
     }
     
-    public function get_wc_text($c_id){
+    public function get_wc_text($c_id, $from){
         $wc = "";
+        $max_aged = strtotime($from);
         foreach ($this->articles as $article) {
-            if($article->getCId() == $c_id){
+            if($article->getCId() == $c_id && $article->getTimestamp() > $max_aged){
                 $wc .= $article->getText() . " ";
             }
         }
@@ -99,7 +105,7 @@ class stat implements JsonSerializable {
         $stat = new stat($obj_array['email']);
         $article_array = array();
         foreach ($obj_array['feeds'] as $a){
-            $article = new article($a["id"],$a["cat_id"],$a["text"]);
+            $article = new article($a["id"],$a["cat_id"],$a["text"],$a["timestamp"]);
             $article_array[] = $article;
         }
         $stat->set_articles($article_array);

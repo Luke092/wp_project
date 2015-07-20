@@ -5,6 +5,9 @@ use RSSAggregator\model\category;
 use RSSAggregator\model\feed;
 use RSSAggregator\model\session;
 use RSSAggregator\model\stat;
+use RSSAggregator\model\article;
+
+use time;
 
 require_once("./config.php");
 require_once("./utils.php");
@@ -240,8 +243,13 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
         <div class="article-readbox-fs">
             <img src="<?php echo get_envelope_src($article, $email); ?>" id="<?php echo $article_link ?>" class="envelope-img" />
         </div>
-        <div id="<?php echo $article_link ?>" name="<?php echo $category->getId() ?>" class="hidden">
-            <?php echo get_article_title($article).' '.get_full_article_description($article->get_content()) ?>
+        <div class="hidden">
+            <?php
+                $art = new article($article_link, $category->getId(), 
+                        get_article_title($article).' '.get_full_article_description($article->get_content()),
+                        time());
+                echo json_encode($art);
+            ?>
         </div>
     </div>
 <?php
