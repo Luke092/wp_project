@@ -59,10 +59,11 @@ class stat implements JsonSerializable {
         foreach ($this->articles as $key => $article) {
             if($article->getId() == $art->getId()){
                 unset($this->articles[$key]);
+                $this->articles = array_values($this->articles);
+                $this->saveStatsToFile();
                 return true;
             }
         }
-        $this->saveStatsToFile();
         return false;
     }
     

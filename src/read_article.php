@@ -1,5 +1,7 @@
 <?php
     use RSSAggregator\model\article;
+    use RSSAggregator\model\stat;
+    use RSSAggregator\model\session;
 
     function __autoload($class) {
 
@@ -13,5 +15,13 @@
 }
 
 $json = $_POST["article"];
+$readonly = $_POST["readonly"];
 $article = article::import_JSON($json);
-echo $article->getText();
+session::start();
+$email = session::get_info("email");
+$stat = stat::getStat($email);
+if(!$stat->addArticle($article)){
+    if($readonly == "false"){
+        $stat->removeArticle($article);
+    }
+}

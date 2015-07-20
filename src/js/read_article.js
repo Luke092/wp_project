@@ -7,7 +7,7 @@ $(document).ready(function(){
     $(".article-title-fs").click(function(){
         var id = $(this).parent().attr("href");
        $(".envelope-img[id=\""+id+"\"]").attr("src", ENVELOPE_OPEN_SRC);
-        sendArticleObject($(this));
+        sendArticleObject($(this), true);
     });
     $(".envelope-img[src=\""+ENVELOPE_CLOSED_SRC+"\"]").attr("title", MSG_READ);
     $(".envelope-img[src=\""+ENVELOPE_OPEN_SRC+"\"]").attr("title", MSG_NO_READ);
@@ -20,7 +20,7 @@ $(document).ready(function(){
             $(this).attr("src", ENVELOPE_OPEN_SRC);
             $(this).attr("title", MSG_NO_READ);
         }
-        sendArticleObject($(this));
+        sendArticleObject($(this), false);
     });
     $(".article-box-fs").mouseover(function(){
         $(this).css("backgroundColor", "rgb(255, 238, 181)");
@@ -47,7 +47,7 @@ $(document).ready(function(){
         waitResponse(); 
     });
     
-    function sendArticleObject(elem){
+    function sendArticleObject(elem, readOnly){
         var xhr = myGetXmlHttpRequest();
         var url = "./read_article.php";
         var method = "POST";
@@ -57,8 +57,9 @@ $(document).ready(function(){
         JSONObject.cat_id = hidden.attr("name");
         JSONObject.text = hidden.text();
         var JSONString = JSON.stringify(JSONObject);
-        var param = ["article", JSONString];
-        pageRequest(xhr, url, method, param);
-        waitResponse(); 
+        var param = ["article", JSONString,
+                     "readonly", readOnly];
+        sendData(xhr, url, method, param, function(){});
+//        waitResponse(); 
     }
 });
