@@ -69,7 +69,7 @@ font-size: 12px;
 line-height: 30px;
 overflow: hidden;
 text-transform: capitalize;
-color: #816060;
+color: #8B0000;
 font-weight: bold;
 background-color: rgb(254, 228, 185);
 }
@@ -522,4 +522,12 @@ h1.category-header, h1.home-header{
 
 .hidden{
     display: none;
+}
+
+#search-error{
+    left: 37%;
+    margin-top: initial;
+    position: fixed;
+    font-size: 22px;
+    color: red;
 }

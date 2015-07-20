@@ -153,7 +153,7 @@ function get_article_image_url($article){
         return $src;
     else{
         try{
-            $html = file_get_contents($article->get_link());
+            $html = @file_get_contents($article->get_link());
             $dom = new DOMDocument();
             @$dom->loadHTML($html);
             $xpath = new DOMXPath($dom);
@@ -162,7 +162,7 @@ function get_article_image_url($article){
                 foreach($images as $image){
                     $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
                     list($width, $height) = @getimagesize($src);
-                    if($width > MIN_IMAGE_WIDTH && $height > MIN_IMAGE_HEIGHT)
+                    if($width >= MIN_IMAGE_WIDTH && $height >= MIN_IMAGE_HEIGHT && !preg_match('/.gif$/', $src))
                         return $src;
                 }
                 $src = DEF_ARTICLE_IMAGE_PATH;
@@ -178,7 +178,7 @@ function get_article_image_url($article){
                 foreach($images as $image){
                     $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
                     list($width, $height) = @getimagesize($src);
-                    if($width > MIN_IMAGE_WIDTH && $height > MIN_IMAGE_HEIGHT)
+                    if($width >= MIN_IMAGE_WIDTH && $height >= MIN_IMAGE_HEIGHT && !preg_match('/.gif$/', $src))
                         return $src;
                 }
                 $src = DEF_ARTICLE_IMAGE_PATH;

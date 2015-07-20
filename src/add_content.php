@@ -50,7 +50,9 @@ function __autoload($class) {
                 $rss = new SimplePie();
                 $rss->set_feed_url($feed_url);
                 if(!$rss->init()){
-                    echo h($USER_MESSAGES[10]);
+?>
+                    <h2 id="search-error"><?php echo $USER_MESSAGES[10] ?></h2>
+<?php
                     return;
                 }
                 $f_name = $rss->get_title();                

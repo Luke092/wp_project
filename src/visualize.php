@@ -92,7 +92,6 @@ function visualize_single_feed_box($feed, $default_categories, $class, $email = 
             </div>
     <?php
         }
-        $article_desc = ($rss->get_item(0) == null ? null : $rss->get_item(0)->get_description());
     ?>
         <a href="<?php echo get_first_article_link($rss) ?>" target="_blank">
             <div class="feed-footer">
