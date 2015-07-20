@@ -125,7 +125,7 @@ class stat implements JsonSerializable {
     
     private static function fetch_data($email){
         $db = dbUtil::connect();
-        $sql = "SELECT * FROM". self::$TABLE ."WHERE email = ?";
+        $sql = "SELECT * FROM ". self::$TABLE ." WHERE email = ?";
         $stm = $db->prepare($sql);
         $stm->execute(array($email));
         dbUtil::close($db);

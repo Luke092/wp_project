@@ -47,8 +47,10 @@ if ($decoded->type == "removeFeed") {
 
 if ($decoded->type == "moveFeed") {
     $oldCat = $cats->getCatByName($decoded->oldCatName);
-    $newCat = category::fetch_by_name($decoded->newCatName);
-    $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat["id"], $decoded->feedId);
+//    $newCat = category::fetch_by_name($decoded->newCatName);
+    $newCat = $cats->add_Category($decoded->newCatName);
+//    $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat["id"], $decoded->feedId);
+    $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat->getId(), $decoded->feedId);
 }
 
 if ($decoded->type == "addCategory") {
