@@ -25,64 +25,6 @@ function is_empty_field($field){
 /////////////////// XHTML reader functions ///////////////////
 //////////////////////////////////////////////////////////////
 
-function make_absolute_path($baseUrl, $relativePath){
-    if((!$baseParts = parse_url($baseUrl)) || (!$pathParts = parse_url($relativePath))){
-        return FALSE;
-    }
-    if(empty($baseParts['host']) && !empty($baseParts['path']) && substr($baseParts['path'], 0, 2) === '//'){
-        $parts = explode('/', ltrim($baseParts['path'], '/'));
-        $baseParts['host'] = array_shift($parts);
-        $baseParts['path'] = '/'.implode('/', $parts);
-    }
-    if(empty($pathParts['host']) && !empty($pathParts['path']) && substr($pathParts['path'], 0, 2) === '//'){
-        $parts = explode('/', ltrim($pathParts['path'], '/'));
-        $pathParts['host'] = array_shift($parts);
-        $pathParts['path'] = '/'.implode('/', $parts);
-    }
-    if(!empty($pathParts['host'])){
-        return $relativePath;
-    }
-    if(empty($baseParts['host'])){
-        return FALSE;
-    }
-    if(empty($baseParts['path'])){
-        $baseParts['path'] = '/';
-    }
-    if(empty($baseParts['scheme'])){
-        $baseParts['scheme'] = 'http';
-    }
-    $result = $baseParts['scheme'].'://';
-    if(!empty($baseParts['user'])){
-        $result .= $baseParts['user'];
-        if (!empty($baseParts['pass'])){
-            $result .= ":{$baseParts['pass']}";
-        }
-        $result .= '@';
-    }
-    $result .= !empty($baseParts['port']) ? "{$baseParts['host']}:{$baseParts['port']}" : $baseParts['host'];
-    if($relativePath[0] === '/'){
-        $result .= $relativePath;
-    }else if ($relativePath[0] === '?'){
-        $result .= $baseParts['path'].$relativePath;
-    }else{
-        $resultPath = rtrim(substr($baseParts['path'], -1) === '/' ? trim($baseParts['path']) : str_replace('\\', '/', dirname(trim($baseParts['path']))), '/');
-        foreach(explode('/', $relativePath) as $pathComponent){
-            switch ($pathComponent){
-                case '': case '.':
-                    break;
-                case '..':
-                    $resultPath = rtrim(str_replace('\\', '/', dirname($resultPath)), '/');
-                    break;
-                default:
-                    $resultPath .= "/$pathComponent";
-                    break;
-            }
-        }
-        $result .= $resultPath;
-    }
-    return $result;
-}
-
 function date_transform($date_to_transf){
     global $DAYS, $MONTHS;
     $date_parts = explode(" ", $date_to_transf);
@@ -149,43 +91,14 @@ function get_first_article_title($rss){
 
 function get_article_image_url($article){
     $src = DEF_ARTICLE_IMAGE_PATH;
-    if($article->get_content() == null)
-        return $src;
-    else{
-        try{
-            $html = @file_get_contents($article->get_link());
-            $dom = new DOMDocument();
-            @$dom->loadHTML($html);
-            $xpath = new DOMXPath($dom);
-            $images = $xpath->query('//img');
-            if(count($images) > 0){
-                foreach($images as $image){
-                    $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
-                    list($width, $height) = @getimagesize($src);
-                    if($width >= MIN_IMAGE_WIDTH && $height >= MIN_IMAGE_HEIGHT && !preg_match('/.gif$/', $src))
-                        return $src;
-                }
-                $src = DEF_ARTICLE_IMAGE_PATH;
-            }
-            else
-                $src = DEF_ARTICLE_IMAGE_PATH;
-        }catch(DOMException $e){
-            $dom = new DOMDocument();
-            @$dom->loadHTML($article->get_content());
-            $xpath = new DOMXPath($dom);
-            $images = $xpath->query('//img');
-            if(count($images) > 0){
-                foreach($images as $image){
-                    $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
-                    list($width, $height) = @getimagesize($src);
-                    if($width >= MIN_IMAGE_WIDTH && $height >= MIN_IMAGE_HEIGHT && !preg_match('/.gif$/', $src))
-                        return $src;
-                }
-                $src = DEF_ARTICLE_IMAGE_PATH;
-            }
-            else
-                $src = DEF_ARTICLE_IMAGE_PATH;
-        }
+    $dom = new DOMDocument();
+    @$dom->loadHTML($article->get_content());
+    $image_tags = $dom->getElementsByTagName('img');
+    if($image_tags->item(0) != null){
+        $src = $image_tags->item(0)->getAttribute("src");
+        list($width, $height) = @getimagesize($src);
+        if($width < MIN_IMAGE_WIDTH && $height < MIN_IMAGE_HEIGHT)
+            $src = DEF_ARTICLE_IMAGE_PATH;
     }
     return $src;
 }

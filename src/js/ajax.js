@@ -99,7 +99,6 @@ function sendData(xhr, url, method, param, callback){
                         callback();
                     else
                         alert("Spiacente, si e' verificato il seguente errore: " + statusText[xhr.status]);
-                    $("#waiting").remove();
                 }
             };
             xhr.send(null);
@@ -122,7 +121,6 @@ function sendData(xhr, url, method, param, callback){
                         callback();
                     else
                         alert("Spiacente, si e' verificato il seguente errore: " + statusText[xhr.status]);
-                    $("#waiting").remove();
                 }
             };
             xhr.send((content == "")? null : content);
@@ -134,6 +132,7 @@ function sendData(xhr, url, method, param, callback){
 
 function pageRequest(xhr, url, method, param){
     var callback = function (){
+        $("#waiting").remove();
         $("#page").html(xhr.responseText);
     };
     sendData(xhr, url, method, param, callback);
