@@ -68,7 +68,7 @@ if (!session::user_is_logged())
             <div class="header">
                 <!-- Top menu for account name, link to profile and manage button -->
                 <div class="top-menu">
-                    <div id="home" class="menu-entry">
+                    <div id="home" class="menu-entry selected-menu-entry">
                         <div>
                             <img src="./img/utils/menu_icons/home.png">
                         </div>
