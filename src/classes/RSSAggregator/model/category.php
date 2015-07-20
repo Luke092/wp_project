@@ -178,7 +178,7 @@ class category {
     }
 
     public static function update_UCF_data($oldId, $newId, $email) {
-        dbUtil::update("UCF", ["c_id"], [$newId], ["email", "c_id"], [$email, $oldId]); 
+        return dbUtil::update("UCF", ["c_id"], [$newId], ["email", "c_id"], [$email, $oldId]); 
     }
 
     public static function modifyName($id, $newName) {

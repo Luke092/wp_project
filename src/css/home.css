@@ -69,8 +69,9 @@ font-size: 12px;
 line-height: 30px;
 overflow: hidden;
 text-transform: capitalize;
-color: #494949;
+color: #816060;
 font-weight: bold;
+background-color: rgb(254, 228, 185);
 }
 
 table{
@@ -83,7 +84,7 @@ table{
     margin-left: 130px;
     margin-bottom: 25px;
     font-weight: bold;
-    color: darkslategray;
+    color: darkred;
     font-size: 25px;
 }
 
@@ -104,7 +105,7 @@ table{
 
 .feed-header{
     margin-bottom: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .feed-icon{
@@ -173,7 +174,7 @@ img.disabled-add-feed{
     height: 340px;
     padding-bottom: 0px;
     border: 1px solid #EBA2A2;
-    background-color: #FFF;
+    background-color: rgba(255, 185, 185, 0.56);
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box;
@@ -204,7 +205,7 @@ img.disabled-add-feed{
     position: relative;
     height: 32px;
     overflow: hidden;
-    background-color: #FFF;
+    background-color: #FED2C2;
     border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
@@ -214,6 +215,7 @@ img.disabled-add-feed{
     position: relative;
     bottom: 0px;
     font-size: 12px;
+    color: initial;
 }
 
 .article-box{
@@ -242,7 +244,7 @@ img.disabled-add-feed{
     height: 300px;
     padding-bottom: 0px;
     border: 1px solid #EBA2A2;
-    background-color: #FFF;
+    background-color: #FED2C2;
     -moz-background-clip: padding;
     -webkit-background-clip: padding;
     background-clip: padding-box; 
@@ -250,6 +252,7 @@ img.disabled-add-feed{
 
 .category-choice{
     margin-left: 60%;
+    margin-top: 25px;
 }
 
 .category-choice input[type=radio]{
@@ -263,16 +266,22 @@ img.disabled-add-feed{
     border: inset 1px red;
 }
 
+.category-choice-header{
+    font-size: 19px;
+    color: darkred;
+    margin-left: 125px;
+}
+
 button{
     cursor: pointer;
-    margin-top: 75px;
-    margin-left: 15%;
+    margin-top: 32px;
+    margin-left: 19%;
     width: 12em;
     padding: .5em;
     color: #ffffff;
     text-shadow: 1px 1px 1px #000;
     
-    -webkit-box-shadow: 1px 1px 2px #999;   // Safari
+    /* -webkit-box-shadow: 1px 1px 2px #999; */   // Safari
     box-shadow: 2px 2px 2px #bbb;
     
     background-color: #c54101;
@@ -299,6 +308,7 @@ button{
     clear: both;
     overflow: hidden;
     cursor: pointer;
+    margin-bottom: 4px;
 }
 
 .navigation{
@@ -310,6 +320,7 @@ button{
 
 .navigation_arrow{
      float:left;
+     padding: 5px;
 }
 
 .icon{
@@ -318,6 +329,7 @@ button{
 }
 
 .cName{
+    padding: 5px;
     float:left;
     /* margin-top: 3px; */
     margin-left: 3px;
@@ -378,6 +390,10 @@ h1{
     margin-left: 4px;
 }
 
+.menu-entry:hover, .selected-menu-entry{
+    background-color: #fe8181;
+}
+
 .top-menu #logout{
     float: right;
     margin-right: 10px;
@@ -427,6 +443,7 @@ h1{
     width: 64px;     
     margin-top: 25%;
     margin-left: 25%;
+    cursor: pointer;
 }
 
 .article-image-fs{
@@ -438,6 +455,10 @@ h1{
     font-size: 14px;
     height: 43px;
     margin-top: 7px;
+}
+
+.cat-name-fs{
+    cursor: pointer;
 }
 
 .article-date-fs{
@@ -454,6 +475,8 @@ h1{
 
 #tv-commands{
     cursor: pointer;
+    padding: 5px;
+    background-color: #FFC7A4;
 }
 
 h1.category-header, h1.home-header{
@@ -485,7 +508,18 @@ h1.category-header, h1.home-header{
     
     background-color: rgb(255, 208, 168);
     color: red;
-    font-weight: bold;
-    
+    font-weight: bold;   
     cursor: pointer;
+}
+
+.sidebar-header{
+    margin-left: 11%;
+    margin-top: 6%;
+    font-size: 15px;
+    color: darkred;
+    font-style: italic;
+}
+
+.hidden{
+    display: none;
 }

@@ -20,6 +20,7 @@ $(document).ready(function(){
                         "page", ids[0]);
         }
         pageRequest(xhr, url, method, param);
+        waitResponse();
         $("#page").scrollTop(0);
    });
    $(".paging-header").mouseover(function(){

@@ -18,6 +18,7 @@ $(document).ready(function(){
         var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
+        waitResponse();
         $("#page").scrollTop(0);
    });
    $(".cName").click(function(){
@@ -26,25 +27,22 @@ $(document).ready(function(){
         var xhr = myGetXmlHttpRequest();
         var url = "./user_home.php";
         pageRequest(xhr, url, "POST", param);
+        waitResponse();
         $("#page").scrollTop(0);
    });
-//   $(".feed").mouseover(function(){
-//      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
-//   });
-//   $(".feed").mouseout(function(){
-//      $(this).css("backgroundColor", "inherit"); 
-//   });
-//   $(".cName").mouseover(function(){
-//      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
-//   });
-//   $(".cName").mouseout(function(){
-//      $(this).css("backgroundColor", "inherit"); 
-//   });
+   
    $(".evidence").mouseover(function(){
-      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)"); 
+      $(this).css("backgroundColor", "rgba(249, 197, 109, 0.66)");
+      $(this).css("color", "red");
    });
    $(".evidence").mouseout(function(){
-      $(this).css("backgroundColor", "inherit"); 
+      $(this).css("backgroundColor", "");
+      $(this).css("fontWeight", "");
+      $(this).css("color", "");
+   });
+   $("#tv-commands").mouseover(function(){
+        $(this).css("fontWeight", "bold");
+        $(this).css("color", "darkred");
    });
    
    $("#tv-commands").click(function(){
@@ -63,5 +61,9 @@ $(document).ready(function(){
               $(".navigation").attr("src", "./img/utils/right_arrow.png");
           });
       }
+   });
+   $(".feed, .cName").click(function(){
+        $("#home").addClass("selected-menu-entry");
+        $(".menu-entry").not("#home").removeClass("selected-menu-entry");
    });
 });

@@ -37,8 +37,8 @@
 
 h2 {
     font-weight: 600;
-    color: grey;
-    font-size: 10pt;
+    color: #816060;
+    font-size: 16px;
     line-height: 1.4em;
     margin-top: 3rem;
     margin-bottom: 1rem;
@@ -56,7 +56,7 @@ h2 {
 }
 
 .subscriptionContentsHolder {
-    border: 1pt solid lightgrey;
+    border: 1pt solid rgba(254, 118, 118, 0.66);
     padding: 5pt;
     min-height: 200pt;
     max-height: 200pt;
@@ -65,7 +65,7 @@ h2 {
 }
 
 .subscriptionContents {
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 10pt;
     height: 18pt;
     line-height: 18pt;
@@ -77,6 +77,7 @@ h2 {
 .feedName {
     display: inline-block;
     padding-left: 5pt;
+    cursor: pointer;
 }
 
 .feedId {
@@ -84,7 +85,7 @@ h2 {
 }
 
 .newCategory {
-    border: 1px dashed lightgrey;
+    border: 1px dashed rgb(255, 119, 119);
     padding-top: 40px;
     padding-right: 17px;
     padding-bottom: 17px;
@@ -92,7 +93,7 @@ h2 {
     font-size: 13pt;
     text-align: center;
     line-height: 20pt;
-    color: lightgrey;
+    color: rgba(255, 85, 85, 0.9);
     min-height: 90pt;
     cursor: default;
 }
@@ -107,3 +108,10 @@ h2 {
     margin-top: 4pt;
 }
 
+img.editCat, img.removeCat, img.removeFeed{
+    height: 16px;
+    
+}
+.editCat{
+    margin-right: 10px;
+}

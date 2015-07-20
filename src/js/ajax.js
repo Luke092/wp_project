@@ -156,10 +156,10 @@ function waitResponse(){
     var pos = $("#page").position();
     var h = $("#page").height();
     var w = $("#page").width();
-    var top_margin = pos.top - h/2 - $("#waiting").height();
-    var left_margin = pos.left + w/2;
-    loadingImage.style.marginTop = top_margin+"px";
-    loadingImage.style.marginLeft = left_margin+"px";
+    var top_margin = pos.top + h/2 - $("#waiting").height()/2;
+    var left_margin = pos.left + w/2 - $("#waiting").width()/2;
+    loadingImage.style.top = top_margin+"px";
+    loadingImage.style.left = left_margin+"px";
     $("#page *").fadeTo(600, 0);
     $(".block").css("cursor", "initial");
     $(".minicover, .label").unbind("click"); 

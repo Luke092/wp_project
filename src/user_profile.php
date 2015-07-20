@@ -15,7 +15,7 @@
             $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
         }
         require_once($class);
-    }
+}
 
     if(isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])){
         session::start();
@@ -53,11 +53,23 @@
     }
 ?>
 
+<link rel = "stylesheet" type = "text/css" href = "./css/c3.min.css">
+<link rel = "stylesheet" type = "text/css" href = "./css/user_profile.css">
+<script type = "text/javascript" src = "./lib/jquery-2.1.4.js"></script>
+<script src = "./lib/d3.min.js"></script>
+<script src = "./lib/d3.layout.cloud.js"></script>
+<script src = "./lib/c3.min.js"></script>
+<script src = "./lib/wordfreq.js"></script>
+<script src = "./lib/wordcloud2.js"></script>
+<script type="text/javascript" src="./js/ajax.js"></script>
+<!--<script type="text/javascript" src="./js/user_profile.js"></script>-->
+<script type="text/javascript" src="./js/user_statistic.js"></script>
+
 <div class="profile">
     <div class="info">
         <div class="profile-image">
             <img src="./img/utils/menu_icons/profile.png" />
-            
+
         </div>
         <div class="profile-modify">
             <div class="errors">
@@ -95,9 +107,12 @@
             </form>
         </div>
     </div>
-    <div class="stats">
-        <p>
-            Qui andranno le statistiche!
-        </p>
+    <div class='stats'>
+        <div id='barChartContainer'>
+<!--            <img src='./img/utils/arrow_left_2.png' id='arrowLeft'></img>
+            <img src='./img/utils/arrow_right_2.png' id='arrowRight'></img>-->
+            <div id='barchart'></div>
+            <div id='wordCloud'></div>
+        </div>
     </div>
 </div>

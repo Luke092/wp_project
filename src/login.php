@@ -23,24 +23,24 @@
         
         // check email field
         if(is_empty_field($email))
-            $errors[] = $ERROR_MESSAGES[0];
+            $errors[] = $USER_MESSAGES[1];
         else if(!is_valid_email($email))
-            $errors[] = $ERROR_MESSAGES[1];
+            $errors[] = $USER_MESSAGES[2];
         
         // check password fields
         if(is_empty_field($password))
-            $errors[] = $ERROR_MESSAGES[3];
+            $errors[] = $USER_MESSAGES[4];
         else if(strlen($password) < MIN_LENGTH_PASSWORD)
-            $errors[] = $ERROR_MESSAGES[4];
+            $errors[] = $USER_MESSAGES[5];
         
         // if no errors occured, then authenticate user
         if(empty($errors)){
             $password = hash(HASHING_ALGORITHM, $password);
             // check if password is correct
             if(user::getPassword($email) == null)
-                $errors[] = $ERROR_MESSAGES[9];
+                $errors[] = $USER_MESSAGES[9];
             else if($password !== user::getPassword($email))
-                $errors[] = $ERROR_MESSAGES[6];
+                $errors[] = $USER_MESSAGES[7];
             else{
                 session::set_info("login", true);
                 session::set_info("email", $email);

@@ -20,8 +20,8 @@
     padding: 10px;
     border: 2px solid #BD3A3A;
     float: left;
-    font: 13px Arial, Helvetica, sans-serif;
-    /*font-size: 1.2em;*/
+    font: 14px Arial, Helvetica, sans-serif;
+    /* font-size: 1.2em; */
     position: fixed;
     top: 50%;
     left: 50%;
@@ -93,26 +93,27 @@ form.signin input::-webkit-input-placeholder {
 }
 
 .button {
-    background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
-    background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
-    background: -o-linear-gradient(top, #f3f3f3, #dddddd);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
+    background: -moz-linear-gradient(center top, #FFC0C0, #FF9191);
+    /* background: -webkit-gradient(linear, left top, left bottom, from(#FFC0C0), to(#FF9191)); */
+    background: -o-linear-gradient(top, #FFC0C0, #FF9191);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFC0C0', EndColorStr='#FF9191');
     border-color: #000;
     border-width: 1px;
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    color: #333;
+    color: white;
     cursor: pointer;
     display: inline-block;
     padding: 6px 6px 4px;
-    margin-top: 10px;
-    font-size: 12px;
-    width: 214px;
+    margin-top: 32px;
+    /* font-size: 12px; */
+    /* width: 214px; */
+    -webkit-box-shadow: none;
 }
 
 .button:hover {
-    background: #ddd;
+    background: rgba(244, 120, 120, 0.81);
 }
 
 .error{

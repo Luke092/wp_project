@@ -50,7 +50,7 @@ function __autoload($class) {
                 $rss = new SimplePie();
                 $rss->set_feed_url($feed_url);
                 if(!$rss->init()){
-                    echo h("Errore, hai inserito un url che non contiene feed RSS");
+                    echo h($USER_MESSAGES[10]);
                     return;
                 }
                 $f_name = $rss->get_title();                
@@ -59,7 +59,7 @@ function __autoload($class) {
                     $feed = new feed(feed::fetch_by_name_url($f_name, $feed_url)['id']);
                 }
                 else{
-                    die("Errore nella comunicazione con il DB!");
+                    die($USER_MESSAGES[8]);
                 }
             }
             else{

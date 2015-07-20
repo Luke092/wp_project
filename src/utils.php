@@ -6,8 +6,10 @@ require_once("./config.php");
 //////////////////////////////////////////////////////////////
 
 function show_form_errors($errors){
-    if(!empty($errors))
-        echo "Errori riscontrati:<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+    if(!empty($errors)){
+        global $USER_MESSAGES;
+        echo $USER_MESSAGES[0].":<ul><li>" . implode("</li><li>", $errors) . "</li></ul>";
+    }
 }
 
 function is_valid_email($email){
@@ -20,112 +22,70 @@ function is_empty_field($field){
 
 
 //////////////////////////////////////////////////////////////
-/////////////////// XHTML writer functions ///////////////////
-//////////////////////////////////////////////////////////////
-
-function table($content, $attribute_assign = array()){
-    return '<table'.add_attributes($attribute_assign).'>'.$content.'</table>';
-}
-
-function tr($content, $attribute_assign = array()){
-    return '<tr'.add_attributes($attribute_assign).'>'.$content.'</tr>';
-}
-
-function td($content, $attribute_assign = array()){
-    return '<td'.add_attributes($attribute_assign).'>'.$content.'</td>';
-}
-
-function img($attribute_assign = array()){
-    return '<img'.add_attributes($attribute_assign).' />';
-}
-
-function div($content, $attribute_assign = array()){
-    return '<div'.add_attributes($attribute_assign).'>'.$content.'</div>';
-}
-
-function span($content, $attribute_assign = array()){
-    return '<span'.add_attributes($attribute_assign).'>'.$content.'</span>';
-}
-
-//function radio_button($text, $value, $name, $checked, $class = null){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    $check = ($checked ? ' checked="checked"' : '');
-//    return '<input name="'.$name.'" type="radio" value="'.$value.'"'.$class_assign.$check.'>&nbsp;&nbsp;'.$text.'<br>';
-//}
-
-function radio_button($text, $attribute_assign = array()){
-    return '<input type="radio"'.add_attributes($attribute_assign).'>'.nbsp(2).$text.'<br>';
-}
-
-//function input_text($default_text, $attribute_assign = array()){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    return '<input'.$class_assign.' type="text" value="'.$default_text.'">';
-//}
-//
-//function input_text_with_placeholder($placeholder, $class = null){
-//    $class_assign = (isset($class) ? ' class="'.$class.'"' : '');
-//    return '<input'.$class_assign.' type="text" value="" placeholder="'.$placeholder.'">';
-//}
-
-function input_text($attribute_assign = array()){
-    return'<input type="text"'.add_attributes($attribute_assign).'>';
-}
-
-//function button($text, $value){
-//    return '<button value="'.$value.'">'.$text.'</button>';
-//}
-
-function button($text, $attribute_assign = array()){
-    return '<button'.  add_attributes($attribute_assign).'>'.$text.'</button>';
-}
-
-//function hlink($ref, $label, $target = null){
-//    $target_assign = (isset($target) ? ' target="'.$target.'"' : '');
-//    return "<a" . $target_assign ." href='". $ref . "'>".$label."</a> ";
-//}
-
-function a($text, $attribute_assign = array()){
-    return '<a'.  add_attributes($attribute_assign).'>'.$text.'</a>';
-}
-
-function p($text, $attribute_assign = array()){
-    return '<p'.  add_attributes($attribute_assign).'>'.$text.'</p>';
-}
-
-function h($text, $size = 1, $attribute_assign = array()){
-    $head = 'h' . $size;
-    return '<'.$head.add_attributes($attribute_assign).'>'.$text.'</'.$head.'>';
-}
-
-function br($n = 1){
-    $content = '';
-    for($i = 1; $i <= $n; $i++)
-        $content .= '<br />';
-    return $content;
-}
-
-function nbsp($n = 1){
-    $content = '';
-    for($i = 1; $i <= $n; $i++)
-        $content .= '&nbsp;';
-    return $content;
-}
-
-function add_attributes($attribute_assign){
-    $res = '';
-    for($i = 0; $i < count($attribute_assign); $i += 2){
-        $res .= ' '.$attribute_assign[$i].'='.'"'.$attribute_assign[$i+1].'"';
-    }
-    return $res;
-}
-
-//////////////////////////////////////////////////////////////
 /////////////////// XHTML reader functions ///////////////////
 //////////////////////////////////////////////////////////////
 
-function date_transform($date_format){
+function make_absolute_path($baseUrl, $relativePath){
+    if((!$baseParts = parse_url($baseUrl)) || (!$pathParts = parse_url($relativePath))){
+        return FALSE;
+    }
+    if(empty($baseParts['host']) && !empty($baseParts['path']) && substr($baseParts['path'], 0, 2) === '//'){
+        $parts = explode('/', ltrim($baseParts['path'], '/'));
+        $baseParts['host'] = array_shift($parts);
+        $baseParts['path'] = '/'.implode('/', $parts);
+    }
+    if(empty($pathParts['host']) && !empty($pathParts['path']) && substr($pathParts['path'], 0, 2) === '//'){
+        $parts = explode('/', ltrim($pathParts['path'], '/'));
+        $pathParts['host'] = array_shift($parts);
+        $pathParts['path'] = '/'.implode('/', $parts);
+    }
+    if(!empty($pathParts['host'])){
+        return $relativePath;
+    }
+    if(empty($baseParts['host'])){
+        return FALSE;
+    }
+    if(empty($baseParts['path'])){
+        $baseParts['path'] = '/';
+    }
+    if(empty($baseParts['scheme'])){
+        $baseParts['scheme'] = 'http';
+    }
+    $result = $baseParts['scheme'].'://';
+    if(!empty($baseParts['user'])){
+        $result .= $baseParts['user'];
+        if (!empty($baseParts['pass'])){
+            $result .= ":{$baseParts['pass']}";
+        }
+        $result .= '@';
+    }
+    $result .= !empty($baseParts['port']) ? "{$baseParts['host']}:{$baseParts['port']}" : $baseParts['host'];
+    if($relativePath[0] === '/'){
+        $result .= $relativePath;
+    }else if ($relativePath[0] === '?'){
+        $result .= $baseParts['path'].$relativePath;
+    }else{
+        $resultPath = rtrim(substr($baseParts['path'], -1) === '/' ? trim($baseParts['path']) : str_replace('\\', '/', dirname(trim($baseParts['path']))), '/');
+        foreach(explode('/', $relativePath) as $pathComponent){
+            switch ($pathComponent){
+                case '': case '.':
+                    break;
+                case '..':
+                    $resultPath = rtrim(str_replace('\\', '/', dirname($resultPath)), '/');
+                    break;
+                default:
+                    $resultPath .= "/$pathComponent";
+                    break;
+            }
+        }
+        $result .= $resultPath;
+    }
+    return $result;
+}
+
+function date_transform($date_to_transf){
     global $DAYS, $MONTHS;
-    $date_parts = explode(" ", $date_format);
+    $date_parts = explode(" ", $date_to_transf);
     $day = $DAYS[$date_parts[0]];
     $date = $date_parts[1];
     $month = $MONTHS[$date_parts[2]];
@@ -144,9 +104,8 @@ function get_favicon($url){
 }
 
 function get_domain($url){
-//        $sUrl = str_ireplace('www.', '', $sUrl);
-        $host = parse_url($url, PHP_URL_HOST);
-        return $host;
+    $host = parse_url($url, PHP_URL_HOST);
+    return $host;
 }
 
 
@@ -188,20 +147,45 @@ function get_first_article_title($rss){
     return get_article_title($rss->get_item(0));
 }
 
-function get_article_image_url($article_content){
-    if($article_content == null)
-        $src = DEF_ARTICLE_IMAGE_PATH;
+function get_article_image_url($article){
+    $src = DEF_ARTICLE_IMAGE_PATH;
+    if($article->get_content() == null)
+        return $src;
     else{
-        $dom = new DOMDocument();
-        @$dom->loadHTML($article_content);
-        $image_tags = $dom->getElementsByTagName('img');
-        if($image_tags->item(0) != null){
-            $src = $image_tags->item(0)->getAttribute("src");
-            if(preg_match('/rc\.img$/', $src))
-                    $src = DEF_ARTICLE_IMAGE_PATH;
+        try{
+            $html = file_get_contents($article->get_link());
+            $dom = new DOMDocument();
+            @$dom->loadHTML($html);
+            $xpath = new DOMXPath($dom);
+            $images = $xpath->query('//img');
+            if(count($images) > 0){
+                foreach($images as $image){
+                    $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
+                    list($width, $height) = @getimagesize($src);
+                    if($width > MIN_IMAGE_WIDTH && $height > MIN_IMAGE_HEIGHT)
+                        return $src;
+                }
+                $src = DEF_ARTICLE_IMAGE_PATH;
+            }
+            else
+                $src = DEF_ARTICLE_IMAGE_PATH;
+        }catch(DOMException $e){
+            $dom = new DOMDocument();
+            @$dom->loadHTML($article->get_content());
+            $xpath = new DOMXPath($dom);
+            $images = $xpath->query('//img');
+            if(count($images) > 0){
+                foreach($images as $image){
+                    $src = @make_absolute_path($article->get_link(), $image->getAttribute("src"));
+                    list($width, $height) = @getimagesize($src);
+                    if($width > MIN_IMAGE_WIDTH && $height > MIN_IMAGE_HEIGHT)
+                        return $src;
+                }
+                $src = DEF_ARTICLE_IMAGE_PATH;
+            }
+            else
+                $src = DEF_ARTICLE_IMAGE_PATH;
         }
-        else
-            $src = DEF_ARTICLE_IMAGE_PATH;
     }
     return $src;
 }
@@ -216,6 +200,10 @@ function get_full_article_description($article_content){
         $body .= " ".$text_node->textContent;
     }
     return $body;
+}
+
+function get_first_article_link($rss){
+    return $rss->get_item(0)->get_link();
 }
 
 function get_partial_article_description($article_content){

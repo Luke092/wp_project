@@ -1,7 +1,13 @@
 <?php
 namespace RSSAggregator\model;
 use PDO;
+use JSONSerializable;
+
 class stat implements JsonSerializable {
+    
+    public static $CORRECT_INSERT = 1;
+    public static $ERROR_INSERT = 0;
+    public static $ALREADY_PRESENT = 2;
     
     private $user_id;
     
@@ -127,12 +133,30 @@ class stat implements JsonSerializable {
         return ($elems != null)? $elems[0] : null;
     }
     
-    private static function insert($email, $file_path){
-        if (dbUtil::insert(self::$TABLE, array("email", "file_path"), array($c_name, $file_path))) {
-            return self::$CORRECT_INSERT;
-        } else {
-            return self::$ERROR_INSERT;
+    private static function alreadyPresent($email) {
+        $db = dbUtil::connect();
+        $sql = "SELECT * FROM " . self::$TABLE . " WHERE email = '" . $email . "';";
+        $stmt = $db->query($sql);
+
+        $present = false;
+        if ($stmt->rowCount() > 0) {
+            $present = true;
         }
+
+        dbUtil::close($db);
+
+        return $present;
     }
     
+    private static function insert($email, $file_path){
+        if(!self::alreadyPresent($email)){
+            if (dbUtil::insert(self::$TABLE, array("email", "file_path"), array($email, $file_path))) {
+                return self::$CORRECT_INSERT;
+            } else {
+                return self::$ERROR_INSERT;
+            }
+        } else {
+            return self::$ALREADY_PRESENT;
+        }
+    }
 }
