@@ -98,7 +98,7 @@ class stat implements JsonSerializable {
         $stat = new stat($obj_array['email']);
         $article_array = array();
         foreach ($obj_array['feeds'] as $a){
-            $article = new article($a["id"],$a["cat_it"],$a["text"]);
+            $article = new article($a["id"],$a["cat_id"],$a["text"]);
             $article_array[] = $article;
         }
         $stat->set_articles($article_array);

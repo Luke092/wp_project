@@ -53,13 +53,11 @@ $(document).ready(function(){
         var method = "POST";
         var JSONObject = new Object;
         var hidden = elem.parents(".article-box-fs").children(".hidden");
-        JSONObject.artID = hidden.attr("id");
-        JSONObject.catID = hidden.attr("name");
+        JSONObject.id = hidden.attr("id");
+        JSONObject.cat_id = hidden.attr("name");
         JSONObject.text = hidden.text();
         var JSONString = JSON.stringify(JSONObject);
         var param = ["article", JSONString];
-//        var myWindow = window.open('', '_blank');
-//        myWindow.document.body.innerHTML = hidden.text();
         pageRequest(xhr, url, method, param);
         waitResponse(); 
     }

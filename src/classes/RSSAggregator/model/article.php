@@ -27,7 +27,7 @@ class article implements JsonSerializable {
     public function jsonSerialize() {
         return [
             "id" => $this->id,
-            "cat_it" => $this->c_id,
+            "cat_id" => $this->c_id,
             "text" => $this->text
         ];
     }
@@ -38,7 +38,7 @@ class article implements JsonSerializable {
     
     public static function import_JSON($json){
         $obj_array = json_decode($json, true);
-        $article = new article($obj_array["id"], $obj_array["cat_it"], $obj_array["text"]);
+        $article = new article($obj_array["id"], $obj_array["cat_id"], $obj_array["text"]);
         return $article;
     }
 }
