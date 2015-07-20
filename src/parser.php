@@ -24,7 +24,6 @@ $decoded = json_decode($_GET['json']);
 session::start();
 $email = session::get_info("email");
 $cats = user::getCategories($email);
-$stats = stat::getStat($email);
 
 $json = array();
 
@@ -58,6 +57,7 @@ if ($decoded->type == "addCategory") {
 }
 
 if ($decoded->type == "readFeed") {
+    $stats = stat::getStat($email);
     $catArray = $cats->get_array();
     $json['categories'] = array();
     $json['numReadFeed'] = array();

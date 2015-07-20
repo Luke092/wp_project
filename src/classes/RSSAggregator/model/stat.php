@@ -51,6 +51,7 @@ class stat implements JsonSerializable {
             }
         }
         $this->articles[] = $art;
+        $this->saveStatsToFile();
         return true;
     }
     
@@ -61,6 +62,7 @@ class stat implements JsonSerializable {
                 return true;
             }
         }
+        $this->saveStatsToFile();
         return false;
     }
     
@@ -73,7 +75,7 @@ class stat implements JsonSerializable {
         return false;
     }
     
-    public function saveStatsToFile(){
+    private function saveStatsToFile(){
         $path = self::fetch_data($this->user_id)['file_path'];
         $json = self::export_JSON($this);
         $res = file_put_contents($path, $json);
@@ -119,7 +121,8 @@ class stat implements JsonSerializable {
         else{
             $path = "./json/stats/" . $email . ".json";
             self::insert($email, $path);
-            return new stat($email);
+            $stat = new stat($email);
+            $stat->saveStatsToFile();
         }
     }
     

@@ -24,8 +24,8 @@ function DBreadFeedRequest()
 
 function drawBarChart(data)
 {
-    data.categories = ['pippo', 'pluto', 'paperino', 'minnie', 'pippo', 'pluto', 'paperino', 'minnie', 'pippo', 'pluto', 'paperino', 'minnie'];
-    data.numReadFeed = [10, 11, 12, 14, 15, 16, 16, 10, 1, 15, 100, 20];
+//    data.categories = ['pippo', 'pluto', 'paperino', 'minnie', 'pippo', 'pluto', 'paperino', 'minnie', 'pippo', 'pluto', 'paperino', 'minnie'];
+//    data.numReadFeed = [10, 11, 12, 14, 15, 16, 16, 10, 1, 15, 100, 20];
     var loadedData = $.merge(['data1'], data.numReadFeed);
     var barChart = c3.generate({
         bindto: '#barchart',
@@ -35,7 +35,6 @@ function drawBarChart(data)
             ],
             types: {
                 data1: 'bar'
-//                data2: 'bar'
             },
             onclick: createWordCloud
         },
@@ -44,7 +43,6 @@ function drawBarChart(data)
                 type: 'category',
                 categories: data.categories
             }
-//            rotated: true            
         },
         legend: {
             show: false
@@ -55,8 +53,6 @@ function drawBarChart(data)
 
 function createWordCloud(data, element)
 {//accesso a category name tramite data.x all'array ottenuto da categories->get_array()
-    console.log(data);
-    console.log(element);
     var JSONObject = new Object;
     JSONObject.type = "sendWords";
     JSONObject.classIndex = data.x;
@@ -72,5 +68,13 @@ function getFreqList(text)
 
 function drawWordCloud(list)
 {
-    WordCloud(document.getElementById('wordCloud'), list);
+    var options = {
+        list: list,
+        fontFamily: 'Arial',
+        shape: 'circle',
+        rotateRatio: 1,
+        shuffle: true,
+        weightFactor: 2.5
+    }
+    WordCloud(document.getElementById('wordCloud'), options);
 }
