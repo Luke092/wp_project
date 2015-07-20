@@ -4,16 +4,19 @@ function initstat()
 
     //
 //    getFreqList("a");
-    //
-    $("#wordCloud").click(flipChart);
-    $("#card").flip({
+    
+    $("#wordCloud").click(function(){
+        flipChart();
+        document.getElementById("wordCloud").innerHTML = "<canvas id=\"canvas_cloud\"></canvas>";
+    });
+    $(".card").flip({
         trigger: 'manual'
     });
 }
 
 function flipChart()
 {
-    $("#card").flip('toggle');
+    $(".card").flip('toggle');
 }
 
 $(document).ready(initstat);
@@ -43,7 +46,7 @@ function drawBarChart(data)
     ///
     var loadedData = $.merge(['articoli'], data.numReadFeed);
     var barChart = c3.generate({
-        bindto: $("div[class='front']")[0],
+        bindto: document.getElementById("graph"),
         data: {
             columns: [
                 loadedData
@@ -97,8 +100,7 @@ function getWeightFactor(list)
         if(list[i][1]>max)
             max = list[i][1];
     }
-    var height = $(".front").height();
-            console.log(height);
+    var height = $(document.getElementById("graph")).height();
     return height/max;
 }
 
@@ -114,6 +116,6 @@ function drawWordCloud(list)
         weightFactor: weightFactor/2
     };
     
-    WordCloud($(".back")[0], options);
+    WordCloud(document.getElementById("wordCloud"), options);
     flipChart();
 }

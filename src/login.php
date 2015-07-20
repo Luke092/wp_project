@@ -30,8 +30,6 @@
         // check password fields
         if(is_empty_field($password))
             $errors[] = $USER_MESSAGES[4];
-        else if(strlen($password) < MIN_LENGTH_PASSWORD)
-            $errors[] = $USER_MESSAGES[5];
         
         // if no errors occured, then authenticate user
         if(empty($errors)){

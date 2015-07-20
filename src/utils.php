@@ -97,7 +97,7 @@ function get_article_image_url($article){
     if($image_tags->item(0) != null){
         $src = $image_tags->item(0)->getAttribute("src");
         list($width, $height) = @getimagesize($src);
-        if($width < MIN_IMAGE_WIDTH && $height < MIN_IMAGE_HEIGHT)
+        if($width < MIN_IMAGE_WIDTH || $height < MIN_IMAGE_HEIGHT)
             $src = DEF_ARTICLE_IMAGE_PATH;
     }
     return $src;

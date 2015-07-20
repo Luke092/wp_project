@@ -25,8 +25,7 @@ session::start();
 if (!session::user_is_logged())
     header("Location: ./index.php");
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="ISO-8859-1">
@@ -34,7 +33,7 @@ if (!session::user_is_logged())
         <link rel="stylesheet" type="text/css" href="./css/home.css">
         <link rel="stylesheet" type="text/css" href="./css/organize.css">
         <!--<link rel="stylesheet" href="./css/jquery-ui.min.css">-->
-        <link rel="icon" href="./img/utils/feed_icon.png" type="image/png"/>
+        <link rel="icon" href="./img/utils/favicon.png" type="image/png"/>
 
         <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
 <!--        <script type="text/javascript" src="lib/json2.js"></script>-->

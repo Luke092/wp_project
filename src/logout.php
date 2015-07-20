@@ -21,6 +21,7 @@
     <head>
         <title>Logout</title>
         <link rel = "stylesheet" type = "text/css" href = "./css/generic.css">
+        <link rel="icon" href="./img/utils/favicon.png" type="image/png"/>
         <script type="text/javascript">
             function waitLogout(){
                 setTimeout(function(){location.href = "./index.php";}, 2500);

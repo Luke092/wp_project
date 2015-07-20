@@ -63,7 +63,7 @@ if ($decoded->type == "readFeed") {
     $json['numReadFeed'] = array();
     for ($i = 0; $i < count($catArray); $i++) {
         $json['categories'][] = $catArray[$i]->getName();
-        $json['numReadFeed'][] = $stats->feed_count($catArray[$i]->getId());
+        $json['numReadFeed'][] = $stats->feed_count($catArray[$i]->getId(), stat::$SINCE_REGISTERED);
     }
 }
 
@@ -71,7 +71,7 @@ if ($decoded->type == "sendWords") {
     $stats = stat::getStat($email);
     $catArray = $cats->get_array();
     $catId = $catArray[$decoded->classIndex]->getId();
-    $json['text'] = $stats->get_wc_text($catId);
+    $json['text'] = $stats->get_wc_text($catId, stat::$SINCE_REGISTERED);
 }
 
 $encoded = json_encode($json);

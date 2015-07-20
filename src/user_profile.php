@@ -25,35 +25,40 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
     $oldPassword = $_POST['oldPasswd'];
     if (hash(HASHING_ALGORITHM, $oldPassword) == user::getPassword($email)) {
         user::modifyPassword($email, hash(HASHING_ALGORITHM, $newPasswd));
-        echo '<script>'
-        . '$(document).ready(function(){'
-        . '$(".profile-modify").hide();'
-        . '$(".errors").hide();'
-        . 'alert("Password cambiata con successo!")'
-        . '})'
-        . '</script>';
-    } else {
-        echo '<script>'
-        . '$(document).ready(function(){'
-        . '$(".profile-modify").show();'
-        . '$(".errors").show();'
-        . '$(".errors").html("<ul><li>Password errata!</li></ul>");'
-        . '$("#oldPassword").css("borderColor", "red");'
-        . '})'
-        . '</script>';
+?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+               $(".profile-modify").hide();
+               $(".errors").hide();
+               alert("Password cambiata con successo!");
+            });
+        </script>
+<?php
+    }else{
+?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+               $(".profile-modify").show();
+               $(".errors").show();
+               $(".errors").html("<span>Password errata!</span>");
+               $("#oldPassword").css("borderColor", "red");
+            });
+        </script>
+<?php
     }
-} else {
-    echo '<script>'
-    . '$(document).ready(function(){'
-    . '$(".profile-modify").hide();'
-    . '$(".errors").hide();'
-    . '})'
-    . '</script>';
+}else{
+?>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $(".profile-modify").hide();
+           $(".errors").hide();
+        });
+    </script>  
+<?php
 }
 ?>
 
 <link rel = "stylesheet" type = "text/css" href = "./css/c3.min.css">
-<link rel = "stylesheet" type = "text/css" href = "./css/user_profile.css">
 <script type = "text/javascript" src = "./lib/jquery-2.1.4.js"></script>
 <script src = "./lib/d3.min.js"></script>
 <script src = "./lib/d3.layout.cloud.js"></script>
@@ -63,7 +68,6 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
 <script src = "./lib/wordcloud2.js"></script>
 <script src = "./lib/flip.js"></script>
 <script type="text/javascript" src="./js/ajax.js"></script>
-<!--<script type="text/javascript" src="./js/user_profile.js"></script>-->
 <script type="text/javascript" src="./js/user_statistic.js"></script>
 
 <div class="profile">
@@ -108,16 +112,16 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
             </form>
         </div>
     </div>
-    <div class='stats'>
-        <div id='barChartContainer'>
-<!--            <img src='./img/utils/arrow_left_2.png' id='arrowLeft'></img>
-            <img src='./img/utils/arrow_right_2.png' id='arrowRight'></img>-->
-            <div id='card'> 
-                <div class='front'>
-                </div> 
-                <div class='back'>
-                    <canvas id='canvas_cloud'></canvas>
-                </div> 
+    
+    <div class='card'>
+        <div class='front'>
+            <div id="graph">
             </div>
         </div>
+        <div class='back'>
+            <div id="wordCloud">
+                <canvas id='canvas_cloud'></canvas>
+            </div>
+        </div> 
     </div>
+</div>
