@@ -7,8 +7,6 @@ use RSSAggregator\model\session;
 use RSSAggregator\model\stat;
 use RSSAggregator\model\article;
 
-use time;
-
 require_once("./config.php");
 require_once("./utils.php");
 
