@@ -1,56 +1,55 @@
 <link rel = "stylesheet" type = "text/css" href = "./css/user_profile.css">
 <script type="text/javascript" src="./js/user_profile.js" />
 <?php
-    use RSSAggregator\model\session;
-    use RSSAggregator\model\user;
-    
-    require_once ("./config.php");
 
-    function __autoload($class) {
+use RSSAggregator\model\session;
+use RSSAggregator\model\user;
 
-        // convert namespace to full file path
-        if (strpos($class, 'SimplePie') !== 0) {
-            $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
-        } else {
-            $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-        }
-        require_once($class);
+require_once ("./config.php");
+
+function __autoload($class) {
+
+    // convert namespace to full file path
+    if (strpos($class, 'SimplePie') !== 0) {
+        $class = 'classes/' . str_replace('\\', '/', $class) . '.php';
+    } else {
+        $class = 'php/library/' . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+    }
+    require_once($class);
 }
 
-    if(isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])){
-        session::start();
-        $email = session::get_info("email");
-        $newPasswd = $_POST['newPasswd'];
-        $oldPassword = $_POST['oldPasswd'];
-        if(hash(HASHING_ALGORITHM, $oldPassword) == user::getPassword($email)){
-            user::modifyPassword($email, hash(HASHING_ALGORITHM,$newPasswd));
-            echo '<script>'
-                . '$(document).ready(function(){'
-                    . '$(".profile-modify").hide();'
-                    . '$(".errors").hide();'
-                    . 'alert("Password cambiata con successo!")'
-                . '})'
-                . '</script>';
-        }
-        else{
-            echo '<script>'
-                . '$(document).ready(function(){'
-                    . '$(".profile-modify").show();'
-                    . '$(".errors").show();'
-                    . '$(".errors").html("<ul><li>Password errata!</li></ul>");'
-                    . '$("#oldPassword").css("borderColor", "red");'
-                . '})'
-                . '</script>';
-        }
-    }
-    else {
+if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
+    session::start();
+    $email = session::get_info("email");
+    $newPasswd = $_POST['newPasswd'];
+    $oldPassword = $_POST['oldPasswd'];
+    if (hash(HASHING_ALGORITHM, $oldPassword) == user::getPassword($email)) {
+        user::modifyPassword($email, hash(HASHING_ALGORITHM, $newPasswd));
         echo '<script>'
-            . '$(document).ready(function(){'
-                . '$(".profile-modify").hide();'
-                . '$(".errors").hide();'
-            . '})'
-            . '</script>';
+        . '$(document).ready(function(){'
+        . '$(".profile-modify").hide();'
+        . '$(".errors").hide();'
+        . 'alert("Password cambiata con successo!")'
+        . '})'
+        . '</script>';
+    } else {
+        echo '<script>'
+        . '$(document).ready(function(){'
+        . '$(".profile-modify").show();'
+        . '$(".errors").show();'
+        . '$(".errors").html("<ul><li>Password errata!</li></ul>");'
+        . '$("#oldPassword").css("borderColor", "red");'
+        . '})'
+        . '</script>';
     }
+} else {
+    echo '<script>'
+    . '$(document).ready(function(){'
+    . '$(".profile-modify").hide();'
+    . '$(".errors").hide();'
+    . '})'
+    . '</script>';
+}
 ?>
 
 <link rel = "stylesheet" type = "text/css" href = "./css/c3.min.css">
@@ -60,7 +59,9 @@
 <script src = "./lib/d3.layout.cloud.js"></script>
 <script src = "./lib/c3.min.js"></script>
 <script src = "./lib/wordfreq.js"></script>
+<script src = "./lib/wordfreq.worker.js"></script>
 <script src = "./lib/wordcloud2.js"></script>
+<script src = "./lib/flip.js"></script>
 <script type="text/javascript" src="./js/ajax.js"></script>
 <!--<script type="text/javascript" src="./js/user_profile.js"></script>-->
 <script type="text/javascript" src="./js/user_statistic.js"></script>
@@ -111,8 +112,12 @@
         <div id='barChartContainer'>
 <!--            <img src='./img/utils/arrow_left_2.png' id='arrowLeft'></img>
             <img src='./img/utils/arrow_right_2.png' id='arrowRight'></img>-->
-            <div id='barchart'></div>
-            <div id='wordCloud'></div>
+            <div id='card'> 
+                <div class='front'>
+                </div> 
+                <div class='back'>
+                    <canvas id='canvas_cloud'></canvas>
+                </div> 
+            </div>
         </div>
     </div>
-</div>

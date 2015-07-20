@@ -68,9 +68,10 @@ if ($decoded->type == "readFeed") {
 }
 
 if ($decoded->type == "sendWords") {
+    $stats = stat::getStat($email);
     $catArray = $cats->get_array();
     $catId = $catArray[$decoded->classIndex]->getId();
-    $json['text'] = $stats->get_wc_text($c_id);
+    $json['text'] = $stats->get_wc_text($catId);
 }
 
 $encoded = json_encode($json);
