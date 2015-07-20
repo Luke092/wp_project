@@ -51,13 +51,8 @@ $(document).ready(function(){
         var xhr = myGetXmlHttpRequest();
         var url = "./read_article.php";
         var method = "POST";
-        var JSONObject = new Object;
         var hidden = elem.parents(".article-box-fs").children(".hidden");
-//        JSONObject.id = hidden.attr("id");
-//        JSONObject.cat_id = hidden.attr("name");
-//        JSONObject.text = hidden.text();
         var json = hidden.text();
-//        var JSONString = JSON.stringify(JSONObject);
         var param = ["article", json,
                      "readonly", readOnly];
         sendData(xhr, url, method, param, function(){});
