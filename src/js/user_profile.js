@@ -2,7 +2,10 @@ $(document).ready(function(){
     $(".profile-image img").click(function(){
        $(".profile-modify").toggle();
     }); 
-    $(".profile-modify button").click(function(event){
+    $(".profile-modify form").submit(function(event){
+        
+        event.preventDefault();
+        
         $("#oldPassword").css("borderColor", "");
         $("#newPassword").css("borderColor", "");
         $("#rePassword").css("borderColor", "");
@@ -24,8 +27,12 @@ $(document).ready(function(){
                     else{
                         var xhr = myGetXmlHttpRequest();
                         var url = "./user_profile.php";
-                        var param = array("oldPasswd", oldPasswd, "newPasswd", newPasswd);
-                        pageRequest(xhr, url, "POST", param);
+                        var method = "POST";
+                        var param = new Array(
+                                'newPasswd', newPasswd,
+                                'oldPasswd', oldPasswd
+                                );
+                        pageRequest(xhr,url,method,param);
                     }
                 }
                 else{
@@ -45,7 +52,6 @@ $(document).ready(function(){
             $(".errors ul").append("<li>Inserire la vecchia password!</li>");
             $("#oldPassword").css("borderColor", "red");
         }
-        event.preventDefault();
         return false;
     });
 });

@@ -16,12 +16,10 @@
 .profile-modify{
     float: left;
     width: 40%;
-    display: none;
     margin-top: 20px;
 }
 
 .errors{
-    display: none;
 }
 
 .profile-form-row{
