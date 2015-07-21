@@ -172,7 +172,10 @@ function print_all_user_categories($user_categories){
     foreach($user_categories as $category){
 ?>
         <input type="radio" name="category" value="<?php echo $category->getName() ?>" />
-            &nbsp;&nbsp;<?php echo $category->getName() ?><br>
+            &nbsp;&nbsp;
+            <span title="<?php echo $category->getName() ?>">
+                <?php echo truncate($category->getName(), MAX_LENGTH_CAT_NAME) ?>
+            </span><br>
 <?php
     }
 }
@@ -221,16 +224,16 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
             <?php
                 if($cat_name !== ''){
             ?>
-                    <span class="cat-name-fs link-evidence">
-                        <?php echo $cat_name ?>
+                    <span class="cat-name-fs link-evidence" title="<?php echo $cat_name; ?>">
+                        <?php echo truncate($cat_name, MAX_LENGTH_CAT_NAME) ?>
                     </span>
                      | 
             <?php
                 }
                 if($feed_name !== ''){
             ?>
-                    <a href="<?php echo $site_url ?>" target="_blank" class="link-evidence">
-                        <?php echo $feed_name ?>
+                    <a href="<?php echo $site_url ?>" target="_blank" class="link-evidence" title="<?php echo $feed_name; ?>">
+                        <?php echo truncate($feed_name, MAX_LENGTH_FEED_NAME) ?>
                     </a>
                      | 
             <?php

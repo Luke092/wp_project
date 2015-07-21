@@ -40,8 +40,8 @@
     ?>
                 <div id="<?php echo 'category_'.$category->getName().'_contents' ?>" class="itemContentsHolder">
                     <h2 class="categoryHeader">
-                        <div class="categoryName">
-                            <?php echo $category->getName() ?>
+                        <div class="categoryName" title="<?php echo $category->getName() ?>">
+                            <?php echo truncate($category->getName(), MAX_LENGTH_CAT_NAME) ?>
                         </div>
                         <div class="modCanc">
                             <img src="./img/utils/icon-edit.png" class="editCat"/>

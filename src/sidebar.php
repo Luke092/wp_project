@@ -45,7 +45,7 @@ function __autoload($class) {
                     <img class="navigation" src="img/utils/down_arrow.png" />
                 </div>
                 <div  id="<?php echo $cat->getName() ?>" class="cName evidence">
-                    <span style="font-weight: bold;"><?php echo $cat->getName();?></span>
+                    <span style="font-weight: bold;" title="<?php echo $cat->getName(); ?>"><?php echo truncate($cat->getName(), MAX_LENGTH_CAT_NAME);?></span>
                 </div>
                 <?php
                     foreach ($cat->get_array() as $feed){
@@ -55,8 +55,8 @@ function __autoload($class) {
                             <div style="float:left; width: 20%">
                                 <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo $feed->getIconURL(); ?>"/>
                             </div>
-                            <div style="float:left; margin-top: 3px; margin-left: 3px;width: 75%;line-height: 15px">
-                                <span><?php echo $feed->getName();?></span>
+                            <div class="fName" style="float:left; margin-top: 3px; margin-left: 3px;width: 75%;line-height: 15px">
+                                <span title="<?php echo $feed->getName(); ?>"><?php echo truncate($feed->getName(), MAX_LENGTH_FEED_NAME);?></span>
                             </div>
                         </div>
                     </div>
