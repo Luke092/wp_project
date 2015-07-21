@@ -105,7 +105,7 @@ if ($decoded->type == "sendWords") {
             break;
     }
     $catId = $catArray[$decoded->classIndex]->getId();
-    $json['text'] = $stats->get_wc_text($catId, $form);
+    $json['text'] = $stats->get_wc_text($catId, $from);
 }
 
 if ($decoded->type == "loadStopWords") {
