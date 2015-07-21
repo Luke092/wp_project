@@ -46,9 +46,7 @@ if ($decoded->type == "removeFeed") {
 
 if ($decoded->type == "moveFeed") {
     $oldCat = $cats->getCatByName($decoded->oldCatName);
-//    $newCat = category::fetch_by_name($decoded->newCatName);
     $newCat = $cats->add_Category($decoded->newCatName);
-//    $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat["id"], $decoded->feedId);
     $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat->getId(), $decoded->feedId);
 }
 
@@ -72,6 +70,16 @@ if ($decoded->type == "sendWords") {
     $catArray = $cats->get_array();
     $catId = $catArray[$decoded->classIndex]->getId();
     $json['text'] = $stats->get_wc_text($catId, stat::$SINCE_REGISTERED);
+}
+
+if ($decoded->type == "loadStopWords") {
+    $stopWords = file_get_contents("./stopwords/stopwords_it_1.txt");
+    $stopWords .= file_get_contents("./stopwords/stopwords_en_1.txt");
+    if ($stopWords != false) {
+        $json['stopWords'] = explode("\r\n", $stopWords);
+    } else {
+        $json['stopWords'] = array();
+    }
 }
 
 $encoded = json_encode($json);

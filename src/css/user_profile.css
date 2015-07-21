@@ -58,3 +58,16 @@
     width: 100%;
 }
 
+#left_arrow{
+    height: 25pt;
+    width: 25pt;
+    display: inline-block;
+    float: right;
+}
+
+#right_arrow{
+    height: 25pt;
+    width: 25pt;
+    display: inline-block;
+    float: right;
+}

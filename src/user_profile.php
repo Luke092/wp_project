@@ -126,6 +126,8 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
             </div>
             <div id="graph">
             </div>
+            <img id='right_arrow' src='./img/utils/right_arrow.png'></img>
+            <img id='left_arrow' src='./img/utils/left_arrow.png'></img>
         </div>
         <div class='back'>
             <div id="wordCloud">
