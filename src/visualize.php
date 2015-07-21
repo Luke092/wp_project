@@ -200,6 +200,7 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
     $feed_url = $article->get_feed()->subscribe_url();
     $cat_and_feed = $categories->getCatByFeedURL($feed_url);
     $category = $cat_and_feed[0];
+    $feed = $cat_and_feed[1];
 ?>
     <div class="article-box-fs">
         <div class="article-image-box-fs">
@@ -255,7 +256,7 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
         </div>
         <div class="hidden">
             <?php
-                $art = new article($article_link, $category->getId(), 
+                $art = new article($article_link, $category->getId(), $feed->getId(), 
                         get_article_title($article).' '.get_full_article_description($article->get_content()),
                         time());
                 echo json_encode($art);

@@ -82,6 +82,32 @@ class stat implements JsonSerializable {
         return false;
     }
     
+    public function change_articles_cat_by_feed($f_id, $new_cat_id){
+        foreach ($this->articles as $article) {
+            if($article->getFId() == $f_id){
+                $article->setCatId($new_cat_id);
+            }
+        }
+        $this->saveStatsToFile();
+    }
+    
+    public function change_articles_cat_by_cat($old_cat_id, $new_cat_id){
+        foreach ($this->articles as $article) {
+            if($article->getCId() == $old_cat_id){
+                $article->setCatId($new_cat_id);
+            }
+        }
+        $this->saveStatsToFile();
+    }
+    
+    public function remove_all_art_in_cat($c_id){
+        foreach ($this->articles as $article){
+            if($article->getCId() == $c_id){
+                $this->removeArticle($article);
+            }
+        }
+    }
+    
     private function saveStatsToFile(){
         $path = self::fetch_data($this->user_id)['file_path'];
         $json = self::export_JSON($this);
@@ -105,7 +131,7 @@ class stat implements JsonSerializable {
         $stat = new stat($obj_array['email']);
         $article_array = array();
         foreach ($obj_array['feeds'] as $a){
-            $article = new article($a["id"],$a["cat_id"],$a["text"],$a["timestamp"]);
+            $article = new article($a["id"],$a["cat_id"],$a["feed_id"],$a["text"],$a["timestamp"]);
             $article_array[] = $article;
         }
         $stat->set_articles($article_array);

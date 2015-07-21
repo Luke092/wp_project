@@ -155,7 +155,7 @@ function DBreadFeedRequest()
 {
     var JSONObject = new Object;
     JSONObject.type = "readFeed";
-    JSONObject.from = $("#from option:selected").text();
+    JSONObject.from = $("#from option:selected").val();
     var JSONstring = JSON.stringify(JSONObject);
     $.getJSON("parser.php?json=" + JSONstring, null, drawBarChart);
 }
@@ -165,6 +165,7 @@ function createWordCloud(data, element)
     var JSONObject = new Object;
     JSONObject.type = "sendWords";
     JSONObject.classIndex = data.x;
+    JSONObject.from = $("#from option:selected").val();
     var JSONstring = JSON.stringify(JSONObject);
     $.getJSON("parser.php?json=" + JSONstring, null, getFreqList);
 }

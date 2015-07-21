@@ -31,11 +31,15 @@ if ($decoded->type == "editCategory") {
     $oldCat = $cats->getCatByName($decoded->oldName);
     $newCat = $cats->add_Category($decoded->newName);
     $json['success'] = category::update_UCF_data($oldCat->getId(), $newCat->getId(), $email);
+    $stat = user::getStat($email);
+    $stat->change_articles_cat_by_cat($oldCat->getId(), $newCat->getId());
 }
 
 if ($decoded->type == "removeCategory") {
     $category = $cats->getCatByName($decoded->catName);
     $json['success'] = $cats->remove_Category($category);
+    $stat = user::getStat($email);
+    $stat->remove_all_art_in_cat($category->getId());
 }
 
 if ($decoded->type == "removeFeed") {
@@ -48,6 +52,8 @@ if ($decoded->type == "moveFeed") {
     $oldCat = $cats->getCatByName($decoded->oldCatName);
     $newCat = $cats->add_Category($decoded->newCatName);
     $json['success'] = feed::update_UCF_data($email, $oldCat->getId(), $newCat->getId(), $decoded->feedId);
+    $stat = user::getStat($email);
+    $stat->change_articles_cat_by_feed($decoded->feedId, $newCat->getId());
 }
 
 if ($decoded->type == "addCategory") {
@@ -57,19 +63,49 @@ if ($decoded->type == "addCategory") {
 if ($decoded->type == "readFeed") {
     $stats = stat::getStat($email);
     $catArray = $cats->get_array();
+    $from = $decoded->from;
+    switch ($from){
+        case 'week':
+            $form = stat::$LAST_WEEK;
+            break;
+        case 'month':
+            $from = stat::$LAST_MONTH;
+            break;
+        case 'registration':
+            $from = stat::$SINCE_REGISTERED;
+            break;
+        default:
+            $from = stat::$SINCE_REGISTERED;
+            break;
+    }
     $json['categories'] = array();
     $json['numReadFeed'] = array();
     for ($i = 0; $i < count($catArray); $i++) {
         $json['categories'][] = $catArray[$i]->getName();
-        $json['numReadFeed'][] = $stats->feed_count($catArray[$i]->getId(), stat::$SINCE_REGISTERED);
+        $json['numReadFeed'][] = $stats->feed_count($catArray[$i]->getId(), $from);
     }
 }
 
 if ($decoded->type == "sendWords") {
     $stats = stat::getStat($email);
     $catArray = $cats->get_array();
+    $from = $decoded->from;
+    switch ($from){
+        case 'week':
+            $form = stat::$LAST_WEEK;
+            break;
+        case 'month':
+            $from = stat::$LAST_MONTH;
+            break;
+        case 'registration':
+            $from = stat::$SINCE_REGISTERED;
+            break;
+        default:
+            $from = stat::$SINCE_REGISTERED;
+            break;
+    }
     $catId = $catArray[$decoded->classIndex]->getId();
-    $json['text'] = $stats->get_wc_text($catId, stat::$SINCE_REGISTERED);
+    $json['text'] = $stats->get_wc_text($catId, $form);
 }
 
 if ($decoded->type == "loadStopWords") {
