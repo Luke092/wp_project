@@ -25,36 +25,36 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
     $oldPassword = $_POST['oldPasswd'];
     if (hash(HASHING_ALGORITHM, $oldPassword) == user::getPassword($email)) {
         user::modifyPassword($email, hash(HASHING_ALGORITHM, $newPasswd));
-?>
+        ?>
         <script type="text/javascript">
-            $(document).ready(function(){
-               $(".profile-modify").hide();
-               $(".errors").hide();
-               alert("Password cambiata con successo!");
+            $(document).ready(function () {
+                $(".profile-modify").hide();
+                $(".errors").hide();
+                alert("Password cambiata con successo!");
             });
         </script>
-<?php
-    }else{
-?>
+        <?php
+    } else {
+        ?>
         <script type="text/javascript">
-            $(document).ready(function(){
-               $(".profile-modify").show();
-               $(".errors").show();
-               $(".errors").html("<span>Password errata!</span>");
-               $("#oldPassword").css("borderColor", "red");
+            $(document).ready(function () {
+                $(".profile-modify").show();
+                $(".errors").show();
+                $(".errors").html("<span>Password errata!</span>");
+                $("#oldPassword").css("borderColor", "red");
             });
         </script>
-<?php
+        <?php
     }
-}else{
-?>
+} else {
+    ?>
     <script type="text/javascript">
-        $(document).ready(function(){
-           $(".profile-modify").hide();
-           $(".errors").hide();
+        $(document).ready(function () {
+            $(".profile-modify").hide();
+            $(".errors").hide();
         });
     </script>  
-<?php
+    <?php
 }
 ?>
 
@@ -112,9 +112,18 @@ if (isset($_POST['newPasswd']) && isset($_POST['oldPasswd'])) {
             </form>
         </div>
     </div>
-    
+
     <div class='card'>
         <div class='front'>
+            <div id='select_period'
+                 <p>Visualizzazione dei dati relativi al periodo
+                    <select id='from'>
+                        <option value="week">ultima settimana</option>
+                        <option value="month">ultimo mese</option>
+                        <option value="registration">dalla registrazione a oggi</option>
+                    </select>
+                </p>
+            </div>
             <div id="graph">
             </div>
         </div>
