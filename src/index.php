@@ -36,7 +36,7 @@
     <body>
         <div class="wrapper">
             <div class="header" align="center">
-                <img src="img/utils/index_header.jpg"/>
+                <img src="img/utils/index_header.png"/>
             </div>
             <div class="content" align="center">
                 <div class="description">
