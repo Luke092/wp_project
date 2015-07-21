@@ -2,6 +2,7 @@
     use RSSAggregator\model\article;
     use RSSAggregator\model\stat;
     use RSSAggregator\model\session;
+    use RSSAggregator\model\user;
 
     function __autoload($class) {
 
@@ -16,10 +17,11 @@
 
 $json = $_POST["article"];
 $readonly = $_POST["readonly"];
+$json->text = trim(preg_replace('/\u0026/', '&', $json->text));
 $article = article::import_JSON($json);
 session::start();
 $email = session::get_info("email");
-$stat = stat::getStat($email);
+$stat = user::getStat($email);
 if(!$stat->addArticle($article)){
     if($readonly == "false"){
         $stat->removeArticle($article);

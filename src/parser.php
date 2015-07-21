@@ -61,7 +61,7 @@ if ($decoded->type == "addCategory") {
 }
 
 if ($decoded->type == "readFeed") {
-    $stats = stat::getStat($email);
+    $stats = user::getStat($email);
     $catArray = $cats->get_array();
     $from = $decoded->from;
     switch ($from){
@@ -87,7 +87,7 @@ if ($decoded->type == "readFeed") {
 }
 
 if ($decoded->type == "sendWords") {
-    $stats = stat::getStat($email);
+    $stats = user::getStat($email);
     $catArray = $cats->get_array();
     $from = $decoded->from;
     switch ($from){
@@ -112,7 +112,7 @@ if ($decoded->type == "loadStopWords") {
     $stopWords = file_get_contents("./stopwords/stopwords_it_1.txt");
     $stopWords .= file_get_contents("./stopwords/stopwords_en_1.txt");
     if ($stopWords != false) {
-        $json['stopWords'] = explode("\r\n", $stopWords);
+        $json['stopWords'] = explode("\n", $stopWords);
     } else {
         $json['stopWords'] = array();
     }

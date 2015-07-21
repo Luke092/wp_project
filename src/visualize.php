@@ -256,12 +256,13 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
         </div>
         <div class="hidden">
             <?php
+                $art_id = hash("sha512", $article_link);
                 $text = get_article_title($article).' '.get_full_article_description($article->get_content());
-                $art = new article($article_link, $category->getId(), $feed->getId(), 
+                $text = trim(preg_replace('/&/', '\u0026', $text));
+                $art = new article($art_id, $category->getId(), $feed->getId(), 
                         $text, time());
-                $json = json_encode($art);
-                $json = trim(preg_replace('/&/', '\u0026', $json));
-                echo $json;
+                $ser_obj = json_encode($art);
+                echo $ser_obj;
             ?>
         </div>
     </div>
@@ -274,7 +275,8 @@ function get_envelope_src($article, $email){
         return null;
     }
     else{
-        $status = ($stat->getArticleById($article->get_link()) == false) ? "closed" : "open";
+        $art_id = hash("sha512", $article->get_link());
+        $status = ($stat->getArticleById($art_id) == false) ? "closed" : "open";
         return "./img/utils/".$status."_envelope.png";
     }
 }
