@@ -255,10 +255,14 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
         </div>
         <div class="hidden">
             <?php
+                $text = get_article_title($article).' '.get_full_article_description($article->get_content());
+                //$text = substr($text, 0, 5000);
                 $art = new article($article_link, $category->getId(), 
-                        get_article_title($article).' '.get_full_article_description($article->get_content()),
+                        $text,
                         time());
-                echo json_encode($art);
+                $json = json_encode($art);
+                $json = trim(preg_replace('/&/', '\u0026', $json));
+                echo $json;
             ?>
         </div>
     </div>
