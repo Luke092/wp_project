@@ -49,6 +49,7 @@
                 case user::$CORRECT_INSERT:
                     session::set_info("login", true);
                     session::set_info("email", $email);
+                    user::createStat($email);
                     break;
             }
         }

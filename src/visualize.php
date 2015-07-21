@@ -239,7 +239,19 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
             </div>
         </div>
         <div class="article-readbox-fs">
-            <img src="<?php echo get_envelope_src($article, $email); ?>" id="<?php echo $article_link ?>" class="envelope-img" />
+            <?php
+            $env_src = get_envelope_src($article, $email);
+            if($env_src == null){
+                ?>
+                <script>
+                    alert("Errore sul server! Ci scusiamo per il disagio.");
+                    location.href = "./logout.php";
+                </script>
+                <?php
+                exit();
+            }
+            ?>
+            <img src="<?php echo $env_src ?>" id="<?php echo $article_link ?>" class="envelope-img" />
         </div>
         <div class="hidden">
             <?php
@@ -254,9 +266,14 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
 }
 
 function get_envelope_src($article, $email){
-    $stat = stat::getStat($email);
-    $status = ($stat->getArticleById($article->get_link()) == false) ? "closed" : "open";
-    return "./img/utils/".$status."_envelope.png";
+    $stat = user::getStat($email);
+    if($stat == null){
+        return null;
+    }
+    else{
+        $status = ($stat->getArticleById($article->get_link()) == false) ? "closed" : "open";
+        return "./img/utils/".$status."_envelope.png";
+    }
 }
 
 function visualize_articles_by_feed($feed, $from, $n){
@@ -297,7 +314,7 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
             <h3>Pagine</h3>
         <?php
             if($current_page != 1){
-            ?>
+        ?>
                 <span id="<?php echo '1'.$feed_id.$cat_name ?>" class="paging-header">&lt;&lt;</span>
             <?php
                 $prev = max(array($current_page-1,1));
@@ -318,11 +335,11 @@ function visualize_page_navigation_bar($pages, $feed_id = '', $cat_name = '', $c
             }
             for($i = $loop_start; $i <= $loop_end; $i++){
                 if($i == $current_page){
-                ?>
+            ?>
                     <span id="<?php echo $i.$feed_id.$cat_name ?>" class="paging-header-selected">
             <?php
                 }else{
-                ?>
+            ?>
                     <span id="<?php echo $i.$feed_id.$cat_name ?>" class="paging-header">
             <?php
                 }

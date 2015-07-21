@@ -21,8 +21,14 @@ function __autoload($class) {
 }
     
     session::start();
-    if(!session::user_is_logged())
-        header("Location: ./index.php");
+    if(!session::user_is_logged()){
+?>
+        <script>
+            alert("Sessione scaduta! Effettuare nuovamente l'accesso.");
+            location.href = "./index.php";
+        </script>
+<?php
+    }
     else{
         $email = session::get_info("email");
         $categories = user::getCategories($email);

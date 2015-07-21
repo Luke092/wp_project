@@ -10,6 +10,7 @@ class user {
     
     private static $TABLE = "Users";
     private static $categories;
+    private static $stat;
 
     // returns $ALREADY_SIGNEDUP if the user is already signed up.
     // true if user has been added.
@@ -32,6 +33,15 @@ class user {
     public static function getCategories($email){
         self::$categories = categories::getCategories(categories::$USER_CAT, $email);
         return self::$categories;
+    }
+    
+    public static function getStat($email){
+        self::$stat = stat::getStat($email);
+        return self::$stat;
+    }
+    
+    public static function createStat($email){
+        self::$stat = stat::getStat($email);
     }
 
     // returns $NOT_SIGNEDUP if user didn't exist.

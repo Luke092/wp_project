@@ -24,51 +24,62 @@
 <div id="mainArea">
 <?php
     session::start();
-    $email = session::get_info("email");
-    $categories = user::getCategories($email)->get_array();
-    foreach ($categories as $category) {
-        $feeds = $category->get_array();
-        if (count($feeds) > 0) {
+    if(!session::user_is_logged()){
 ?>
-            <div id="<?php echo 'category_'.$category->getName().'_contents' ?>" class="itemContentsHolder">
-                <h2 class="categoryHeader">
-                    <div class="categoryName">
-                        <?php echo $category->getName() ?>
-                    </div>
-                    <div class="modCanc">
-                        <img src="./img/utils/icon-edit.png" class="editCat"/>
-                        <img src="./img/utils/icon-bury.png" class="removeCat"/>
-                    </div>
-                </h2>
-                <div class="subscriptionContentsHolder">
-                <?php
-                    foreach ($feeds as $feed){
-                ?>
-                    <div class="subscriptionContents">
-                        <img src="<?php echo $feed->getIconURL() ?>" class="feedIcon" />
-                        <div class="feedName">
-                            <?php echo $feed->getName() ?>
+        <script>
+            alert("Sessione scaduta! Effettuare nuovamente l'accesso.");
+            location.href = "./index.php";
+        </script>
+<?php
+    }else{
+        $email = session::get_info("email");
+        $categories = user::getCategories($email)->get_array();
+        foreach ($categories as $category) {
+            $feeds = $category->get_array();
+            if (count($feeds) > 0) {
+    ?>
+                <div id="<?php echo 'category_'.$category->getName().'_contents' ?>" class="itemContentsHolder">
+                    <h2 class="categoryHeader">
+                        <div class="categoryName">
+                            <?php echo $category->getName() ?>
                         </div>
                         <div class="modCanc">
-                            <img src="./img/utils/icon-bury.png" class="removeFeed" />
+                            <img src="./img/utils/icon-edit.png" class="editCat"/>
+                            <img src="./img/utils/icon-bury.png" class="removeCat"/>
                         </div>
-                        <div class="feedId">
-                            <?php echo 'a'.$feed->getId().'a' ?>
+                    </h2>
+                    <div class="subscriptionContentsHolder">
+                    <?php
+                        foreach ($feeds as $feed){
+                    ?>
+                        <div class="subscriptionContents">
+                            <img src="<?php echo $feed->getIconURL() ?>" class="feedIcon" />
+                            <div class="feedName">
+                                <?php echo $feed->getName() ?>
+                            </div>
+                            <div class="modCanc">
+                                <img src="./img/utils/icon-bury.png" class="removeFeed" />
+                            </div>
+                            <div class="feedId">
+                                <?php echo 'a'.$feed->getId().'a' ?>
+                            </div>
                         </div>
+                    <?php
+                        }
+                    ?>
                     </div>
-                <?php
-                    }
-                ?>
                 </div>
-            </div>
-<?php
+    <?php
+            }
         }
+    ?>
+        <div class='itemContentsHolder'>
+            <h2 class="categoryHeader">
+                <div class="categoryName">Nuova categoria</div>
+            </h2>
+            <div class="newCategory">Trascina un feed qui per creare una nuova categoria</div>
+        </div>
+    </div>
+<?php
     }
 ?>
-    <div class='itemContentsHolder'>
-        <h2 class="categoryHeader">
-            <div class="categoryName">Nuova categoria</div>
-        </h2>
-        <div class="newCategory">Trascina un feed qui per creare una nuova categoria</div>
-    </div>
-</div>

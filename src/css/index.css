@@ -35,3 +35,9 @@ button{
     width: 100%;
     overflow-x: no-display;
 }
+
+.description{
+    width:  60%;
+    margin-left: auto;
+    margin-right: auto;
+}
