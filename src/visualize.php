@@ -284,12 +284,12 @@ function visualize_articles_by_feed($feed, $from, $n){
     $varticles = get_articles_in_range($articles, $from, $n);
     $i = $from;
 ?>
-    <div class="timeline">
     <h1>
         <a href="<?php echo $rss->get_base() ?>" target="_blank">
             <?php echo $feed->getName() ?>
         </a>
     </h1>
+    <div class="timeline">
 <?php
     foreach($varticles as $article){
         visualize_article($article);
