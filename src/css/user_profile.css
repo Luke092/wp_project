@@ -11,22 +11,38 @@
 
 .profile-image{
     float: left;
-    width: 40%;
+    width: 160px;
+}
+
+.profile-image img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .profile-modify{
     float: left;
-    width: 40%;
-    margin-top: 20px;
+    margin-top: 10px;
+    width: 450px;
+    margin-left: 32px;
 }
 
 .errors{
+    margin-bottom: 10px;
+    margin-left: auto;
+    width: inherit;
+    color: red;
+    font-size: 16px;
+    font-variant: small-caps;
+    text-align: center;
+    display: block;
 }
 
 .profile-form-row{
     clear: both;
     overflow: hidden;
     height: 30px;
+    text-align: center;
 }
 
 .profile-form-label{
@@ -34,6 +50,8 @@
     width: 40%;
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .profile-form-input{
@@ -52,22 +70,74 @@
     width: 170px;
 }
 
+#change-password{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    display: block;
+    width: 130px;
+}
+
 .stats{
-    margin-top: 50px;
     clear: both;
-    width: 100%;
+    width: calc(100% - 21px);
+    position: absolute;
+    height: 500px;
+    margin-top: 25px;
 }
 
-#left_arrow{
+.left_arrow, .right_arrow{
+    width: 25pt;
+    display: inline-block;
+    float: left;
+    cursor: pointer;
+    vertical-align: middle;
+    position: absolute;      
+    top:0;      
+    bottom:0;      
+    margin:auto;
+}
+
+.right_arrow{
     height: 25pt;
     width: 25pt;
     display: inline-block;
     float: right;
+    cursor: pointer;
 }
 
-#right_arrow{
-    height: 25pt;
-    width: 25pt;
-    display: inline-block;
-    float: right;
+.card .front, .card .back{
+    margin-top: 25px;
+}
+
+.card{
+    text-align: center;
+    
+}
+
+#statistic-header{   
+    color: darkred;
+    font-size: 24px;
+}
+
+#select-period{
+    text-align: center;
+    
+}
+
+#left-arrow-container, #right-arrow-container{
+    float: left;
+    width: 35px;
+    height: 320px;
+    position: relative;
+}
+
+#graph{
+    width: calc(100% - 75px); 
+    margin-left: 5px;
+    float: left;
+}
+
+#graph-container{
+    margin-top: 25px;
 }

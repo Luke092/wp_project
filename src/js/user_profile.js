@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".profile-image img").click(function(){
+    $("#change-password").click(function(){
        $(".profile-modify").toggle();
     }); 
     $(".profile-modify form").submit(function(event){

@@ -82,7 +82,7 @@ if (!session::user_is_logged()) {
         <div class="info">
             <div class="profile-image">
                 <img src="./img/utils/menu_icons/profile.png" />
-
+                <button id="change-password">Modifica password</button>
             </div>
             <div class="profile-modify">
                 <div class="errors">
@@ -120,28 +120,36 @@ if (!session::user_is_logged()) {
                 </form>
             </div>
         </div>
-
-        <div class='card'>
-            <div class='front'>
-                <div id='select_period'
-                     <p>Visualizzazione dei dati relativi al periodo
-                        <select id='from'>
-                            <option value="week">ultima settimana</option>
-                            <option value="month">ultimo mese</option>
-                            <option value="registration">dalla registrazione a oggi</option>
-                        </select>
-                    </p>
+        <div class="stats">
+            <div class='card'>
+                <span id="statistic-header">Statistiche sugli articoli letti per categoria</span>
+                <div class='front'>
+                    <div id='select-period'
+                         <p>Visualizzazione dei dati relativi al periodo
+                            <select id='from'>
+                                <option value="week">ultima settimana</option>
+                                <option value="month">ultimo mese</option>
+                                <option value="registration">dalla registrazione a oggi</option>
+                            </select>
+                        </p>
+                    </div>
+                    <div id="graph-container">
+                        <div id="left-arrow-container">
+                            <img class='left_arrow' src='./img/utils/left_arrow.png' />
+                        </div>
+                        <div id="graph">
+                        </div>
+                        <div id="right-arrow-container">
+                            <img class='right_arrow' src='./img/utils/right_arrow.png' />
+                        </div>
+                    </div>
                 </div>
-                <div id="graph">
-                </div>
-                <img id='right_arrow' src='./img/utils/right_arrow.png'></img>
-                <img id='left_arrow' src='./img/utils/left_arrow.png'></img>
+                <div class='back'>
+                    <div id="wordCloud">
+                        <canvas id='canvas_cloud'></canvas>
+                    </div>
+                </div> 
             </div>
-            <div class='back'>
-                <div id="wordCloud">
-                    <canvas id='canvas_cloud'></canvas>
-                </div>
-            </div> 
         </div>
     </div>
     <?php

@@ -20,19 +20,19 @@ function initstat()
         trigger: 'manual'
     });
     hideArrows();
-    $("#left_arrow").click(slideVisibleCols);
-    $("#right_arrow").click(slideVisibleCols);
+    $(".left_arrow").click(slideVisibleCols);
+    $(".right_arrow").click(slideVisibleCols);
 }
 
 function hideArrows()
 {
-    $("#left_arrow").css("visibility", "hidden");
-    $("#right_arrow").css("visibility", "hidden");
+    $(".left_arrow").css("visibility", "hidden");
+    $(".right_arrow").css("visibility", "hidden");
 }
 
 function slideVisibleCols(event)
 {
-    $(event.target).attr("id") === "left_arrow" ? firstVisible-- : firstVisible++;
+    $(event.target).attr("class") === "left_arrow" ? firstVisible-- : firstVisible++;
     barChart.load({columns: [
             getVisibleData()
         ],
@@ -97,8 +97,8 @@ function drawBarChart(data)
 
 function handleArrows()
 {
-    firstVisible > 0 ? $("#left_arrow").css("visibility", "visible") : $("#left_arrow").css("visibility", "hidden");
-    (firstVisible + MAX_NUM_COLS) < loadedData.numReadFeed.length ? $("#right_arrow").css("visibility", "visible") : $("#right_arrow").css("visibility", "hidden");
+    firstVisible > 0 ? $(".left_arrow").css("visibility", "visible") : $(".left_arrow").css("visibility", "hidden");
+    (firstVisible + MAX_NUM_COLS) < loadedData.numReadFeed.length ? $(".right_arrow").css("visibility", "visible") : $(".right_arrow").css("visibility", "hidden");
 }
 
 function getFreqList(text)
