@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>RSS Aggregator</title>
+        <title>Feedbook</title>
         <link rel = "stylesheet" type = "text/css" href = "./css/generic.css">
         <link rel = "stylesheet" type = "text/css" href = "./css/index.css">
         <link rel = "stylesheet" type = "text/css" href = "./css/popup.css">
@@ -36,9 +36,13 @@
     <body>
         <div class="wrapper">
             <div class="header" align="center">
-                <img src="img/utils/index_header.jpg"/>
+                <img src="img/utils/index_header.png"/>
             </div>
             <div class="content" align="center">
+                <div class="description">
+                    Benvenuto su Feedbook, il portale che ti far&agrave; rimanere aggiornato
+                    sulle notizie da tutto il mondo in tempo reale.
+                </div>
                 <button id="login" value="#login-box">Accedi</button>&nbsp;&nbsp;
                 <button id="register" value="#register-box">Registrati</button>
                 <?php

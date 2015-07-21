@@ -309,6 +309,7 @@ button{
     overflow: hidden;
     cursor: pointer;
     margin-bottom: 4px;
+    border-radius: 30px;
 }
 
 .navigation{
@@ -336,6 +337,7 @@ button{
     
     cursor: pointer;
     background-color: inherit;
+    border-radius: 30px;
 }
 
 a{
@@ -477,6 +479,7 @@ h1{
     cursor: pointer;
     padding: 5px;
     background-color: #FFC7A4;
+    border-radius: 30px;
 }
 
 h1.category-header, h1.home-header{

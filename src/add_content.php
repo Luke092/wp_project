@@ -21,7 +21,15 @@ function __autoload($class) {
     }
     require_once($class);
 }
-
+session::start();
+if(!session::user_is_logged()){
+?>
+        <script>
+            alert("Sessione scaduta! Effettuare nuovamente l'accesso.");
+            location.href = "./index.php";
+        </script>
+<?php
+}
 ?>
 <div id="search-bar">
     <form>
@@ -36,7 +44,6 @@ function __autoload($class) {
     $default_categories_array = $default_categories->get_array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["catName"]) && !isset($_POST["feedId"])){
-            session::start();
             $email = session::get_info("email");
             $cat_name = $_POST["catName"];
             visualize_default_feeds($default_categories, $cat_name, $email);
