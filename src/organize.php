@@ -18,7 +18,7 @@
     }
 ?>
 <script type="text/javascript" src="./lib/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./lib/json2.js"></script>
+<!--<script type="text/javascript" src="./lib/json2.js"></script>-->
 <script type="text/javascript" src="./js/organize.js"></script>
 
 <div id="mainArea">
@@ -38,10 +38,10 @@
             $feeds = $category->get_array();
             if (count($feeds) > 0) {
     ?>
-                <div id="<?php echo 'category_'.$category->getName().'_contents' ?>" class="itemContentsHolder">
+                <div id="<?php echo 'category_'.$category->getName().'_contents'; ?>" class="itemContentsHolder">
                     <h2 class="categoryHeader">
-                        <div class="categoryName" title="<?php echo $category->getName() ?>">
-                            <?php echo truncate($category->getName(), MAX_LENGTH_CAT_NAME) ?>
+                        <div class="categoryName" title="<?php echo $category->getName(); ?>">
+                            <?php echo truncate($category->getName(), MAX_LENGTH_CAT_NAME); ?>
                         </div>
                         <div class="modCanc">
                             <img src="./img/utils/icon-edit.png" class="editCat"/>
@@ -54,14 +54,14 @@
                     ?>
                         <div class="subscriptionContents">
                             <img src="<?php echo $feed->getIconURL() ?>" class="feedIcon" />
-                            <div class="feedName">
-                                <?php echo $feed->getName() ?>
+                            <div class="feedName" title="<?php echo $feed->getName(); ?>">
+                                <?php echo truncate($feed->getName(), MAX_LENGTH_FEED_NAME); ?>
                             </div>
                             <div class="modCanc">
                                 <img src="./img/utils/icon-bury.png" class="removeFeed" />
                             </div>
                             <div class="feedId">
-                                <?php echo 'a'.$feed->getId().'a' ?>
+                                <?php echo $feed->getId(); ?>
                             </div>
                         </div>
                     <?php

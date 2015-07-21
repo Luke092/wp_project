@@ -58,11 +58,10 @@ function feedDrop(event, ui)
     var movedFeedId = $.trim($(ui.draggable).parent().find("div[class='feedId']").text());
     if (!feedAlreadyPresent(movedFeedId, destinationFeedIds))
     {
-        var oldCatName = $.trim($(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text());
+        var oldCatName = $.trim($(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").attr("title"));
         var movedDiv = $(ui.draggable).parent().detach();
-        var newCatName = $.trim($(event.target).parent().find("div[class='categoryName']").text());
+        var newCatName = $.trim($(event.target).parent().find("div[class='categoryName']").attr("title"));
         var movedFeedId = $.trim($(movedDiv).children("div[class='feedId']").text());
-        movedFeedId = movedFeedId.substring(1, movedFeedId.length - 1);
         DBmoveFeed(oldCatName, newCatName, movedFeedId);
         feedMover(oldCatName, newCatName, movedDiv);
     }
@@ -97,14 +96,14 @@ function newCatDrop(event, ui)
         newCatName = $.trim(newCatName);
         if (newCatName !== "" && !catNameAlreadyPresent(newCatName))
         {
-            var sourceCat = $.trim($(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text());
+            var sourceCat = $.trim($(ui.draggable).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").attr("title"));
             var feedId = $.trim($(ui.draggable).parent().children("div[class='feedId']").text());
             var movedFeed = $(ui.draggable).parent();
             var itemContentsHolder = buildItemContentsHolder(newCatName);
             $(event.target).parents("div[class='itemContentsHolder']").before(itemContentsHolder);
-            DBaddCategory(newCatName);
-            DBmoveFeed(sourceCat, newCatName, feedId.substring(1, feedId.length - 1));
             feedMover(sourceCat, newCatName, movedFeed);
+            DBaddCategory(newCatName);
+            DBmoveFeed(sourceCat, newCatName, feedId);
         }
         else
         {
@@ -124,7 +123,7 @@ function buildItemContentsHolder(newCatName)
     newCatName = newCatName.trim();
     var itemContentsHolder = $("<div id=\"category_" + newCatName + "_contents\" class=\"itemContentsHolder\"></div>");
     var categoryHeader = $("<h2 class=\"categoryHeader\"></h2>");
-    categoryHeader.append($("<div class=\"categoryName\">" + newCatName + "</div>"));
+    categoryHeader.append($("<div class=\"categoryName\" title=\""+newCatName+"\">" + displayCatName(newCatName) + "</div>"));
     categoryHeader.append($("<div class=\"modCanc\"><img class=\"editCat\" src=\"./img/utils/icon-edit.png\"></img><img class=\"removeCat\" src=\"./img/utils/icon-bury.png\"></img></div>"));
     itemContentsHolder.append(categoryHeader);
     var subscriptionContentsHolder = $("<div class=\"subscriptionContentsHolder\"></div>").droppable({
@@ -141,21 +140,26 @@ function editCategory(event)
     var newName = $.trim(prompt("Inserisci il nuovo nome da dare alla categoria"));
     if (newName !== null && newName !== "") {
         newName = $.trim(newName);
-        var oldName = $.trim($(event.target).parent().prev().text());
+        var oldName = $.trim($(event.target).parent().prev().attr("title"));
         if (catNameAlreadyPresent(newName)) {
             alert("La categoria " + newName + " esiste gia'!");
         }
         else {
             DBeditCategory(oldName, newName);
-            $(event.target).parent().prev().text(newName);
+            $(event.target).parent().prev().text(displayCatName(newName));
+            $(event.target).parent().prev().attr("title", newName);
         }
     }
     sidebar_reload();
 }
 
+function displayCatName(catName){
+    return (catName.length > 15 ? catName+"..." : catName);
+}
+
 function removeCategory(event)
 {
-    var catName = $.trim($(event.target).parent().prev().text());
+    var catName = $.trim($(event.target).parent().prev().attr("title"));
     var remove = confirm("Vuoi veramente rimuovere la categoria '" + catName + "'?");
     if (remove)
     {
@@ -168,8 +172,8 @@ function removeCategory(event)
 function removeFeed(event)
 {
     var feedId = $.trim($(event.target).parent().next().text());
-    var feedName = $.trim($(event.target).parent().prev().text());
-    var catName = $.trim($(event.target).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text());
+    var feedName = $.trim($(event.target).parent().prev().attr("title"));
+    var catName = $.trim($(event.target).parents("div[class='itemContentsHolder']").find("div[class='categoryName']").attr("title"));
     var remove = confirm("Vuoi veramente rimuovere il feed '" + feedName + "'?");
     if (remove)
     {
@@ -199,7 +203,7 @@ function catNameAlreadyPresent(catName)
     var categories = $("div[class='categoryName']:visible");
     for (var i = 0; i < categories.length; i++)
     {
-        if ($.trim($(categories[i]).text()) === $.trim(catName))
+        if ($.trim($(categories[i]).attr("title")) === $.trim(catName))
         {
             return true;
         }
@@ -211,7 +215,7 @@ function hideFeed(feedId, catName)
 {
     var idDiv = $("#category_" + catName + "_contents div[class='feedId']:contains(" + feedId + ")");
     if (idDiv.parents("div[class^='subscriptionContentsHolder']").children().length === 1) {
-        hideCategory($.trim(idDiv.parents("div[class='itemContentsHolder']").find("div[class='categoryName']").text()));
+        hideCategory($.trim(idDiv.parents("div[class='itemContentsHolder']").find("div[class='categoryName']").attr("title")));
     }
     else
     {
@@ -277,7 +281,7 @@ function DBfeedRemover(feedId, catName)
 {
     var JSONObject = new Object;
     JSONObject.type = "removeFeed";
-    JSONObject.feedId = feedId.substring(1, feedId.length - 1);
+    JSONObject.feedId = feedId;
     JSONObject.catName = catName;
     var JSONstring = JSON.stringify(JSONObject);
     runAjax(JSONstring, DBsuccess);
