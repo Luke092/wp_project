@@ -256,10 +256,12 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
         </div>
         <div class="hidden">
             <?php
+                $text = get_article_title($article).' '.get_full_article_description($article->get_content());
                 $art = new article($article_link, $category->getId(), $feed->getId(), 
-                        get_article_title($article).' '.get_full_article_description($article->get_content()),
-                        time());
-                echo json_encode($art);
+                        $text, time());
+                $json = json_encode($art);
+                $json = trim(preg_replace('/&/', '\u0026', $json));
+                echo $json;
             ?>
         </div>
     </div>

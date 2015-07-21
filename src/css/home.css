@@ -310,6 +310,8 @@ button{
     cursor: pointer;
     margin-bottom: 4px;
     border-radius: 30px;
+    padding-left: 10px;
+    padding-top: 3px;   
 }
 
 .navigation{

@@ -50,7 +50,6 @@ if(!session::user_is_logged()){
         }
         else if(isset($_POST["feedId"]) && !isset($_POST["catName"])){
             $feed_id = $_POST["feedId"];
-            session::start();
             $email = session::get_info("email");
             if($feed_id == -1){
                 $feed_url = $_POST['feedUrl'];
@@ -79,7 +78,6 @@ if(!session::user_is_logged()){
         else if(isset($_POST["feedId"]) && isset($_POST["catName"])){
             $cat_name = $_POST["catName"];
             $feed_id = $_POST["feedId"];
-            session::start();
             $email = session::get_info("email");
             $user_categories = user::getCategories($email);
             $added_category = $user_categories->add_Category($cat_name);
