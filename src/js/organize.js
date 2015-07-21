@@ -154,7 +154,7 @@ function editCategory(event)
 }
 
 function displayCatName(catName){
-    return (catName.length > 15 ? catName+"..." : catName);
+    return (catName.length > 12 ? catName+"..." : catName);
 }
 
 function removeCategory(event)
