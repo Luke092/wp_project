@@ -3,6 +3,7 @@ var xhr;
 var barChart;
 var barChartHeight;
 var MAX_NUM_COLS = 8;
+var MAX_NUM_WORDS = 100;
 var loadedData;
 var firstVisible;
 var stopWords;
@@ -125,6 +126,7 @@ function getWeightFactor(list)
 
 function drawWordCloud(list)
 {
+    list = list.slice(0, MAX_NUM_WORDS);
     var weightFactor = getWeightFactor(list);
     var options = {
         list: list,

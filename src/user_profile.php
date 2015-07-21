@@ -69,7 +69,6 @@ if (!session::user_is_logged()) {
     <link rel = "stylesheet" type = "text/css" href = "./css/c3.min.css">
     <script type = "text/javascript" src = "./lib/jquery-2.1.4.js"></script>
     <script src = "./lib/d3.min.js"></script>
-    <script src = "./lib/d3.layout.cloud.js"></script>
     <script src = "./lib/c3.min.js"></script>
     <script src = "./lib/wordfreq.js"></script>
     <script src = "./lib/wordfreq.worker.js"></script>
