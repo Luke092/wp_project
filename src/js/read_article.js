@@ -7,6 +7,7 @@ $(document).ready(function(){
     $(".article-title-fs").click(function(){
         var id = $(this).parent().attr("href");
        $(".envelope-img[id=\""+id+"\"]").attr("src", ENVELOPE_OPEN_SRC);
+       $(".envelope-img[id=\""+id+"\"]").attr("title", MSG_NO_READ);
         sendArticleObject($(this), true);
     });
     $(".envelope-img[src=\""+ENVELOPE_CLOSED_SRC+"\"]").attr("title", MSG_READ);
