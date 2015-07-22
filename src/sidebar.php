@@ -55,7 +55,7 @@ function __autoload($class) {
                             <div style="float:left; width: 20%">
                                 <img class="icon" alt="<?php echo $feed->getName() ?> icon" src="<?php echo $feed->getIconURL(); ?>"/>
                             </div>
-                            <div class="fName" style="float:left; margin-top: 3px; margin-left: 3px;width: 75%;line-height: 15px" title="<?php echo $feed->getName(); ?>">
+                            <div class="fName" style="float:left; margin-top: 3px; margin-left: 3px;width: 75%" title="<?php echo $feed->getName(); ?>">
                                 <span><?php echo $feed->getName();?></span>
                             </div>
                         </div>

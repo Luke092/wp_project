@@ -221,18 +221,22 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
             <?php
                 if($cat_name !== ''){
             ?>
-                    <span class="cat-name-fs link-evidence">
-                        <?php echo $cat_name ?>
-                    </span>
-                     | 
+                    <div style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
+                        <span class="cat-name-fs link-evidence">
+                            <?php echo $cat_name ?>
+                        </span>
+                    </div>
+                     &nbsp;|&nbsp;
             <?php
                 }
                 if($feed_name !== ''){
             ?>
-                    <a href="<?php echo $site_url ?>" target="_blank" class="link-evidence">
-                        <?php echo $feed_name ?>
-                    </a>
-                     | 
+                    <div style="max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">
+                        <a href="<?php echo $site_url ?>" target="_blank" class="link-evidence">
+                            <?php echo $feed_name ?>
+                        </a>
+                    </div>
+                    &nbsp;| 
             <?php
                 }
                 echo date_transform($article->get_date(DATE_FORMAT))
