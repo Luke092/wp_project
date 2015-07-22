@@ -66,7 +66,7 @@ if ($decoded->type == "readFeed") {
     $from = $decoded->from;
     switch ($from) {
         case 'week':
-            $form = stat::$LAST_WEEK;
+            $from = stat::$LAST_WEEK;
             break;
         case 'month':
             $from = stat::$LAST_MONTH;
@@ -92,7 +92,7 @@ if ($decoded->type == "sendWords") {
     $from = $decoded->from;
     switch ($from) {
         case 'week':
-            $form = stat::$LAST_WEEK;
+            $from = stat::$LAST_WEEK;
             break;
         case 'month':
             $from = stat::$LAST_MONTH;

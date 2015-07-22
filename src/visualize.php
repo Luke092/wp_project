@@ -163,8 +163,8 @@ function show_category_choice($feed, $email){
             }
         }
             ?>
+            <button value="<?php echo $feed->getId() ?>">Aggiungi</button>
         </div>
-        <button value="<?php echo $feed->getId() ?>">Aggiungi</button>
 <?php
 }
 
