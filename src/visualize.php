@@ -261,7 +261,7 @@ function visualize_article($article, $feed_name = '', $cat_name = ''){
             <?php
                 $art_id = hash("sha512", $article_link);
                 $text = get_article_title($article).' '.get_full_article_description($article->get_content());
-                $text = trim(preg_replace('/&/', '\u0026', $text));
+                $text = trim(preg_replace('/&/', 'e', $text));
                 $art = new article($art_id, $category->getId(), $feed->getId(), 
                         $text, time());
                 $ser_obj = json_encode($art);

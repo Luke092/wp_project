@@ -17,7 +17,6 @@
 
 $json = $_POST["article"];
 $readonly = $_POST["readonly"];
-$json->text = trim(preg_replace('/\u0026/', '&', $json->text));
 $article = article::import_JSON($json);
 session::start();
 $email = session::get_info("email");

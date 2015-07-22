@@ -70,8 +70,8 @@ if (!session::user_is_logged()) {
     <script type = "text/javascript" src = "./lib/jquery-2.1.4.js"></script>
     <script src = "./lib/d3.min.js"></script>
     <script src = "./lib/c3.min.js"></script>
-    <script src = "./lib/wordfreq.js"></script>
     <script src = "./lib/wordfreq.worker.js"></script>
+    <script src = "./lib/wordfreq.js"></script>
     <script src = "./lib/wordcloud2.js"></script>
     <script src = "./lib/flip.js"></script>
     <script type="text/javascript" src="./js/ajax.js"></script>

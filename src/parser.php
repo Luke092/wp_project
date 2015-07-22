@@ -64,7 +64,7 @@ if ($decoded->type == "readFeed") {
     $stats = user::getStat($email);
     $catArray = $cats->get_array();
     $from = $decoded->from;
-    switch ($from){
+    switch ($from) {
         case 'week':
             $form = stat::$LAST_WEEK;
             break;
@@ -90,7 +90,7 @@ if ($decoded->type == "sendWords") {
     $stats = user::getStat($email);
     $catArray = $cats->get_array();
     $from = $decoded->from;
-    switch ($from){
+    switch ($from) {
         case 'week':
             $form = stat::$LAST_WEEK;
             break;
