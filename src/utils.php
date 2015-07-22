@@ -25,13 +25,6 @@ function is_empty_field($field){
 /////////////////// XHTML reader functions ///////////////////
 //////////////////////////////////////////////////////////////
 
-function truncate($string, $max_length){
-    if(strlen($string) > $max_length){
-        return substr($string, 0, $max_length).'...';
-    }
-    return $string;
-}
-
 function date_transform($date_to_transf){
     global $DAYS, $MONTHS;
     $date_parts = explode(" ", $date_to_transf);
@@ -75,8 +68,10 @@ function get_feed_description($rss){
     $res = null;
     if($desc == null || $desc == "")
         $res = "Descrizione non disponibile";
+    else if(strlen($desc) > MAX_LENGTH_DESC)
+        $res = substr($desc, 0, MAX_LENGTH_DESC).'...';
     else
-        $res = truncate($desc, MAX_LENGTH_DESC);
+        $res = $desc;
     return $res;
 }
 
@@ -129,8 +124,10 @@ function get_partial_article_description($article_content){
     $res = null;
     if($body == null || $body == "")
         $res = "Contenuto non disponibile";
-    else 
-        $res = truncate($body, MAX_LENGTH_SUMMARY);
+    else if(strlen($body) > MAX_LENGTH_SUMMARY)
+        $res = substr($body, 0, MAX_LENGTH_SUMMARY).'...';
+    else
+        $res = $body;
     return $res;
 }
 

@@ -45,6 +45,7 @@ $(document).ready(function(){
         var param = ["catName", $(this).text().trim()];
         pageRequest(xhr, url, method, param);
         waitResponse(); 
+        $("#page").scrollTop(0);
     });
     
     function sendArticleObject(elem, readOnly){
@@ -56,6 +57,5 @@ $(document).ready(function(){
         var param = ["article", json,
                      "readonly", readOnly];
         sendData(xhr, url, method, param, function(){});
-//        waitResponse(); 
     }
 });

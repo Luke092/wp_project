@@ -112,7 +112,6 @@ function sendData(xhr, url, method, param, callback){
                 }
                 content += param[i] + "=" + param[i+1];
             }
-//            console.log(content);
             xhr.open("POST", url, true);
             xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function(){

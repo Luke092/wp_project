@@ -83,7 +83,15 @@ if(!session::user_is_logged()){
             $added_category = $user_categories->add_Category($cat_name);
             $feed = new feed($feed_id);
             $added_category->add_Feed_obj($feed);
-            header("Location: ./user_home.php");
+?>
+            <script type="text/javascript">
+            var xhr = myGetXmlHttpRequest();
+            var param = ["catName", "<?php echo $cat_name; ?>",
+                         "feedId", "<?php echo $feed_id; ?>"];
+            pageRequest(xhr, "./user_home.php", "POST", param);
+            waitResponse();
+            </script>
+<?php
         }
         else if(isset($_POST["back-to-cat"])){
             visualize_default_categories($default_categories_array);

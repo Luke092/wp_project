@@ -335,14 +335,21 @@ button{
     float:left;
     margin-left: 3px;
     font-weight: bold; 
-    text-shadow: 1px 1px darkorange;
+    color: darkred;
     cursor: pointer;
     background-color: inherit;
     border-radius: 30px;
+    width: 78%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .fName{
     text-shadow: 0px 1px darkred;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 a{

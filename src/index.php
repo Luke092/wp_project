@@ -43,6 +43,10 @@
                     Benvenuto su Feedbook, il portale che ti far&agrave; rimanere aggiornato
                     sulle notizie da tutto il mondo in tempo reale.
                 </div>
+                <noscript>
+                    <br>
+                    <h1 style="background-color: white;">Non puoi usare Feedbook perchè il tuo browser non supporta JavaScript</h1>
+                </noscript>
                 <button id="login" value="#login-box">Accedi</button>&nbsp;&nbsp;
                 <button id="register" value="#register-box">Registrati</button>
                 <?php
